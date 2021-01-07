@@ -1,0 +1,43 @@
+group 'com.itsazza'
+version '1.0.0'
+
+apply plugin: 'kotlin'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+    ext {
+        kotlin_version = '1.4.21'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    // maven { url "https://repo.destroystokyo.com/repository/maven-public" }
+    maven { url "https://repo.minebench.de" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "de.themoep:inventorygui:1.4.2-SNAPSHOT"
+    implementation 'com.google.code.gson:gson:2.8.6'
+    compileOnly group: 'com.destroystokyo.paper', name: 'paper', version: '1.16.4-R0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+shadowJar {
+    archiveName("BannerZ-${this.version}.jar")
+}
