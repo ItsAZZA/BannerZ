@@ -4,6 +4,7 @@ import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.closeButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -74,6 +75,7 @@ object MainMenu {
             "§e§lCLICK §7to open"
         ))
 
+        gui.setCloseAction { false }
         gui.addElement(closeButton)
         return gui
     }

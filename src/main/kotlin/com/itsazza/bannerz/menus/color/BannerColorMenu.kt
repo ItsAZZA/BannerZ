@@ -13,6 +13,7 @@ import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
 import org.bukkit.DyeColor
+import org.bukkit.block.Block
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
@@ -20,11 +21,11 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
 
 object BannerColorMenu {
-    fun openMenu(player: Player, banner: ItemStack, creatorMode: CreatorMode) {
-        createMenu(player, banner, creatorMode).show(player)
+    fun open(player: Player, banner: ItemStack, creatorMode: CreatorMode, block: Block?) {
+        create(player, banner, creatorMode, block).show(player)
     }
 
-    private fun createMenu(player: Player, banner: ItemStack, creatorMode: CreatorMode) : InventoryGui {
+    private fun create(player: Player, banner: ItemStack, creatorMode: CreatorMode, block: Block?) : InventoryGui {
         val gui = InventoryGui(
             BannerZPlugin.instance,
             null,
@@ -34,16 +35,16 @@ object BannerColorMenu {
 
         val group = GuiElementGroup('0')
         for (dye in dyes) {
-            group.addElement(createColorSelectButton(player, banner, dye, creatorMode))
+            group.addElement(createColorSelectButton(player, banner, dye, creatorMode, block))
         }
 
         gui.addElement(group)
-        gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode)))
+        gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)))
         gui.addElement(closeButton)
         return gui
     }
 
-    private fun createColorSelectButton(player: Player, banner: ItemStack, color: DyeColor, creatorMode: CreatorMode) : StaticGuiElement {
+    private fun createColorSelectButton(player: Player, banner: ItemStack, color: DyeColor, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         val item = color.bannerMaterial.item
 
         if(banner.type == color.bannerMaterial) {
@@ -58,7 +59,7 @@ object BannerColorMenu {
             1,
             {
                 banner.type = color.bannerMaterial
-                BannerCreatorMenu.open(player, banner, creatorMode)
+                BannerCreatorMenu.open(player, banner, creatorMode, block)
                 return@StaticGuiElement true
             },
             "§6§l${color.name.toLowerCase().capitalize()}",

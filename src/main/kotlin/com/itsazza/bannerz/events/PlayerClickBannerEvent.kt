@@ -1,8 +1,11 @@
 package com.itsazza.bannerz.events
 
+import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.util.isBanner
 import org.bukkit.Material
+import org.bukkit.block.Banner
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -20,5 +23,11 @@ object PlayerClickBannerEvent : Listener {
         val clickedBlock = event.clickedBlock ?: return
         if (!isBanner(clickedBlock.type)) return
         if (!event.player.hasPermission("bannerz.interact")) return
+
+        val banner = clickedBlock.state as Banner
+        val patterns = banner.patterns
+        val bannerItem = banner(clickedBlock.type){ patterns.forEach { pattern(it) }}
+
+        BannerCreatorMenu.open(event.player, bannerItem, CreatorMode.CHANGE, clickedBlock)
     }
 }

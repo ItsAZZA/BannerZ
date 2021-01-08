@@ -15,9 +15,9 @@ import de.themoep.inventorygui.StaticGuiElement
 import org.bukkit.Color
 import org.bukkit.DyeColor
 import org.bukkit.Material
+import org.bukkit.block.Block
 import org.bukkit.block.banner.Pattern
 import org.bukkit.block.banner.PatternType
-import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -25,11 +25,11 @@ import org.bukkit.inventory.meta.BannerMeta
 import org.bukkit.inventory.meta.PotionMeta
 
 object PatternMenu {
-    fun openMenu(player: Player, banner: ItemStack, color: DyeColor = DyeColor.RED, index: Int? = null, creatorMode: CreatorMode = CreatorMode.CREATE) {
-        createMenu(banner, color, index, creatorMode).show(player)
+    fun open(player: Player, banner: ItemStack, color: DyeColor = DyeColor.RED, index: Int? = null, creatorMode: CreatorMode, block: Block?) {
+        create(banner, color, index, creatorMode, block).show(player)
     }
 
-    fun createMenu(banner: ItemStack, color: DyeColor, index: Int?, creatorMode: CreatorMode) : InventoryGui {
+    fun create(banner: ItemStack, color: DyeColor, index: Int?, creatorMode: CreatorMode, block: Block?) : InventoryGui {
         val gui = InventoryGui(
             BannerZPlugin.instance,
             null,
@@ -39,7 +39,7 @@ object PatternMenu {
 
         val group = GuiElementGroup('0')
         PatternType.values().drop(1).forEach {
-            group.addElement(createPatternButton(banner, it, color, index, creatorMode))
+            group.addElement(createPatternButton(banner, it, color, index, creatorMode, block))
         }
 
         gui.addElement(group)
@@ -57,15 +57,15 @@ object PatternMenu {
             ))
 
         gui.addElement(createPreviewButton(banner))
-        gui.addElement(createChangeColorButton(banner, index, color, creatorMode))
-        gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode)))
-        gui.addElement(createGoBackAndSaveButton(banner, color, index, creatorMode))
+        gui.addElement(createChangeColorButton(banner, index, color, creatorMode, block))
+        gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)))
+        gui.addElement(createGoBackAndSaveButton(banner, color, index, creatorMode, block))
         gui.addElement(closeButton)
         gui.setCloseAction { false }
         return gui
     }
 
-    private fun createPatternButton(banner: ItemStack, patternType: PatternType, color: DyeColor, index: Int?, creatorMode: CreatorMode) : StaticGuiElement {
+    private fun createPatternButton(banner: ItemStack, patternType: PatternType, color: DyeColor, index: Int?, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         val item = banner(Material.WHITE_BANNER) {pattern(color, patternType)}
         if (color == DyeColor.WHITE) {
             item.type = Material.BLACK_BANNER
@@ -83,11 +83,11 @@ object PatternMenu {
                 if (index == null) {
                     bannerMeta.addPattern(pattern)
                     banner.itemMeta = bannerMeta
-                    BannerCreatorMenu.open(player, banner, creatorMode)
+                    BannerCreatorMenu.open(player, banner, creatorMode, block)
                 } else {
                     bannerMeta.setPattern(index, pattern)
                     banner.itemMeta = bannerMeta
-                    BannerCreatorMenu.open(player, banner, creatorMode)
+                    BannerCreatorMenu.open(player, banner, creatorMode, block)
                 }
                 return@StaticGuiElement true
             },
@@ -99,7 +99,7 @@ object PatternMenu {
             )
     }
 
-    private fun createGoBackAndSaveButton(banner: ItemStack, color: DyeColor, index: Int?, creatorMode: CreatorMode) : StaticGuiElement {
+    private fun createGoBackAndSaveButton(banner: ItemStack, color: DyeColor, index: Int?, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         val item = Material.TIPPED_ARROW.item
         val arrowMeta = item.itemMeta as PotionMeta
         arrowMeta.color = Color.LIME
@@ -113,13 +113,13 @@ object PatternMenu {
             {
                 val player = it.event.whoClicked as Player
                 if (index == null) {
-                    BannerCreatorMenu.open(player, banner, creatorMode)
+                    BannerCreatorMenu.open(player, banner, creatorMode, block)
                 } else {
                     val bannerMeta = banner.itemMeta as BannerMeta
                     val pattern = Pattern(color, bannerMeta.getPattern(index).pattern)
                     bannerMeta.setPattern(index, pattern)
                     banner.itemMeta = bannerMeta
-                    BannerCreatorMenu.open(player, banner, creatorMode)
+                    BannerCreatorMenu.open(player, banner, creatorMode, block)
                 }
                 return@StaticGuiElement true
             },
@@ -142,13 +142,13 @@ object PatternMenu {
         )
     }
 
-    private fun createChangeColorButton(banner: ItemStack, index: Int?, color: DyeColor, creatorMode: CreatorMode) : StaticGuiElement {
+    private fun createChangeColorButton(banner: ItemStack, index: Int?, color: DyeColor, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         return StaticGuiElement('d',
             Material.RED_DYE.item,
             1,
             {
                 val player = it.event.whoClicked as Player
-                ColorMenu.openMenu(player, banner, index, color, creatorMode)
+                ColorMenu.open(player, banner, index, color, creatorMode, block)
                 return@StaticGuiElement true
             },
             "§6§lPattern Color",

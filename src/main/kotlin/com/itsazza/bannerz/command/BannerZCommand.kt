@@ -41,7 +41,7 @@ object BannerZCommand : CommandExecutor {
                     return true
                 }
 
-                BannerCreatorMenu.open(sender, block, CreatorMode.EDIT)
+                BannerCreatorMenu.open(sender, block)
                 return true
             }
         }

@@ -5,6 +5,6 @@ val creatorMenuTemplate = arrayOf(
     " 0000000 ",
     " 0000000 ",
     " 0000000 ",
-    "         ",
+    "    1    ",
     "  blcgs  "
 )
