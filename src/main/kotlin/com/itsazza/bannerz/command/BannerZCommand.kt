@@ -1,6 +1,7 @@
 package com.itsazza.bannerz.command
 
 import com.itsazza.bannerz.builder.banner
+import com.itsazza.bannerz.menus.alphabet.AlphaBetMenu
 import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
@@ -32,6 +33,7 @@ object BannerZCommand : CommandExecutor {
         when (args[0].toLowerCase()) {
             "create", "creator" -> {
                 BannerCreatorMenu.open(sender, banner(DyeColor.WHITE.bannerMaterial){})
+                return true
             }
             "edit", "editor" -> {
                 val block = sender.inventory.itemInMainHand.clone()
@@ -42,6 +44,10 @@ object BannerZCommand : CommandExecutor {
                 }
 
                 BannerCreatorMenu.open(sender, block)
+                return true
+            }
+            "alphabet", "numbers" -> {
+                AlphaBetMenu.open(sender)
                 return true
             }
         }
