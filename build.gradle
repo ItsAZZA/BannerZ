@@ -23,15 +23,12 @@ buildscript {
 repositories {
     mavenLocal()
     mavenCentral()
-
-    // maven { url "https://repo.destroystokyo.com/repository/maven-public" }
     maven { url "https://repo.minebench.de" }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "de.themoep:inventorygui:1.4.2-SNAPSHOT"
-    implementation 'com.google.code.gson:gson:2.8.6'
     compileOnly group: 'com.destroystokyo.paper', name: 'paper', version: '1.16.4-R0.1-SNAPSHOT'
 }
 
