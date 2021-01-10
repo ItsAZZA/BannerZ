@@ -2,6 +2,7 @@ package com.itsazza.bannerz.util
 
 import org.bukkit.DyeColor
 import org.bukkit.Material
+import java.lang.IllegalArgumentException
 
 val Material.bannerColor: DyeColor
     get() {
@@ -22,6 +23,6 @@ val Material.bannerColor: DyeColor
             Material.GREEN_BANNER -> DyeColor.GREEN
             Material.RED_BANNER -> DyeColor.RED
             Material.BLACK_BANNER -> DyeColor.BLACK
-            else -> DyeColor.WHITE
+            else -> throw IllegalArgumentException()
         }
     }
