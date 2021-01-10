@@ -46,3 +46,25 @@ val DyeColor.dyeMaterial : Material
             DyeColor.BLACK -> Material.BLACK_DYE
         }
     }
+
+val DyeColor.concreteMaterial : Material
+get() {
+    return when(this) {
+        DyeColor.WHITE -> Material.WHITE_CONCRETE
+        DyeColor.ORANGE -> Material.ORANGE_CONCRETE
+        DyeColor.MAGENTA -> Material.MAGENTA_CONCRETE
+        DyeColor.LIGHT_BLUE -> Material.LIGHT_BLUE_CONCRETE
+        DyeColor.YELLOW -> Material.YELLOW_CONCRETE
+        DyeColor.LIME -> Material.LIME_CONCRETE
+        DyeColor.PINK -> Material.PINK_CONCRETE
+        DyeColor.GRAY -> Material.GRAY_CONCRETE
+        DyeColor.LIGHT_GRAY -> Material.LIGHT_GRAY_CONCRETE
+        DyeColor.CYAN -> Material.CYAN_CONCRETE
+        DyeColor.PURPLE -> Material.PURPLE_CONCRETE
+        DyeColor.BLUE -> Material.BLUE_CONCRETE
+        DyeColor.BROWN -> Material.BROWN_CONCRETE
+        DyeColor.GREEN -> Material.GREEN_CONCRETE
+        DyeColor.RED -> Material.RED_CONCRETE
+        DyeColor.BLACK -> Material.BLACK_CONCRETE
+    }
+}
