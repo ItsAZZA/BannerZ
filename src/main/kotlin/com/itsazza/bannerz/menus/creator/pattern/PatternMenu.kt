@@ -1,9 +1,9 @@
-package com.itsazza.bannerz.menus.pattern
+package com.itsazza.bannerz.menus.creator.pattern
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.closeButton
-import com.itsazza.bannerz.menus.color.ColorMenu
+import com.itsazza.bannerz.menus.creator.color.ColorMenu
 import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
@@ -109,7 +109,6 @@ object PatternMenu {
 
         return StaticGuiElement('s',
             item,
-            1,
             {
                 val player = it.event.whoClicked as Player
                 if (index == null) {
@@ -134,7 +133,6 @@ object PatternMenu {
 
         return StaticGuiElement('p',
             banner,
-            1,
             {
                 return@StaticGuiElement true
             },
@@ -145,7 +143,6 @@ object PatternMenu {
     private fun createChangeColorButton(banner: ItemStack, index: Int?, color: DyeColor, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         return StaticGuiElement('d',
             Material.RED_DYE.item,
-            1,
             {
                 val player = it.event.whoClicked as Player
                 ColorMenu.open(player, banner, index, color, creatorMode, block)

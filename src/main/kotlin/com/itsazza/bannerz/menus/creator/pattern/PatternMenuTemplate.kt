@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.menus.pattern
+package com.itsazza.bannerz.menus.creator.pattern
 
 val patternMenuTemplate = arrayOf(
     "    p    ",

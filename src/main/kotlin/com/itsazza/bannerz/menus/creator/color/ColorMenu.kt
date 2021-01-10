@@ -1,11 +1,11 @@
-package com.itsazza.bannerz.menus.color
+package com.itsazza.bannerz.menus.creator.color
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.menus.closeButton
 import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.creator.CreatorMode
-import com.itsazza.bannerz.menus.pattern.PatternMenu
+import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -46,6 +46,7 @@ object ColorMenu  {
                                         creatorMode: CreatorMode, block: Block?) : StaticGuiElement
     {
         val item = color.dyeMaterial.item
+        val colorName = color.name.replace("_", " ").toLowerCase()
 
         if(currentColor == color) {
             val itemMeta = item.itemMeta
@@ -56,13 +57,12 @@ object ColorMenu  {
 
         return StaticGuiElement('@',
             item,
-            1,
             {
                 PatternMenu.open(player, banner, color, index, creatorMode, block)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.toLowerCase().capitalize()}",
-            "§7Select ${color.name.toLowerCase()} as the",
+            "§6§l${colorName.capitalize()}",
+            "§7Select $colorName as the",
             "§7pattern color",
             "§0 ",
             "§e§lCLICK §7to select"

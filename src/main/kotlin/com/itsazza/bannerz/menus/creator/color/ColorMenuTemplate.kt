@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.menus.color
+package com.itsazza.bannerz.menus.creator.color
 
 val colorMenuTemplate = arrayOf(
     "         ",

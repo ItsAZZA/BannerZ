@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.util.nms
+package com.itsazza.bannerz.nms
 
 import com.google.common.base.Throwables
 import net.minecraft.server.v1_16_R3.NBTTagCompound
