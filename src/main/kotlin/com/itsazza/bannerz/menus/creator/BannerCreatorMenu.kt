@@ -4,11 +4,11 @@ import com.google.gson.*
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.closeButton
-import com.itsazza.bannerz.menus.color.BannerColorMenu
+import com.itsazza.bannerz.menus.creator.color.BannerColorMenu
 import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.main.MainMenu
-import com.itsazza.bannerz.menus.pattern.PatternMenu
-import com.itsazza.bannerz.util.nms.NMS
+import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
+import com.itsazza.bannerz.nms.NMS
 import com.itsazza.bannerz.util.bannerColor
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
@@ -69,7 +69,6 @@ object BannerCreatorMenu {
     private fun createBannerBaseColorButton(baseBanner: ItemStack, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         return StaticGuiElement('@',
             baseBanner.type.item,
-            1,
             {
                 val player = it.event.whoClicked as Player
                 BannerColorMenu.open(player, baseBanner, creatorMode, block)
@@ -93,7 +92,6 @@ object BannerCreatorMenu {
 
         return StaticGuiElement('@',
             item,
-            1,
             {
                 val player = it.event.whoClicked as Player
                 when {
@@ -142,7 +140,6 @@ object BannerCreatorMenu {
         return StaticGuiElement(
             '@',
             Material.CRIMSON_BUTTON.item,
-            1,
             {
                 val player = it.event.whoClicked as Player
                 PatternMenu.open(player, banner, creatorMode = creatorMode, block = block)
@@ -163,7 +160,6 @@ object BannerCreatorMenu {
 
         return StaticGuiElement('p',
             banner,
-            1,
             {
                 return@StaticGuiElement true
             },
