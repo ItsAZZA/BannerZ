@@ -2,6 +2,7 @@ package com.itsazza.bannerz.menus.main
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
+import com.itsazza.bannerz.menus.alphabet.AlphaBetMenu
 import com.itsazza.bannerz.menus.closeButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
@@ -13,6 +14,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import sun.audio.AudioPlayer.player
 
 object MainMenu {
     fun open(player: Player) {
@@ -43,6 +45,11 @@ object MainMenu {
         gui.addElement(StaticGuiElement(
             '1',
             globeBannerPatternItem,
+            {
+                val player = it.event.whoClicked as Player
+                AlphaBetMenu.open(player)
+                return@StaticGuiElement true
+            },
             "§6§lAlphabet & Numbers",
             "§7Create custom alphabet",
             "§7and number banners",
