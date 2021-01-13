@@ -24,11 +24,13 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://repo.minebench.de" }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "de.themoep:inventorygui:1.4.2-SNAPSHOT"
+    //implementation "com.github.Quicksteve:simplestorage:v1.0-SNAPSHOT"
     compileOnly group: 'com.destroystokyo.paper', name: 'paper', version: '1.16.4-R0.1-SNAPSHOT'
 }
 

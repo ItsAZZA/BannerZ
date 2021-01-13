@@ -1,6 +1,10 @@
 package com.itsazza.bannerz.nms
 
 import com.google.common.base.Throwables
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
 import net.minecraft.server.v1_16_R3.NBTTagCompound
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack

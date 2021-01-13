@@ -4,7 +4,7 @@ import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.alphabet.AlphaBetMenu
 import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
-import com.itsazza.bannerz.menus.creator.CreatorMode
+import com.itsazza.bannerz.menus.library.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.util.isBanner
 import org.bukkit.DyeColor
@@ -45,6 +45,13 @@ object BannerZCommand : CommandExecutor {
 
                 BannerCreatorMenu.open(sender, block)
                 return true
+            }
+            "save" -> {
+                PlayerBanners.add(sender.uniqueId, sender.inventory.itemInMainHand.clone())
+            }
+            "give" -> {
+                val item = PlayerBanners.getItemStack(sender.uniqueId)
+                sender.inventory.addItem(item)
             }
             "alphabet", "numbers" -> {
                 AlphaBetMenu.open(sender)
