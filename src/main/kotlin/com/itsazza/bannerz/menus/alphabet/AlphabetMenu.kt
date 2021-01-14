@@ -3,18 +3,20 @@ package com.itsazza.bannerz.menus.alphabet
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.menus.closeButton
 import com.itsazza.bannerz.menus.creator.color.dyes
+import com.itsazza.bannerz.menus.tippedArrow
 import com.itsazza.bannerz.util.concreteMaterial
 import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
+import org.bukkit.Color
 import org.bukkit.DyeColor
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 
-object AlphaBetMenu  {
+object AlphabetMenu  {
     fun open(player: Player, backgroundColor: DyeColor = DyeColor.WHITE, foregroundColor: DyeColor = DyeColor.BLACK) {
         create(backgroundColor, foregroundColor).show(player)
     }
@@ -35,16 +37,10 @@ object AlphaBetMenu  {
             group1.addElement(createBackgroundColorSelectButton(dye, backgroundColor, foregroundColor))
         }
 
-        gui.addElement(
-            StaticGuiElement(
-                'p',
-                alphabetBanners["A"]!!.build(foregroundColor, backgroundColor),
-                "§6§lPreview"
-            )
-        )
-
         gui.addElement(group0)
         gui.addElement(group1)
+        gui.addElement(createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor))
+        gui.addElement(StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), ""))
         gui.addElement(closeButton)
         gui.setCloseAction { false }
         return gui
@@ -98,5 +94,22 @@ object AlphaBetMenu  {
             "§0 ",
             "§e§lCLICK §7to select"
         )
+    }
+
+    private fun createOpenAlphabetBannerMenuButton(foregroundColor: DyeColor, backgroundColor: DyeColor) : StaticGuiElement {
+        return StaticGuiElement('g',
+            tippedArrow(Color.LIME),
+            {
+                val player = it.event.whoClicked as Player
+                AlphabetBannerMenu.open(player, foregroundColor, backgroundColor)
+                return@StaticGuiElement true
+            },
+            "§6§lGet Banners",
+            "§7Open a menu where you can",
+            "§7select your alphabet & number",
+            "§7banner from the different options",
+            "§0 ",
+            "§e§lCLICK §7to select"
+            )
     }
 }

@@ -167,7 +167,7 @@ object BannerCreatorMenu {
             )
     }
 
-    private fun createGiveItemButton(banner: ItemStack) : StaticGuiElement {
+    fun createGiveItemButton(banner: ItemStack) : StaticGuiElement {
         return StaticGuiElement('s',
             Material.CHEST.item,
             {
@@ -184,7 +184,7 @@ object BannerCreatorMenu {
         )
     }
 
-    private fun createSaveButton() : StaticGuiElement {
+    fun createSaveButton() : StaticGuiElement {
         return StaticGuiElement('l',
             Material.BOOKSHELF.item,
             "§6§lSave",
@@ -195,7 +195,7 @@ object BannerCreatorMenu {
             )
     }
 
-    private fun createGiveCommandButton(banner: ItemStack) : StaticGuiElement {
+    fun createGiveCommandButton(banner: ItemStack) : StaticGuiElement {
         return StaticGuiElement('g',
             Material.COMMAND_BLOCK.item,
             {

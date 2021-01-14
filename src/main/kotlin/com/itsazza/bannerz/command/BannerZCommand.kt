@@ -1,7 +1,7 @@
 package com.itsazza.bannerz.command
 
 import com.itsazza.bannerz.builder.banner
-import com.itsazza.bannerz.menus.alphabet.AlphaBetMenu
+import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.library.data.PlayerBanners
@@ -54,7 +54,7 @@ object BannerZCommand : CommandExecutor {
                 sender.inventory.addItem(item)
             }
             "alphabet", "numbers" -> {
-                AlphaBetMenu.open(sender)
+                AlphabetMenu.open(sender)
                 return true
             }
         }

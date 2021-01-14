@@ -2,19 +2,16 @@ package com.itsazza.bannerz.menus.main
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
-import com.itsazza.bannerz.menus.alphabet.AlphaBetMenu
+import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.menus.closeButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
-import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
 import org.bukkit.Material
-import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
-import sun.audio.AudioPlayer.player
 
 object MainMenu {
     fun open(player: Player) {
@@ -47,7 +44,7 @@ object MainMenu {
             globeBannerPatternItem,
             {
                 val player = it.event.whoClicked as Player
-                AlphaBetMenu.open(player)
+                AlphabetMenu.open(player)
                 return@StaticGuiElement true
             },
             "§6§lAlphabet & Numbers",

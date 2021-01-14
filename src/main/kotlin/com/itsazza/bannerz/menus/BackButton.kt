@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.PotionMeta
 
 fun createBackButton(gui: InventoryGui) : StaticGuiElement {
     return StaticGuiElement('b',
-        redTippedArrow(),
+        tippedArrow(Color.RED),
         {
             val player = it.event.whoClicked as Player
             gui.show(player)
@@ -25,14 +25,14 @@ fun createBackButton(gui: InventoryGui) : StaticGuiElement {
 
 val backInHistoryButton : GuiBackElement
     get() = GuiBackElement('b',
-        redTippedArrow(),
+        tippedArrow(Color.RED),
         "§c§lBack"
     )
 
-fun redTippedArrow() : ItemStack {
+fun tippedArrow(color: Color) : ItemStack {
     val arrow = Material.TIPPED_ARROW.item
     val arrowMeta = arrow.itemMeta as PotionMeta
-    arrowMeta.color = Color.RED
+    arrowMeta.color = color
     arrowMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
     arrow.itemMeta = arrowMeta
     return arrow
