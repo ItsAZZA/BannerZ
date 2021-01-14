@@ -9,6 +9,7 @@ import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
 import com.itsazza.bannerz.nms.NMS
+import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.bannerColor
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
@@ -199,18 +200,10 @@ object BannerCreatorMenu {
         return StaticGuiElement('g',
             Material.COMMAND_BLOCK.item,
             {
-                val json = NMS.getBannerPatternJson(banner)
-                val commandString = "minecraft:give @p minecraft:${banner.type.name.toLowerCase()}$json 1"
-                val tag = NBTTagCompound()
-                val command = NBTTagCompound()
-                command.setString("Command", commandString)
-                tag.set("BlockEntityTag", command)
-                val nmsCommandBlock = ItemStack(Items.ez)
-                nmsCommandBlock.tag = tag
-
+                val item = NMS.getBannerCommandBlock(banner)
                 val player = it.event.whoClicked as Player
-                player.inventory.addItem(CraftItemStack.asCraftMirror(nmsCommandBlock))
-                player.playSound(player.location, Sound.ENTITY_VILLAGER_YES, 1.0F, 1.0F)
+                player.inventory.addItem(item)
+                Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
                 return@StaticGuiElement true
             },
             "§6§lCommand Block",
