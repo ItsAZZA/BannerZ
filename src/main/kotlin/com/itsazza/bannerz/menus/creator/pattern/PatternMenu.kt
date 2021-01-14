@@ -2,14 +2,15 @@ package com.itsazza.bannerz.menus.creator.pattern
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
-import com.itsazza.bannerz.menus.closeButton
+import com.itsazza.bannerz.menus.Buttons.close
+import com.itsazza.bannerz.menus.Buttons.createBackButton
+import com.itsazza.bannerz.menus.Buttons.nextPage
+import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.color.ColorMenu
-import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
-import de.themoep.inventorygui.GuiPageElement
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
 import org.bukkit.Color
@@ -43,24 +44,13 @@ object PatternMenu {
         }
 
         gui.addElement(group)
-        gui.addElement(GuiPageElement('1',
-            Material.ARROW.item,
-            GuiPageElement.PageAction.PREVIOUS,
-            "§6§lPrevious",
-            "§7Go to page %prevpage%"
-            ))
-        gui.addElement(GuiPageElement('2',
-            Material.ARROW.item,
-            GuiPageElement.PageAction.NEXT,
-            "§6§lNext",
-            "§7Go to page %nextpage%"
-            ))
-
+        gui.addElement(nextPage)
+        gui.addElement(previousPage)
         gui.addElement(createPreviewButton(banner))
         gui.addElement(createChangeColorButton(banner, index, color, creatorMode, block))
         gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)))
         gui.addElement(createGoBackAndSaveButton(banner, color, index, creatorMode, block))
-        gui.addElement(closeButton)
+        gui.addElement(close)
         gui.setCloseAction { false }
         return gui
     }

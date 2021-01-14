@@ -4,10 +4,14 @@ import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.library.PlayerLibraryMenu
 import com.itsazza.bannerz.menus.library.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
+import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.isBanner
+import org.bukkit.Bukkit
 import org.bukkit.DyeColor
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -46,14 +50,42 @@ object BannerZCommand : CommandExecutor {
                 BannerCreatorMenu.open(sender, block)
                 return true
             }
+            "bannerlibrary", "bl" -> {
+                if(args.size >= 2) {
+                    val offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[1])
+                    if (offlinePlayer == null) {
+                        sender.sendMessage("§cNo player found with that name!")
+                        return true
+                    }
+                    val player = offlinePlayer.player
+                    if (player == null) {
+                        sender.sendMessage("§cNo player found with that name!")
+                        return true
+                    }
+                    PlayerLibraryMenu.create(player)?.show(sender) ?: sender.sendMessage("§cNo banners found for player $player")
+                    return true
+                }
+                PlayerLibraryMenu.open(sender)
+                return true
+            }
             "save" -> {
-                PlayerBanners.add(sender.uniqueId, sender.inventory.itemInMainHand.clone())
+                val block = sender.inventory.itemInMainHand.clone()
+                block.amount = 1
+
+                if (!isBanner(block.type)) {
+                    sender.sendMessage("§cYou must be holding a banner!")
+                    return true
+                }
+
+                val response = PlayerBanners.add(sender.uniqueId, block)
+                if (response) {
+                    Sounds.play(sender, Sound.ENTITY_VILLAGER_YES)
+                    sender.sendMessage("§eBanner added to personal library!")
+                } else {
+                    sender.sendMessage("§cSomething went wrong adding the banner!")
+                }
             }
-            "give" -> {
-                val item = PlayerBanners.getItemStack(sender.uniqueId)
-                sender.inventory.addItem(item)
-            }
-            "alphabet", "numbers" -> {
+            "alphabet", "number" -> {
                 AlphabetMenu.open(sender)
                 return true
             }

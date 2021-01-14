@@ -1,9 +1,9 @@
 package com.itsazza.bannerz.menus.creator.color
 
 import com.itsazza.bannerz.BannerZPlugin
+import com.itsazza.bannerz.menus.Buttons.close
+import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.util.dyeMaterial
-import com.itsazza.bannerz.menus.closeButton
-import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
 import com.itsazza.bannerz.util.item
@@ -37,7 +37,7 @@ object ColorMenu  {
 
         gui.addElement(group)
         gui.addElement(createBackButton(PatternMenu.create(banner, currentColor, index, creatorMode, block)))
-        gui.addElement(closeButton)
+        gui.addElement(close)
         return gui
     }
 

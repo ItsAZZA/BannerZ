@@ -2,9 +2,10 @@ package com.itsazza.bannerz.menus.main
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
+import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
-import com.itsazza.bannerz.menus.closeButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.library.PlayerLibraryMenu
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -72,6 +73,11 @@ object MainMenu {
         gui.addElement(StaticGuiElement(
             '3',
             Material.BOOK.item,
+            {
+                val player = it.event.whoClicked as Player
+                PlayerLibraryMenu.open(player)
+                return@StaticGuiElement true
+            },
             "§6§lYour banners",
             "§7Check out your saved",
             "§7banners",
@@ -80,7 +86,7 @@ object MainMenu {
         ))
 
         gui.setCloseAction { false }
-        gui.addElement(closeButton)
+        gui.addElement(close)
         return gui
     }
 }

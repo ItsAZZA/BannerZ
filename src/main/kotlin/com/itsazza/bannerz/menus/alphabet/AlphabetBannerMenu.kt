@@ -1,8 +1,13 @@
 package com.itsazza.bannerz.menus.alphabet
 
 import com.itsazza.bannerz.BannerZPlugin
-import com.itsazza.bannerz.menus.backInHistoryButton
+import com.itsazza.bannerz.menus.Buttons.backInHistory
+import com.itsazza.bannerz.menus.Buttons.close
+import com.itsazza.bannerz.menus.Buttons.nextPage
+import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.creator.BannerCreatorMenu.createGiveCommandButton
+import com.itsazza.bannerz.menus.creator.BannerCreatorMenu.createSaveButton
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -23,7 +28,7 @@ object AlphabetBannerMenu {
         val gui = InventoryGui(
             this.plugin,
             null,
-            "Alphabet Banner",
+            "Alphabet Banners",
             alphabetBannerMenuTemplate
         )
 
@@ -34,6 +39,11 @@ object AlphabetBannerMenu {
         }
 
         gui.addElement(group)
+
+        gui.addElement(nextPage)
+        gui.addElement(previousPage)
+        gui.addElement(backInHistory)
+        gui.addElement(close)
         gui.setCloseAction { false }
         return gui
     }
@@ -52,38 +62,38 @@ object AlphabetBannerMenu {
                     player.inventory.addItem(item)
                     return@StaticGuiElement true
                 } else {
-                    createAlphabetBannerGetMenu(item).show(player)
+                    createBannerGetMenu(item).show(player)
                     return@StaticGuiElement true
                 }
             },
             "§6§l$bannerName",
-            "Get this $bannerName banner",
+            "§7Get this $bannerName banner",
             "§0 ",
             "§e§lL-CLICK §7to get item",
             "§e§lR-CLICK §7for more options"
             )
     }
 
-    private fun createAlphabetBannerGetMenu(item: ItemStack) : InventoryGui {
+    private fun createBannerGetMenu(banner: ItemStack) : InventoryGui {
         val gui = InventoryGui(
             this.plugin,
             null,
             "Get Alphabet Banner",
             arrayOf(
                 "         ",
-                "   sge   ",
+                "   lge   ",
                 "    b    ",
                 "         "
             )
         )
 
-        gui.addElement(BannerCreatorMenu.createGiveCommandButton(item))
-        gui.addElement(BannerCreatorMenu.createSaveButton())
+        gui.addElement(createGiveCommandButton(banner))
+        gui.addElement(createSaveButton(banner))
         gui.addElement(StaticGuiElement('e',
             Material.WRITABLE_BOOK.item,
             {
                 val player = it.event.whoClicked as Player
-                BannerCreatorMenu.open(player, item)
+                BannerCreatorMenu.open(player, banner)
                 return@StaticGuiElement true
             },
             "§6§lEdit Banner",
@@ -93,7 +103,7 @@ object AlphabetBannerMenu {
             "§e§lCLICK §7to select"
         ))
 
-        gui.addElement(backInHistoryButton)
+        gui.addElement(backInHistory)
         gui.setCloseAction { false }
         return gui
     }

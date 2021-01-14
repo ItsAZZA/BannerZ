@@ -1,12 +1,14 @@
 package com.itsazza.bannerz.menus.alphabet
 
 import com.itsazza.bannerz.BannerZPlugin
-import com.itsazza.bannerz.menus.closeButton
+import com.itsazza.bannerz.menus.Buttons.close
+import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.color.dyes
-import com.itsazza.bannerz.menus.tippedArrow
+import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.util.concreteMaterial
 import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.util.item
+import com.itsazza.bannerz.util.tippedArrow
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -40,8 +42,9 @@ object AlphabetMenu  {
         gui.addElement(group0)
         gui.addElement(group1)
         gui.addElement(createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor))
-        gui.addElement(StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), ""))
-        gui.addElement(closeButton)
+        gui.addElement(StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6lPreview"))
+        gui.addElement(createBackButton(MainMenu.create()))
+        gui.addElement(close)
         gui.setCloseAction { false }
         return gui
     }
@@ -110,6 +113,6 @@ object AlphabetMenu  {
             "§7banner from the different options",
             "§0 ",
             "§e§lCLICK §7to select"
-            )
+        )
     }
 }

@@ -3,11 +3,12 @@ package com.itsazza.bannerz.menus.creator
 import com.google.gson.*
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
-import com.itsazza.bannerz.menus.closeButton
+import com.itsazza.bannerz.menus.Buttons.close
+import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.color.BannerColorMenu
-import com.itsazza.bannerz.menus.createBackButton
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
+import com.itsazza.bannerz.menus.library.data.PlayerBanners
 import com.itsazza.bannerz.nms.NMS
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.bannerColor
@@ -22,7 +23,6 @@ import org.bukkit.Sound
 import org.bukkit.block.Banner
 import org.bukkit.block.Block
 import org.bukkit.block.banner.Pattern
-import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -59,11 +59,11 @@ object BannerCreatorMenu {
         gui.addElement(createPreviewButton(banner))
         gui.addElement(createGiveItemButton(banner))
         gui.addElement(createGiveCommandButton(banner))
-        gui.addElement(createSaveButton())
+        gui.addElement(createSaveButton(banner))
         if(creatorMode == CreatorMode.CHANGE && block != null) { gui.addElement(createSaveBlockButton(banner, block)) }
         gui.addElement(createBackButton(MainMenu.create()))
         gui.closeAction = InventoryGui.CloseAction { false }
-        gui.addElement(closeButton)
+        gui.addElement(close)
         return gui
     }
 
@@ -100,6 +100,7 @@ object BannerCreatorMenu {
                         val bannerMeta = banner.itemMeta as BannerMeta
                         bannerMeta.removePattern(index)
                         banner.itemMeta = bannerMeta
+                        Sounds.play(player, Sound.BLOCK_BEEHIVE_EXIT)
                         open(player, banner, creatorMode, block)
                         return@StaticGuiElement true
                     }
@@ -168,7 +169,7 @@ object BannerCreatorMenu {
             )
     }
 
-    fun createGiveItemButton(banner: ItemStack) : StaticGuiElement {
+    private fun createGiveItemButton(banner: ItemStack) : StaticGuiElement {
         return StaticGuiElement('s',
             Material.CHEST.item,
             {
@@ -185,9 +186,16 @@ object BannerCreatorMenu {
         )
     }
 
-    fun createSaveButton() : StaticGuiElement {
+    fun createSaveButton(banner: ItemStack) : StaticGuiElement {
         return StaticGuiElement('l',
             Material.BOOKSHELF.item,
+            {
+                val player = it.event.whoClicked as Player
+                PlayerBanners.add(player.uniqueId, banner)
+                player.sendMessage("§eBanner added to personal library!")
+                Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
+                return@StaticGuiElement true
+            },
             "§6§lSave",
             "§7Save this banner to",
             "§7your personal banner library",
