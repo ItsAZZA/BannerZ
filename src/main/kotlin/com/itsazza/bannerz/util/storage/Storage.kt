@@ -1,27 +1,15 @@
 package com.itsazza.bannerz.util.storage
 
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
 
-class Storage<T>(dbFile: File, private val clazz: Class<T>) {
+class Storage(dbFile: File) {
     private val connection: Connection = DriverManager.getConnection("jdbc:sqlite:${dbFile.absolutePath}")
-    /**
-     * The Gson instance to use for serialization/deserialization
-     */
+    private val type = object: TypeToken<MutableList<String>>() {}.type
     var gson = Gson()
-
-    /**
-     * The amount of historic values to save
-     */
-    var limit = 10
-        set(value) {
-            if (limit <= 0) {
-                throw IllegalArgumentException("Limit must be at least 1: $value")
-            }
-            field = value
-        }
 
     init {
         connection.createStatement().use { statement ->
@@ -29,46 +17,30 @@ class Storage<T>(dbFile: File, private val clazz: Class<T>) {
                 """
                 CREATE TABLE IF NOT EXISTS data
                 (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    data TEXT NOT NULL
+                    player_uuid TEXT PRIMARY KEY NOT NULL,
+                    contents TEXT NOT NULL
                 );
             """.trimIndent()
             )
         }
     }
 
-    /**
-     * Loads the last record from the db, or null if it doesn't exist
-     */
-    fun load(): T? {
-        connection.createStatement().use { statement ->
-            statement.executeQuery("SELECT data.data as json FROM data ORDER BY id DESC LIMIT 1").use { resultSet ->
-                return if (resultSet.next()) {
-                    gson.fromJson(resultSet.getString("json"), clazz)
-                } else {
-                    null
+    fun loadPlayer(player: String) : MutableList<String>? {
+        connection.createStatement().also { statement ->
+            statement.executeQuery("SELECT contents as json FROM data WHERE player_uuid = '$player'").use { resultSet ->
+                if(resultSet.next()) {
+                    return gson.fromJson(resultSet.getString(1), type)
                 }
             }
         }
+        return null
     }
 
-    /**
-     * Saves the record to the database and clears records that are too old
-     */
-    fun save(data: T) {
-        connection.prepareStatement("INSERT INTO data(data) values (?)").use { statement ->
-            statement.setString(1, gson.toJson(data))
-            statement.execute()
-        }
-
-        connection.createStatement().use { statement ->
-            statement.execute(
-                """
-                DELETE FROM data WHERE id NOT IN (
-                    SELECT id FROM data ORDER BY id DESC LIMIT $limit
-                )
-            """.trimIndent()
-            )
+    fun savePlayer(player: String, data: MutableList<String>) {
+        connection.prepareStatement("REPLACE INTO data (player_uuid, contents) values(?,?)").use {
+            it.setString(1, player)
+            it.setString(2, gson.toJson(data))
+            it.execute()
         }
     }
 }
