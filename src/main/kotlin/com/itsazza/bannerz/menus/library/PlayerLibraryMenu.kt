@@ -23,17 +23,17 @@ import org.bukkit.inventory.ItemStack
 object PlayerLibraryMenu {
     private val plugin = BannerZPlugin.instance
 
-    fun open(player: Player) {
-        val menu = create(player)
+    fun open(playerWhoseLibrary: Player, playerToOpenFor: Player = playerWhoseLibrary) {
+        val menu = create(playerWhoseLibrary)
         if(menu == null) {
-            player.sendMessage("§cNo saved banners found!")
-            Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
+            playerToOpenFor.sendMessage("§cNo saved banners found!")
+            Sounds.play(playerToOpenFor, Sound.ENTITY_VILLAGER_NO)
             return
         }
-        menu.show(player)
+        menu.show(playerToOpenFor)
     }
 
-    fun create(player: Player): InventoryGui? {
+    fun create(playerWhoseLibrary: Player): InventoryGui? {
         val gui = InventoryGui(
             plugin,
             null,
@@ -41,13 +41,13 @@ object PlayerLibraryMenu {
             libraryMenuTemplate
         )
 
-        val playerUUID = player.uniqueId
+        val playerUUID = playerWhoseLibrary.uniqueId
         val banners = PlayerBanners.get(playerUUID)
         if (banners.isNullOrEmpty()) return null
         val group = GuiElementGroup('0')
 
         for((i, banner) in banners.withIndex()) {
-            group.addElement(createBannerLibraryButton(deSerializeItemStack(banner), i))
+            group.addElement(createBannerLibraryButton(playerWhoseLibrary, deSerializeItemStack(banner), i))
         }
 
         gui.addElement(group)
@@ -59,7 +59,7 @@ object PlayerLibraryMenu {
         return gui
     }
 
-    private fun createBannerLibraryButton(banner: ItemStack, index: Int) : StaticGuiElement {
+    private fun createBannerLibraryButton(playerWhoseLibrary: Player, banner: ItemStack, index: Int) : StaticGuiElement {
         return StaticGuiElement('@',
             banner,
             {
@@ -69,7 +69,7 @@ object PlayerLibraryMenu {
                     Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
                     return@StaticGuiElement true
                 } else {
-                    createBannerGetMenu(banner, index).show(player)
+                    createBannerGetMenu(playerWhoseLibrary, banner, index).show(player)
                     return@StaticGuiElement true
                 }
             },
@@ -82,7 +82,7 @@ object PlayerLibraryMenu {
             )
     }
 
-    private fun createBannerGetMenu(banner: ItemStack, index: Int) : InventoryGui {
+    private fun createBannerGetMenu(playerWhoseLibrary: Player, banner: ItemStack, index: Int) : InventoryGui {
         val gui = InventoryGui(
             plugin,
             null,
@@ -112,9 +112,14 @@ object PlayerLibraryMenu {
             Material.RED_CONCRETE.item,
             {
                 val player = it.event.whoClicked as Player
-                PlayerBanners.remove(player.uniqueId, index)
-                Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
-                player.sendMessage("§eBanner removed from personal library!")
+                if (player != playerWhoseLibrary && !player.hasPermission("bannerz.admin")) {
+                    Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
+                    player.sendMessage("§cNo permission remove banners from other players' menus!")
+                    return@StaticGuiElement true
+                }
+                PlayerBanners.remove(playerWhoseLibrary.uniqueId, index)
+                Sounds.play(playerWhoseLibrary, Sound.ENTITY_VILLAGER_YES)
+                playerWhoseLibrary.sendMessage("§eBanner removed from personal library!")
                 it.gui.close()
                 return@StaticGuiElement true
             },
