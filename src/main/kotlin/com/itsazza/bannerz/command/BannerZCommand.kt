@@ -1,5 +1,6 @@
 package com.itsazza.bannerz.command
 
+import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.util.bannerMaterial
@@ -33,6 +34,12 @@ object BannerZCommand : CommandExecutor {
         }
 
         when (args[0].toLowerCase()) {
+            "reload" -> {
+                val plugin = BannerZPlugin.instance ?: return true
+                plugin.reloadConfig()
+                sender.sendMessage("§eReloaded config!")
+                return true
+            }
             "create", "creator" -> {
                 if (!checkPermission(sender, "bannerz.menu.create")) return true
                 BannerCreatorMenu.open(sender, banner(DyeColor.WHITE.bannerMaterial){})

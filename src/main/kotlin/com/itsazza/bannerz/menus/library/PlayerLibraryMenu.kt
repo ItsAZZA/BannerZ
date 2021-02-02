@@ -10,7 +10,9 @@ import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.library.data.PlayerBanners
 import com.itsazza.bannerz.menus.library.data.deSerializeItemStack
 import com.itsazza.bannerz.menus.main.MainMenu
+import com.itsazza.bannerz.util.BannerMaterials
 import com.itsazza.bannerz.util.Sounds
+import com.itsazza.bannerz.util.hasItems
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui

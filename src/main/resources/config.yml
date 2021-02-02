@@ -1,0 +1,5 @@
+settings:
+  survivalMode:
+    enabled: true
+    # If set to true, limits banner patterns to 6 and if set to false, allows up to 16 patterns
+    limitPatternAmount: true
