@@ -16,6 +16,7 @@ class BannerZPlugin : JavaPlugin() {
         instance = this
 
         if (!dataFolder.exists()) dataFolder.mkdir()
+        saveDefaultConfig()
 
         getCommand("banner")?.setExecutor(BannerZCommand)
         Bukkit.getPluginManager().registerEvents(PlayerClickBannerEvent, this)

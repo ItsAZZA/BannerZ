@@ -166,25 +166,12 @@ object BannerCreatorMenu {
     }
 
     private fun createGiveItemButton(banner: ItemStack) : StaticGuiElement {
-        val config = BannerZPlugin.instance!!.config
-        val survivalMode = config.getBoolean("settings.survivalMode.enabled")
-
-        return StaticGuiElement('s',
+        return StaticGuiElement(
+            's',
             Material.CHEST.item,
             { click ->
                 val player = click.event.whoClicked as Player
-                if (survivalMode) {
-                    val materials = BannerMaterials.getRequired(banner)!!
-                    val inventory = player.inventory
-                    if (!inventory.hasItems(materials)) {
-                        Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
-                        player.sendMessage("§cYou do not have the items to craft this item!")
-                        val needed = materials.map { "${it.value}x ${it.key.name}" }.joinToString()
-                        player.sendMessage("§eYou need the following: §7$needed")
-                        return@StaticGuiElement false
-                    }
-                    BannerMaterials.takeRequired(materials, player)
-                }
+                if (!checkSurvivalCrafting(banner, player)) return@StaticGuiElement true
                 player.inventory.addItem(banner)
                 player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)
                 return@StaticGuiElement true
@@ -219,8 +206,10 @@ object BannerCreatorMenu {
         return StaticGuiElement('g',
             Material.COMMAND_BLOCK.item,
             {
-                val item = NMS.getBannerCommandBlock(banner)
                 val player = it.event.whoClicked as Player
+                if (!checkPermission(player, "bannerz.commandblock")) return@StaticGuiElement true
+
+                val item = NMS.getBannerCommandBlock(banner)
                 player.inventory.addItem(item)
                 Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
                 return@StaticGuiElement true
@@ -256,5 +245,4 @@ object BannerCreatorMenu {
             "§e§lCLICK §7to set"
         )
     }
-    
 }

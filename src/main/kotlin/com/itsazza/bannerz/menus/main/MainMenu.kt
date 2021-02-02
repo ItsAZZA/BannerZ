@@ -30,6 +30,11 @@ object MainMenu {
         gui.addElement(StaticGuiElement(
             '0',
             Material.BOOKSHELF.item,
+            {
+                val player = it.event.whoClicked as Player
+                player.sendMessage("§6This feature is coming soon!")
+                return@StaticGuiElement true
+            },
             "§6§lBanner Library",
             "§7Library of pre-made",
             "§7banners",
