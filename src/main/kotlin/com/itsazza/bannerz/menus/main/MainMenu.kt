@@ -39,7 +39,7 @@ object MainMenu {
             "§7Library of pre-made",
             "§7banners",
             "§0 ",
-            "§e§lCLICK §7to open"
+            "§cComing soon(ish)™!"
         ))
 
         val globeBannerPatternItem = ItemStack(Material.GLOBE_BANNER_PATTERN)
