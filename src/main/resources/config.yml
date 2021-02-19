@@ -1,4 +1,6 @@
 settings:
   survival:
     enabled: false
-    patternLimit: 6 # Survival has a limit of 6, but banners support up to 16
+    requireBaseMaterials: true
+    # Vanilla survival crafting has a limit of 6 patterns, but banners support up to 16
+    patternLimit: 6
