@@ -25,6 +25,28 @@ val DyeColor.bannerMaterial: Material
         }
     }
 
+val DyeColor.woolMaterial : Material
+    get() {
+        return when(this) {
+            DyeColor.WHITE -> Material.WHITE_WOOL
+            DyeColor.ORANGE -> Material.ORANGE_WOOL
+            DyeColor.MAGENTA -> Material.MAGENTA_WOOL
+            DyeColor.LIGHT_BLUE -> Material.LIGHT_BLUE_WOOL
+            DyeColor.YELLOW -> Material.YELLOW_WOOL
+            DyeColor.LIME -> Material.LIME_WOOL
+            DyeColor.PINK -> Material.PINK_WOOL
+            DyeColor.GRAY -> Material.GRAY_WOOL
+            DyeColor.LIGHT_GRAY -> Material.LIGHT_GRAY_WOOL
+            DyeColor.CYAN -> Material.CYAN_WOOL
+            DyeColor.PURPLE -> Material.PURPLE_WOOL
+            DyeColor.BLUE -> Material.BLUE_WOOL
+            DyeColor.BROWN -> Material.BROWN_WOOL
+            DyeColor.GREEN -> Material.GREEN_WOOL
+            DyeColor.RED -> Material.RED_WOOL
+            DyeColor.BLACK -> Material.BLACK_WOOL
+        }
+    }
+
 val DyeColor.dyeMaterial : Material
     get() {
         return when(this) {
