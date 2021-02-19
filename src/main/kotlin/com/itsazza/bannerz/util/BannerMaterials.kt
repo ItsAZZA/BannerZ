@@ -1,6 +1,8 @@
 package com.itsazza.bannerz.util
 
+import com.itsazza.bannerz.BannerZPlugin
 import org.bukkit.Material
+import org.bukkit.block.Banner
 import org.bukkit.block.banner.PatternType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -10,6 +12,7 @@ import java.lang.IllegalArgumentException
 object BannerMaterials {
     fun getRequired(item: ItemStack): MutableMap<Material, Int> {
         val bannerMeta = item.itemMeta as? BannerMeta ?: throw IllegalArgumentException()
+        val baseMaterials = BannerZPlugin.instance!!.config.getBoolean("settings.survival.requireBaseMaterials")
         val itemsNeeded = mutableMapOf<Material, Int>()
 
         bannerMeta.patterns.forEach { pattern ->
@@ -19,6 +22,12 @@ object BannerMaterials {
                 itemsNeeded.putIfAbsent(patternItem, 1)
             }
         }
+
+        if (baseMaterials) {
+            itemsNeeded[Material.STICK] = 1
+            itemsNeeded[item.type.bannerColor.woolMaterial] = 6
+        }
+
         return itemsNeeded
     }
 
