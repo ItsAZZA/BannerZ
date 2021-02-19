@@ -42,7 +42,7 @@ object AlphabetMenu  {
         gui.addElement(group0)
         gui.addElement(group1)
         gui.addElement(createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor))
-        gui.addElement(StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6lPreview"))
+        gui.addElement(StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6§lPreview"))
         gui.addElement(createBackButton(MainMenu.create()))
         gui.addElement(close)
         gui.setCloseAction { false }

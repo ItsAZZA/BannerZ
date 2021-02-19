@@ -22,7 +22,7 @@ fun checkSurvivalCrafting(item: ItemStack, player: Player) : Boolean {
         if (!inventory.hasItems(materials)) {
             Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
             player.sendMessage("§cYou do not have the items to craft this item!")
-            val needed = materials.map { "${it.value}x ${it.key.name}" }.joinToString()
+            val needed = materials.map { "${it.value}x ${it.key.name.replace("_", " ").toLowerCase()}" }.joinToString()
             player.sendMessage("§eYou need: §7$needed")
             return false
         }

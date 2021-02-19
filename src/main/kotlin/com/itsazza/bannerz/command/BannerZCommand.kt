@@ -57,10 +57,10 @@ object BannerZCommand : CommandExecutor {
                 BannerCreatorMenu.open(sender, block)
                 return true
             }
-            "bannerlibrary", "bl" -> {
-                if (!checkPermission(sender, "bannerz.menu.bannerlibrary")) return true
+            "mine", "mybanners" -> {
+                if (!checkPermission(sender, "bannerz.menu.mybanners")) return true
                 if(args.size >= 2) {
-                    if (!checkPermission(sender, "bannerz.menu.bannerlibrary.others")) return true
+                    if (!checkPermission(sender, "bannerz.menu.mybanners.others")) return true
                     val offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[1])
                     if (offlinePlayer == null) {
                         sender.sendMessage("§cNo player found with that name!")
