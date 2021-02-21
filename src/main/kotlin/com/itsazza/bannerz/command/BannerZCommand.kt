@@ -57,7 +57,7 @@ object BannerZCommand : CommandExecutor {
                 BannerCreatorMenu.open(sender, block)
                 return true
             }
-            "mine", "mybanners" -> {
+            "mine", "mybanners", "my" -> {
                 if (!checkPermission(sender, "bannerz.menu.mybanners")) return true
                 if(args.size >= 2) {
                     if (!checkPermission(sender, "bannerz.menu.mybanners.others")) return true
