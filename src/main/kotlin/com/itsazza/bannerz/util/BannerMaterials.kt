@@ -2,7 +2,6 @@ package com.itsazza.bannerz.util
 
 import com.itsazza.bannerz.BannerZPlugin
 import org.bukkit.Material
-import org.bukkit.block.Banner
 import org.bukkit.block.banner.PatternType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -25,7 +24,7 @@ object BannerMaterials {
 
         if (baseMaterials) {
             itemsNeeded[Material.STICK] = 1
-            itemsNeeded[item.type.bannerColor.woolMaterial] = 6
+            itemsNeeded[item.type.bannerWool] = 6
         }
 
         return itemsNeeded
