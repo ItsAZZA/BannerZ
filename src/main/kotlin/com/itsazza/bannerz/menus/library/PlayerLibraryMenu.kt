@@ -89,7 +89,7 @@ object PlayerLibraryMenu {
             "Banner",
             arrayOf(
                 "    p    ",
-                "   ger   ",
+                "   egr   ",
                 "    b    "
             )
         )
