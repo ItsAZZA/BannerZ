@@ -2,9 +2,9 @@ package com.itsazza.bannerz
 
 import com.itsazza.bannerz.command.BannerZCommand
 import com.itsazza.bannerz.events.PlayerClickBannerEvent
+import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
-import java.io.File
 
 class BannerZPlugin : JavaPlugin() {
     companion object {
@@ -20,5 +20,7 @@ class BannerZPlugin : JavaPlugin() {
 
         getCommand("banner")?.setExecutor(BannerZCommand)
         Bukkit.getPluginManager().registerEvents(PlayerClickBannerEvent, this)
+
+        Metrics(this, 10408)
     }
 }
