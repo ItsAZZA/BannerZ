@@ -5,8 +5,8 @@ import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
-import com.itsazza.bannerz.menus.library.PlayerLibraryMenu
-import com.itsazza.bannerz.menus.library.data.PlayerBanners
+import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
+import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.checkPermission

@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.menus.library.data
+package com.itsazza.bannerz.menus.playerlibrary.data
 
 import org.bukkit.inventory.ItemStack
 import java.util.*

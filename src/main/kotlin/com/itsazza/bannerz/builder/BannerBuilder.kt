@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.BannerMeta
 fun banner(base: Material, init: BannerBuilder.() -> Unit) = BannerBuilder(base).apply(init).build()
 
 class BannerBuilder(private val base: Material) {
-    private val patterns = ArrayList<Pattern>()
+    val patterns = ArrayList<Pattern>()
 
     fun pattern(color: DyeColor, pattern: PatternType) {
         patterns += Pattern(color, pattern)

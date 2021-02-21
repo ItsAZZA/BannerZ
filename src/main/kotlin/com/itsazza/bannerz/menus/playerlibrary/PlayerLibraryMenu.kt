@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.menus.library
+package com.itsazza.bannerz.menus.playerlibrary
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.menus.Buttons
@@ -7,8 +7,8 @@ import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.Buttons.nextPage
 import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
-import com.itsazza.bannerz.menus.library.data.PlayerBanners
-import com.itsazza.bannerz.menus.library.data.deSerializeItemStack
+import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
+import com.itsazza.bannerz.menus.playerlibrary.data.deSerializeItemStack
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup

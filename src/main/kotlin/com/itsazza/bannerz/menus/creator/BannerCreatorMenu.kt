@@ -7,7 +7,7 @@ import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.color.BannerColorMenu
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
-import com.itsazza.bannerz.menus.library.data.PlayerBanners
+import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.nms.NMS
 import com.itsazza.bannerz.util.*

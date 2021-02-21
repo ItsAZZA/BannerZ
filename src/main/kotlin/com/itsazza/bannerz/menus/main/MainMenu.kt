@@ -5,7 +5,7 @@ import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
-import com.itsazza.bannerz.menus.library.PlayerLibraryMenu
+import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement

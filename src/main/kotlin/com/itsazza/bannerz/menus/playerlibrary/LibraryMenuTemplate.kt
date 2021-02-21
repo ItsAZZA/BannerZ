@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.menus.library
+package com.itsazza.bannerz.menus.playerlibrary
 
 val libraryMenuTemplate = arrayOf(
     "000000000",

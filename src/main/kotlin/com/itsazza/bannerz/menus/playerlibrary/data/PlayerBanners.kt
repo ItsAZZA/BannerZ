@@ -1,4 +1,4 @@
-package com.itsazza.bannerz.menus.library.data
+package com.itsazza.bannerz.menus.playerlibrary.data
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.util.storage.Storage
