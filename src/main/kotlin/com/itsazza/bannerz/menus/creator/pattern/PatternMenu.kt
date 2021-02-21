@@ -9,6 +9,7 @@ import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.color.ColorMenu
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
+import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -132,7 +133,7 @@ object PatternMenu {
 
     private fun createChangeColorButton(banner: ItemStack, index: Int?, color: DyeColor, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         return StaticGuiElement('d',
-            Material.RED_DYE.item,
+            color.dyeMaterial.item,
             {
                 val player = it.event.whoClicked as Player
                 ColorMenu.open(player, banner, index, color, creatorMode, block)
