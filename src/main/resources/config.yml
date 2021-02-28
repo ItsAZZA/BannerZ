@@ -1,6 +1,7 @@
 settings:
   survival:
     enabled: false
+    # Should the plugin require the base materials (6 colored wool and 1 stick)
     requireBaseMaterials: true
-    # Vanilla survival crafting has a limit of 6 patterns, but banners support up to 16
+    # Vanilla crafting has a limit of 6 patterns, but banners support up to 16
     patternLimit: 6

@@ -6,3 +6,5 @@ api-version: "1.13"
 commands:
   banner:
     aliases: [banners, bannerz]
+  bannerzadmin:
+    aliases: [bza]

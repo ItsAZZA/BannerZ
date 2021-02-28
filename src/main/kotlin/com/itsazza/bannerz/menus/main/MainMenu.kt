@@ -6,6 +6,7 @@ import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
+import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMainMenu
 import com.itsazza.bannerz.util.item
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -32,14 +33,14 @@ object MainMenu {
             Material.BOOKSHELF.item,
             {
                 val player = it.event.whoClicked as Player
-                player.sendMessage("§6This feature is coming soon!")
+                PublicLibraryMainMenu.open(player)
                 return@StaticGuiElement true
             },
             "§6§lBanner Library",
             "§7Library of pre-made",
             "§7banners",
             "§0 ",
-            "§cComing soon(ish)™!"
+            "§e§lCLICK §7to open"
         ))
 
         val globeBannerPatternItem = ItemStack(Material.GLOBE_BANNER_PATTERN)

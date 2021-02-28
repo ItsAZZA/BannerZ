@@ -19,7 +19,7 @@ object PlayerBanners {
     fun add(playerUUID: UUID, banner: ItemStack): Boolean {
         val player = playerUUID.toString()
         val values = storage.loadPlayer(player) ?: mutableListOf()
-        val serialized = serializeItemStack(banner) ?: return false
+        val serialized = serializeItemStack(banner)
         values.add(serialized)
         storage.savePlayer(player, values)
         return true

@@ -8,6 +8,8 @@ import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
+import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMainMenu
+import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMenu
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.checkPermission
 import com.itsazza.bannerz.util.isBanner
@@ -55,6 +57,17 @@ object BannerZCommand : CommandExecutor {
                 }
 
                 BannerCreatorMenu.open(sender, block)
+                return true
+            }
+            "library", "bannerlibrary", "bl" -> {
+                if (!checkPermission(sender, "bannerz.menu.library")) return true
+                if (args.size > 2) {
+                    PublicLibraryMainMenu.open(sender)
+                    return true
+                }
+
+                val library = args[1].toLowerCase()
+                PublicLibraryMenu.open(sender, library)
                 return true
             }
             "mine", "mybanners", "my" -> {

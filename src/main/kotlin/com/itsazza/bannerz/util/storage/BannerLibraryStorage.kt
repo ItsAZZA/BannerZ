@@ -1,39 +1,26 @@
 package com.itsazza.bannerz.util.storage
 
 import com.google.gson.Gson
-import com.google.gson.stream.JsonReader
 import com.itsazza.bannerz.BannerZPlugin
-import com.itsazza.bannerz.builder.banner
+import com.itsazza.bannerz.menus.playerlibrary.data.deSerializeItemStack
+import com.itsazza.bannerz.menus.playerlibrary.data.serializeItemStack
 import com.itsazza.bannerz.util.item
-import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.BannerMeta
-import org.bukkit.util.io.BukkitObjectInputStream
-import org.bukkit.util.io.BukkitObjectOutputStream
-import org.json.simple.JSONObject
-import org.json.simple.parser.JSONParser
-import org.json.simple.parser.ParseException
 import java.io.*
-import java.lang.IllegalArgumentException
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-data class BannerCategoryData(val name: String, val icon: String, val description: ArrayList<String>, val banners: ArrayList<BannerData>)
-data class BannerData(val name: String, val baseBanner: String, val bannerMetaBytes: String)
-
-class BannerCategory(val name: String, val icon: ItemStack, val description: ArrayList<String>, val banners: ArrayList<Banner>)
-class Banner(val name: String, val item: ItemStack)
+data class BannerCategoryData(val name: String, val icon: String, val description: ArrayList<String>, val banners: ArrayList<String>)
+class BannerCategory(val name: String, var icon: ItemStack, var description: ArrayList<String>, var banners: ArrayList<ItemStack>)
 
 object BannerLibraryStorage {
     val categories = HashMap<String, BannerCategory>()
+    private val bannerConfigurationFile = File(BannerZPlugin.instance!!.dataFolder, "/categories")
+    private val gson = Gson()
 
-    fun loadConfigurationFiles() {
+    private fun loadConfigurationFiles() {
         categories.clear()
-
-        val bannerConfigurationFile = File(BannerZPlugin.instance!!.dataFolder, "/categories")
 
         if (!bannerConfigurationFile.exists()) {
             bannerConfigurationFile.mkdir()
@@ -41,56 +28,154 @@ object BannerLibraryStorage {
         }
 
         val files = bannerConfigurationFile.listFiles() ?: return
-        val gson = Gson()
 
         files.forEach {
             val bufferedReader = BufferedReader(FileReader(it))
-            val bannerCategoryData = gson.fromJson(bufferedReader, BannerCategoryData::class.java)
+            val category = gson.fromJson(bufferedReader, BannerCategoryData::class.java)
 
-            val name = bannerCategoryData.name
-            val icon = Material.getMaterial(bannerCategoryData.icon) ?: Material.GRASS_BLOCK
+            val name = category.name
+            val id = it.name.dropLast(5).toLowerCase()
+            val icon = Material.getMaterial(category.icon) ?: Material.GRASS_BLOCK
 
-            val bannerItems = ArrayList<Banner>()
-            bannerCategoryData.banners.forEach { data ->
-                val bannerMaterial = Material.getMaterial(data.baseBanner) ?: Material.WHITE_BANNER
-                val bannerMeta = deSerializeBannerMeta(data.bannerMetaBytes)
-                val patterns = bannerMeta.patterns
-                bannerItems.add(Banner(it.name, banner(bannerMaterial) { patterns.forEach { pattern -> pattern(pattern) } }))
+            val listOfBanners = ArrayList<ItemStack>()
+            for (banner in category.banners) {
+                listOfBanners.add(deSerializeItemStack(banner))
             }
 
-            val bannerCategory = BannerCategory(
+            listOfBanners.sortBy { banner -> banner.itemMeta.displayName }
+
+            categories[id] = BannerCategory(
                 name,
                 icon.item,
-                bannerCategoryData.description,
-                bannerItems
+                category.description,
+                listOfBanners
             )
-
-            categories[name.toLowerCase()] = bannerCategory
         }
     }
 
-    fun broadcastBytes(bannerMeta: BannerMeta) {
-        val serialized = serializeBannerMeta(bannerMeta)
-        Bukkit.getServer().broadcastMessage(serialized)
+    fun addBanner(item: ItemStack, category: String) : Boolean {
+        val name = category.toLowerCase()
+        if (!categories.containsKey(name)) return false
+
+        val data = categories[name]!!
+        val banners = data.banners
+        banners.add(item)
+
+        banners.sortBy { banner -> banner.itemMeta.displayName }
+
+        data.banners = banners
+        saveCategory(name)
+        return true
     }
 
-    private fun serializeBannerMeta(bannerMeta: BannerMeta) : String {
-        val outputStream = ByteArrayOutputStream()
-        val dataOutPut = BukkitObjectOutputStream(outputStream)
+    fun removeBanner(category: String, index: Int) {
+        val name = category.toLowerCase()
+        if (!categories.containsKey(name)) return
 
-        dataOutPut.writeObject(bannerMeta)
-        dataOutPut.close()
-
-        return Base64.getEncoder().encodeToString(outputStream.toByteArray())
+        val data = categories[name]!!
+        val banners = data.banners
+        banners.removeAt(index)
+        data.banners = banners
+        saveCategory(name)
     }
 
-    private fun deSerializeBannerMeta(serialized: String) : BannerMeta {
-        val inputStream = ByteArrayInputStream(Base64.getDecoder().decode(serialized))
-        val dataInput = BukkitObjectInputStream(inputStream)
+    fun addCategory(name: String): Boolean {
+        val categoryID = name.replace(" ", "").toLowerCase()
+        if (categoryExists(categoryID)) return false
 
-        val bannerMeta = dataInput.readObject() as? BannerMeta ?: throw IllegalArgumentException()
-        dataInput.close()
+        categories[categoryID] = BannerCategory(
+            name,
+            Material.GRASS_BLOCK.item,
+            arrayListOf("Default description", "for banner category"),
+            arrayListOf()
+        )
 
-        return bannerMeta
+        saveCategory(categoryID)
+        return true
+    }
+
+    fun removeCategory(name: String) : Boolean {
+        val category = name.toLowerCase()
+        if (!categoryExists(category)) return false
+
+        categories.remove(category)
+        val file = File(bannerConfigurationFile, "${category}.json")
+        file.delete()
+        return true
+    }
+
+    fun getCategory(name: String) : BannerCategory? {
+        val category = name.toLowerCase()
+        if (!categories.containsKey(category)) return null
+        return categories[category]
+    }
+
+    fun categoryExists(name: String) : Boolean {
+        return categories.containsKey(name.toLowerCase())
+    }
+
+    fun categoryHasBannerIndex(name: String, index: Int) : Boolean {
+        val category = getCategory(name.toLowerCase()) ?: return false
+        return category.banners.size >= index + 1
+    }
+
+    fun setCategoryIcon(name: String, item: ItemStack) : Boolean {
+        val category = name.toLowerCase()
+        val data = categories[name] ?: return false
+        data.icon = item
+
+        saveCategory(category)
+        return true
+    }
+
+    fun setCategoryDescription(name: String, description: ArrayList<String>) : Boolean {
+        val category = name.toLowerCase()
+        val data = categories[name] ?: return false
+        data.description = description
+
+        saveCategory(category)
+        return true
+    }
+
+    private fun saveCategory(name: String) {
+        val category = name.toLowerCase()
+        if (!categories.containsKey(category)) return
+        val file = File(bannerConfigurationFile, "${category}.json")
+
+        if (!bannerConfigurationFile.exists()) {
+            file.mkdirs()
+        }
+
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+
+        val data = categories[category]!!
+
+        val listOfBanners = ArrayList<String>()
+        data.banners.forEach {
+            listOfBanners.add(serializeItemStack(it))
+        }
+
+        val bannerCategory = BannerCategoryData(
+            data.name,
+            data.icon.type.name,
+            data.description,
+            listOfBanners
+        )
+
+        val writer = BufferedWriter(FileWriter(file))
+        writer.write(gson.toJson(bannerCategory, BannerCategoryData::class.java))
+        writer.close()
+    }
+
+    fun saveCategories() {
+        for (category in categories) {
+            saveCategory(category.key)
+        }
+    }
+
+    fun load() {
+        this.loadConfigurationFiles()
     }
 }
