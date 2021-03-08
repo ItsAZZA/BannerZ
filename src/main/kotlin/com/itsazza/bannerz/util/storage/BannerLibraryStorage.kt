@@ -16,7 +16,7 @@ class BannerCategory(val name: String, var icon: ItemStack, var description: Arr
 
 object BannerLibraryStorage {
     val categories = HashMap<String, BannerCategory>()
-    private val bannerConfigurationFile = File(BannerZPlugin.instance!!.dataFolder, "/categories")
+    private val bannerConfigurationFile = File(BannerZPlugin.instance.dataFolder, "/categories")
     private val gson = Gson()
 
     private fun loadConfigurationFiles() {

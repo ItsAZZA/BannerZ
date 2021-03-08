@@ -39,12 +39,15 @@ object AlphabetMenu  {
             group1.addElement(createBackgroundColorSelectButton(dye, backgroundColor, foregroundColor))
         }
 
-        gui.addElement(group0)
-        gui.addElement(group1)
-        gui.addElement(createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor))
-        gui.addElement(StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6§lPreview"))
-        gui.addElement(createBackButton(MainMenu.create()))
-        gui.addElement(close)
+        gui.addElements(
+            group0,
+            group1,
+            createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor),
+            StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6§lPreview"),
+            createBackButton(MainMenu.create()),
+            close
+        )
+
         gui.setCloseAction { false }
         return gui
     }
@@ -66,7 +69,7 @@ object AlphabetMenu  {
                 open(player, color, foregroundColor)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.toLowerCase().capitalize()}",
+            "§6§l${color.name.replace("_", " ").toLowerCase().capitalize()}",
             "§7Select ${color.name.toLowerCase()} as the",
             "§7background color",
             "§0 ",
@@ -91,7 +94,7 @@ object AlphabetMenu  {
                 open(player, backgroundColor, color)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.toLowerCase().capitalize()}",
+            "§6§l${color.name.replace("_", " ").toLowerCase().capitalize()}",
             "§7Select ${color.name.toLowerCase()} as the",
             "§7foreground/font color",
             "§0 ",

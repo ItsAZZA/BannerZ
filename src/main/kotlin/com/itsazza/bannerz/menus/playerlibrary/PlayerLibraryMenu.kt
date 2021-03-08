@@ -7,32 +7,47 @@ import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.Buttons.nextPage
 import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.playerlibrary.data.deSerializeItemStack
-import com.itsazza.bannerz.menus.main.MainMenu
+import com.itsazza.bannerz.nms.NMS
 import com.itsazza.bannerz.util.*
+import com.itsazza.bannerz.util.storage.Storage
 import de.themoep.inventorygui.GuiElementGroup
+import de.themoep.inventorygui.GuiStateElement
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import java.util.*
 
 object PlayerLibraryMenu {
     private val plugin = BannerZPlugin.instance
 
-    fun open(playerWhoseLibrary: Player, playerToOpenFor: Player = playerWhoseLibrary) {
-        val menu = create(playerWhoseLibrary)
-        if(menu == null) {
-            playerToOpenFor.sendMessage("§cNo saved banners found!")
-            Sounds.play(playerToOpenFor, Sound.ENTITY_VILLAGER_NO)
+    fun open(ownerUUID: UUID, viewer: Player) {
+        val banners = PlayerBanners.get(ownerUUID)
+
+        if (banners.isNullOrEmpty()) {
+            viewer.sendMessage("§cNo saved banners found!")
             return
         }
-        menu.show(playerToOpenFor)
+
+        if (ownerUUID == viewer.uniqueId) {
+            create(ownerUUID, banners).show(viewer)
+        } else {
+            if (Storage.getVisitorStatus(ownerUUID.toString()) || viewer.hasPermission("bannerz.admin")) {
+                createSpectateMenu(ownerUUID, banners).show(viewer)
+            } else {
+                viewer.sendMessage("§cThis player's banners are not publicly visible.")
+                Sounds.play(viewer, Sound.ENTITY_VILLAGER_NO)
+            }
+        }
     }
 
-    fun create(playerWhoseLibrary: Player): InventoryGui? {
+    fun create(ownerUUID: UUID, banners: MutableList<String>): InventoryGui {
         val gui = InventoryGui(
             plugin,
             null,
@@ -40,26 +55,57 @@ object PlayerLibraryMenu {
             libraryMenuTemplate
         )
 
-        val playerUUID = playerWhoseLibrary.uniqueId
-        val banners = PlayerBanners.get(playerUUID)
-        if (banners.isNullOrEmpty()) return null
         val group = GuiElementGroup('0')
 
-        for((i, banner) in banners.withIndex()) {
-            group.addElement(createBannerLibraryButton(playerWhoseLibrary, deSerializeItemStack(banner), i))
+        for ((i, banner) in banners.withIndex()) {
+            group.addElement(createBannerLibraryButton(deSerializeItemStack(banner), i))
         }
 
-        gui.addElement(group)
-        gui.addElement(previousPage)
-        gui.addElement(nextPage)
-        gui.addElement(createBackButton(MainMenu.create()))
-        gui.addElement(close)
+        val toggleButton = toggleVisitorsButton
+        toggleButton.setState(Storage.getVisitorStatus(ownerUUID.toString()).toString())
+
+        gui.addElements(
+            group,
+            toggleButton,
+            previousPage,
+            nextPage,
+            createBackButton(MainMenu.create()),
+            close
+        )
+
         gui.setCloseAction { false }
         return gui
     }
 
-    private fun createBannerLibraryButton(playerWhoseLibrary: Player, banner: ItemStack, index: Int) : StaticGuiElement {
-        return StaticGuiElement('@',
+    private fun createSpectateMenu(owner: UUID, banners: MutableList<String>): InventoryGui {
+        val playerName = Bukkit.getOfflinePlayer(owner).name ?: "Unknown"
+        val gui = InventoryGui(
+            plugin,
+            null,
+            "${playerName}'s banners",
+            libraryMenuTemplate
+        )
+
+        val group = GuiElementGroup('0')
+        for (banner in banners) {
+            group.addElement(createBannerSpectateLibraryButton(playerName, deSerializeItemStack(banner)))
+        }
+
+        gui.addElements(
+            group,
+            previousPage,
+            nextPage,
+            createBackButton(MainMenu.create()),
+            close
+        )
+
+        gui.setCloseAction { false }
+        return gui
+    }
+
+    private fun createBannerLibraryButton(banner: ItemStack, index: Int): StaticGuiElement {
+        return StaticGuiElement(
+            '@',
             banner,
             {
                 val player = it.event.whoClicked as Player
@@ -69,7 +115,7 @@ object PlayerLibraryMenu {
                     Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
                     return@StaticGuiElement true
                 } else {
-                    createBannerGetMenu(playerWhoseLibrary, banner, index).show(player)
+                    createBannerGetMenu(banner, index).show(player)
                     return@StaticGuiElement true
                 }
             },
@@ -79,10 +125,83 @@ object PlayerLibraryMenu {
             "§0 ",
             "§e§lL-CLICK §7to get",
             "§e§lR-CLICK §7for more options"
-            )
+        )
     }
 
-    private fun createBannerGetMenu(playerWhoseLibrary: Player, banner: ItemStack, index: Int) : InventoryGui {
+    private fun createBannerSpectateLibraryButton(ownerName: String, banner: ItemStack): StaticGuiElement {
+        return StaticGuiElement(
+            '@',
+            banner,
+            {
+                val player = it.event.whoClicked as Player
+                when {
+                    it.event.isShiftClick -> {
+                        val commandBlock = NMS.getBannerCommandBlock(banner)
+                        player.inventory.addItem(commandBlock)
+                        return@StaticGuiElement true
+                    }
+                    it.event.isLeftClick -> {
+                        if (!checkSurvivalCrafting(banner, player)) return@StaticGuiElement true
+                        player.inventory.addItem(banner)
+                        Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
+                        return@StaticGuiElement true
+                    }
+                    it.event.isRightClick -> {
+                        BannerCreatorMenu.open(player, banner)
+                        return@StaticGuiElement true
+                    }
+                }
+                return@StaticGuiElement true
+            },
+            "§6§lBanner",
+            "§7Banner in ${ownerName}'s",
+            "§7personal banner library",
+            "§0 ",
+            "§e§lL-CLICK §7to get",
+            "§e§lR-CLICK §7to open editor",
+            "§e§lSHIFT-CLICK §7to get command block"
+        )
+    }
+
+    private val toggleVisitorsButton = GuiStateElement(
+        't',
+        GuiStateElement.State(
+            {
+                val player = it.event.whoClicked as Player
+                val uuid = player.uniqueId.toString()
+                Storage.setVisitorStatus(uuid, true)
+            },
+            "true",
+            Material.LIME_DYE.item,
+            "§6§lToggle visibility",
+            "§7Toggles whether players",
+            "§7are able to check your saved",
+            "§7banners in this library",
+            "§0",
+            "§7Visibility: §atrue",
+            "§0 ",
+            "§e§lCLICK §7to toggle"
+        ),
+        GuiStateElement.State(
+            {
+                val player = it.event.whoClicked as Player
+                val uuid = player.uniqueId.toString()
+                Storage.setVisitorStatus(uuid, false)
+            },
+            "false",
+            Material.GRAY_DYE.item,
+            "§6§lToggle visibility",
+            "§7Toggles whether players",
+            "§7are able to check your saved",
+            "§7banners in this library",
+            "§0",
+            "§7Visibility: §cfalse",
+            "§0 ",
+            "§e§lCLICK §7to toggle"
+        )
+    )
+
+    private fun createBannerGetMenu(banner: ItemStack, index: Int): InventoryGui {
         val gui = InventoryGui(
             plugin,
             null,
@@ -95,42 +214,28 @@ object PlayerLibraryMenu {
         )
 
         gui.addElement(BannerCreatorMenu.createGiveCommandButton(banner))
-        gui.addElement(StaticGuiElement('e',
-            Material.WRITABLE_BOOK.item,
-            {
-                val player = it.event.whoClicked as Player
-                BannerCreatorMenu.open(player, banner)
-                return@StaticGuiElement true
-            },
-            "§6§lEdit Banner",
-            "§7Open this banner in the",
-            "§7banner editor menu",
-            "§0 ",
-            "§e§lCLICK §7to select"
-        ))
-        gui.addElement(StaticGuiElement('r',
-            Material.RED_CONCRETE.item,
-            {
-                val player = it.event.whoClicked as Player
-                if (player != playerWhoseLibrary && !player.hasPermission("bannerz.admin")) {
-                    Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
-                    player.sendMessage("§cNo permission remove banners from other players' menus!")
+        gui.addElement(Buttons.createEditBannerButton(banner))
+        gui.addElement(
+            StaticGuiElement(
+                'r',
+                Material.RED_CONCRETE.item,
+                {
+                    val player = it.event.whoClicked as Player
+                    PlayerBanners.remove(player.uniqueId, index)
+                    Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
+                    player.sendMessage("§eBanner removed from personal library!")
+                    it.gui.close()
                     return@StaticGuiElement true
-                }
-                PlayerBanners.remove(playerWhoseLibrary.uniqueId, index)
-                Sounds.play(playerWhoseLibrary, Sound.ENTITY_VILLAGER_YES)
-                playerWhoseLibrary.sendMessage("§eBanner removed from personal library!")
-                it.gui.close()
-                return@StaticGuiElement true
-            },
-            "§c§lDelete Banner",
-            "§7Remove the banner from",
-            "§7your personal library",
-            "§0 ",
-            "§cThis action cannot be undone!",
-            "§0 ",
-            "§e§lCLICK §7to remove"
-            ))
+                },
+                "§c§lDelete Banner",
+                "§7Remove the banner from",
+                "§7your personal library",
+                "§0 ",
+                "§cThis action cannot be undone!",
+                "§0 ",
+                "§e§lCLICK §7to remove"
+            )
+        )
 
         gui.addElement(Buttons.backInHistory)
         gui.setCloseAction { false }

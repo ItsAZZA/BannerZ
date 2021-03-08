@@ -37,7 +37,7 @@ object BannerZCommand : CommandExecutor {
 
         when (args[0].toLowerCase()) {
             "reload" -> {
-                val plugin = BannerZPlugin.instance ?: return true
+                val plugin = BannerZPlugin.instance
                 plugin.reloadConfig()
                 sender.sendMessage("§eReloaded config!")
                 return true
@@ -61,7 +61,7 @@ object BannerZCommand : CommandExecutor {
             }
             "library", "bannerlibrary", "bl" -> {
                 if (!checkPermission(sender, "bannerz.menu.library")) return true
-                if (args.size > 2) {
+                if (args.size < 2) {
                     PublicLibraryMainMenu.open(sender)
                     return true
                 }
@@ -70,24 +70,21 @@ object BannerZCommand : CommandExecutor {
                 PublicLibraryMenu.open(sender, library)
                 return true
             }
-            "mine", "mybanners", "my" -> {
-                if (!checkPermission(sender, "bannerz.menu.mybanners")) return true
+            "playerlibrary", "player", "pl" -> {
                 if(args.size >= 2) {
-                    if (!checkPermission(sender, "bannerz.menu.mybanners.others")) return true
+                    if (!checkPermission(sender, "bannerz.menu.playerlibrary")) return true
                     val offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[1])
                     if (offlinePlayer == null) {
                         sender.sendMessage("§cNo player found with that name!")
                         return true
                     }
-                    val player = offlinePlayer.player
-                    if (player == null) {
-                        sender.sendMessage("§cNo player found with that name!")
-                        return true
-                    }
-                    PlayerLibraryMenu.create(player)?.show(sender) ?: sender.sendMessage("§cNo banners found for player $player")
+                    PlayerLibraryMenu.open(offlinePlayer.uniqueId, sender)
                     return true
                 }
-                PlayerLibraryMenu.open(sender)
+            }
+            "mine", "mybanners", "my" -> {
+                if (!checkPermission(sender, "bannerz.menu.mybanners")) return true
+                PlayerLibraryMenu.open(sender.uniqueId, sender)
                 return true
             }
             "save" -> {
@@ -112,6 +109,19 @@ object BannerZCommand : CommandExecutor {
                 if (!checkPermission(sender, "bannerz.menu.alphabet")) return true
                 AlphabetMenu.open(sender)
                 return true
+            }
+            else -> {
+                sender.sendMessage("""
+                    §ePossible subcommands:
+                    §f- /bannerz create : Open banner creator
+                    §f- /bannerz edit : Open banner in hand in the editor
+                    §f- /bannerz save : Save banner in hand to personal library
+                    §f- /bannerz alphabet : Open alphabet & numerals creator
+                    §f- /bannerz mine : Show your personal banner library
+                    §f- /banners library [category] : Open banner library category
+                    §f- /bannerz player <player> : Show player's banner library
+                    §f- /bannerz reload : Reload config
+                """.trimIndent())
             }
         }
         return true

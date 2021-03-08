@@ -11,6 +11,7 @@ import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.util.item
+import com.itsazza.bannerz.util.tippedArrow
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -44,14 +45,17 @@ object PatternMenu {
             group.addElement(createPatternButton(banner, it, color, index, creatorMode, block))
         }
 
-        gui.addElement(group)
-        gui.addElement(nextPage)
-        gui.addElement(previousPage)
-        gui.addElement(createPreviewButton(banner))
-        gui.addElement(createChangeColorButton(banner, index, color, creatorMode, block))
-        gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)))
-        gui.addElement(createGoBackAndSaveButton(banner, color, index, creatorMode, block))
-        gui.addElement(close)
+        gui.addElements(
+            group,
+            nextPage,
+            previousPage,
+            createPreviewButton(banner),
+            createChangeColorButton(banner, index, color, creatorMode, block),
+            createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)),
+            createGoBackAndSaveButton(banner, color, index, creatorMode, block),
+            close
+        )
+
         gui.setCloseAction { false }
         return gui
     }
@@ -91,15 +95,8 @@ object PatternMenu {
     }
 
     private fun createGoBackAndSaveButton(banner: ItemStack, color: DyeColor, index: Int?, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
-        val item = Material.TIPPED_ARROW.item
-        val arrowMeta = item.itemMeta as PotionMeta
-        arrowMeta.color = Color.LIME
-        arrowMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
-        item.itemMeta = arrowMeta
-
-
         return StaticGuiElement('s',
-            item,
+            tippedArrow(Color.LIME),
             {
                 val player = it.event.whoClicked as Player
                 if (index == null) {
@@ -113,7 +110,9 @@ object PatternMenu {
                 }
                 return@StaticGuiElement true
             },
-            "§6§lSave & Go Back"
+            "§6§lSave & Go Back",
+            "§7Saves the changes made,",
+            "§7for example the pattern color",
             )
     }
 

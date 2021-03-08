@@ -14,20 +14,19 @@ fun Inventory.hasItems(items: Map<Material, Int>): Boolean {
             if (slotItem.type == item.key) {
                 amountInInventory += slotItem.amount
             }
-
             if (amountInInventory >= item.value) break
         }
-
         if (amountInInventory < item.value) return false
     }
     return true
 }
 
 fun Inventory.takeItems(items: Map<Material, Int>) {
+    val contents = this.storageContents
+
     items.forEach {
         var amount = it.value
         if (amount <= 0) return
-        val contents = this.storageContents
 
         for (slotItem in contents) {
             slotItem ?: continue
@@ -42,7 +41,8 @@ fun Inventory.takeItems(items: Map<Material, Int>) {
                     if (amount == 0) break
                 }
             }
-            this.storageContents = contents
         }
     }
+
+    this.storageContents = contents
 }

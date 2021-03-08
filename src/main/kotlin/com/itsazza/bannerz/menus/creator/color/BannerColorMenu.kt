@@ -35,9 +35,12 @@ object BannerColorMenu {
             group.addElement(createColorSelectButton(banner, dye, creatorMode, block))
         }
 
-        gui.addElement(group)
-        gui.addElement(createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)))
-        gui.addElement(close)
+        gui.addElements(
+            group,
+            createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)),
+            close
+        )
+
         return gui
     }
 

@@ -1,5 +1,6 @@
 package com.itsazza.bannerz.menus
 
+import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.util.item
 import com.itsazza.bannerz.util.tippedArrow
 import de.themoep.inventorygui.GuiBackElement
@@ -56,4 +57,21 @@ object Buttons {
             "§6§lNext",
             "§7Go to page %nextpage%"
         )
+
+    fun createEditBannerButton(banner: ItemStack) : StaticGuiElement {
+        return StaticGuiElement(
+            'e',
+            Material.WRITABLE_BOOK.item,
+            {
+                val player = it.event.whoClicked as Player
+                BannerCreatorMenu.open(player, banner)
+                return@StaticGuiElement true
+            },
+            "§6§lEdit Banner",
+            "§7Open this banner in the",
+            "§7banner editor menu",
+            "§0 ",
+            "§e§lCLICK §7to select"
+        )
+    }
 }

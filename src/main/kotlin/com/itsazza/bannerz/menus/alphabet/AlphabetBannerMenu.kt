@@ -1,6 +1,7 @@
 package com.itsazza.bannerz.menus.alphabet
 
 import com.itsazza.bannerz.BannerZPlugin
+import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.Buttons.backInHistory
 import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.nextPage
@@ -41,12 +42,14 @@ object AlphabetBannerMenu {
             group.addElement(button)
         }
 
-        gui.addElement(group)
+        gui.addElements(
+            group,
+            nextPage,
+            previousPage,
+            backInHistory,
+            close
+        )
 
-        gui.addElement(nextPage)
-        gui.addElement(previousPage)
-        gui.addElement(backInHistory)
-        gui.addElement(close)
         gui.setCloseAction { false }
         return gui
     }
@@ -92,23 +95,13 @@ object AlphabetBannerMenu {
             )
         )
 
-        gui.addElement(createGiveCommandButton(banner))
-        gui.addElement(createSaveButton(banner))
-        gui.addElement(StaticGuiElement('e',
-            Material.WRITABLE_BOOK.item,
-            {
-                val player = it.event.whoClicked as Player
-                BannerCreatorMenu.open(player, banner)
-                return@StaticGuiElement true
-            },
-            "§6§lEdit Banner",
-            "§7Open this banner in the",
-            "§7banner editor menu",
-            "§0 ",
-            "§e§lCLICK §7to select"
-        ))
+        gui.addElements(
+            createGiveCommandButton(banner),
+            createSaveButton(banner),
+            Buttons.createEditBannerButton(banner),
+            backInHistory
+        )
 
-        gui.addElement(backInHistory)
         gui.setCloseAction { false }
         return gui
     }

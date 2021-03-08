@@ -11,7 +11,7 @@ import java.lang.IllegalArgumentException
 object BannerMaterials {
     fun getRequired(item: ItemStack): MutableMap<Material, Int> {
         val bannerMeta = item.itemMeta as? BannerMeta ?: throw IllegalArgumentException()
-        val baseMaterials = BannerZPlugin.instance!!.config.getBoolean("settings.survival.requireBaseMaterials")
+        val baseMaterials = BannerZPlugin.instance.config.getBoolean("settings.survival.requireBaseMaterials")
         val itemsNeeded = mutableMapOf<Material, Int>()
 
         bannerMeta.patterns.forEach { pattern ->
@@ -33,11 +33,6 @@ object BannerMaterials {
     fun takeRequired(items: MutableMap<Material, Int>, player: Player) {
         val filtered = items.filter { !bannerPatterns.containsValue(it.key) }
         player.inventory.takeItems(filtered)
-    }
-
-    fun takeRequired(item: ItemStack, player: Player) {
-        val materials = getRequired(item).filter { !bannerPatterns.containsValue(it.key) }
-        player.inventory.takeItems(materials)
     }
 
     private val bannerPatterns = mutableMapOf<PatternType, Material>().also {

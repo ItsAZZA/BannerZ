@@ -35,9 +35,12 @@ object ColorMenu  {
             group.addElement(createColorSelectButton(player, banner, index, currentColor, dye, creatorMode, block))
         }
 
-        gui.addElement(group)
-        gui.addElement(createBackButton(PatternMenu.create(banner, currentColor, index, creatorMode, block)))
-        gui.addElement(close)
+        gui.addElements(
+            group,
+            createBackButton(PatternMenu.create(banner, currentColor, index, creatorMode, block)),
+            close
+        )
+
         return gui
     }
 

@@ -81,7 +81,7 @@ object MainMenu {
             Material.BOOK.item,
             {
                 val player = it.event.whoClicked as Player
-                PlayerLibraryMenu.open(player)
+                PlayerLibraryMenu.open(player.uniqueId, player)
                 return@StaticGuiElement true
             },
             "§6§lYour banners",

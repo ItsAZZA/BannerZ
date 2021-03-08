@@ -4,4 +4,19 @@ settings:
     # Should the plugin require the base materials (6 colored wool and 1 stick)
     requireBaseMaterials: true
     # Vanilla crafting has a limit of 6 patterns, but banners support up to 16
+    # This setting will limit players getting any banners with more than this amount
+    # of patterns when survival mode is enabled
     patternLimit: 6
+    # Should players in creative mode bypass the crafting material requirements
+    bypassInCreative: true
+  database:
+    sqlite:
+      enabled: true
+      db: "banners"
+    mysql:
+      enabled: false
+      host: "localhost"
+      port: "1337"
+      user: "root"
+      password: "password"
+      database: "bannerz"
