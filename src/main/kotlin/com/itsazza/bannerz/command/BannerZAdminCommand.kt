@@ -18,6 +18,7 @@ object BannerZAdminCommand : CommandExecutor {
         if (args.isEmpty()) {
             val message = """
                 §ePossible subcommands:
+                §f- /bza reload : Reloads category configs from disk
                 §f- /bza add <category> : Add banner in hand to category
                 §f- /bza remove <category> <index> : Remove banner index in category
                 §f- /bza category create <category> : Add category
@@ -30,6 +31,12 @@ object BannerZAdminCommand : CommandExecutor {
         }
 
         when (args[0]) {
+            "reload" -> {
+                sender.sendMessage("§eReloading banner categories from disk...")
+                BannerLibraryStorage.load()
+                sender.sendMessage("§cComplete!")
+                return true
+            }
             "add" -> {
                 if (args.size < 2) {
                     sender.sendMessage("§cUsage: /bza create <category>")
