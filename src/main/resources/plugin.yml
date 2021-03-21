@@ -1,6 +1,6 @@
 name: BannerZ
 main: com.itsazza.bannerz.BannerZPlugin
-version: 1.0.0
+version: BETA-1.0.0
 author: ItsAZZA
 api-version: "1.16"
 commands:

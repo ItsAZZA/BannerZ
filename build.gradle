@@ -1,5 +1,5 @@
 group 'com.itsazza'
-version '1.0.0'
+version 'BETA-1.0.0'
 
 String depedencyPath = 'com.itsazza.depedencies'
 
