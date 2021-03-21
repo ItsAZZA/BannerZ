@@ -10,7 +10,6 @@ import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.playerlibrary.data.deSerializeItemStack
-import com.itsazza.bannerz.nms.NMS
 import com.itsazza.bannerz.util.*
 import com.itsazza.bannerz.util.storage.Storage
 import de.themoep.inventorygui.GuiElementGroup
@@ -136,7 +135,7 @@ object PlayerLibraryMenu {
                 val player = it.event.whoClicked as Player
                 when {
                     it.event.isShiftClick -> {
-                        val commandBlock = NMS.getBannerCommandBlock(banner)
+                        val commandBlock = NBT.getBannerCommandBlock(banner)
                         player.inventory.addItem(commandBlock)
                         return@StaticGuiElement true
                     }

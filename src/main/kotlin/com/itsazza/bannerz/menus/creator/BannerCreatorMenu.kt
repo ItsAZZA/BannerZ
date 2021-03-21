@@ -9,7 +9,6 @@ import com.itsazza.bannerz.menus.creator.color.BannerColorMenu
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
-import com.itsazza.bannerz.nms.NMS
 import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -51,15 +50,18 @@ object BannerCreatorMenu {
             group.addElement(createAddPatternButton(banner, creatorMode, block))
         }
 
-        gui.addElement(group)
-        gui.addElement(createPreviewButton(banner))
-        gui.addElement(createGiveItemButton(banner))
-        gui.addElement(createGiveCommandButton(banner))
-        gui.addElement(createSaveButton(banner))
+        gui.addElements(
+            group,
+            createPreviewButton(banner),
+            createGiveItemButton(banner),
+            createGiveCommandButton(banner),
+            createSaveButton(banner),
+            createBackButton(MainMenu.create()),
+            close
+        )
+
         if(creatorMode == CreatorMode.CHANGE && block != null) { gui.addElement(createSaveBlockButton(banner, block)) }
-        gui.addElement(createBackButton(MainMenu.create()))
         gui.closeAction = InventoryGui.CloseAction { false }
-        gui.addElement(close)
         return gui
     }
 
@@ -137,7 +139,7 @@ object BannerCreatorMenu {
     private fun createAddPatternButton(banner: ItemStack, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         return StaticGuiElement(
             '@',
-            Material.CRIMSON_BUTTON.item,
+            Material.ACACIA_BUTTON.item,
             {
                 val player = it.event.whoClicked as Player
                 PatternMenu.open(player, banner, creatorMode = creatorMode, block = block)
@@ -209,7 +211,7 @@ object BannerCreatorMenu {
                 val player = it.event.whoClicked as Player
                 if (!checkPermission(player, "bannerz.commandblock")) return@StaticGuiElement true
 
-                val item = NMS.getBannerCommandBlock(banner)
+                val item = NBT.getBannerCommandBlock(banner)
                 player.inventory.addItem(item)
                 Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
                 return@StaticGuiElement true
