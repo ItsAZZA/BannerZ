@@ -2,7 +2,7 @@ name: BannerZ
 main: com.itsazza.bannerz.BannerZPlugin
 version: 1.0.0
 author: ItsAZZA
-api-version: "1.13"
+api-version: "1.16"
 commands:
   banner:
     aliases: [banners, bannerz]
