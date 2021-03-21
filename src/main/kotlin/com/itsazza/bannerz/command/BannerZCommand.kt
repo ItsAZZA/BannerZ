@@ -13,9 +13,7 @@ import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMenu
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.checkPermission
 import com.itsazza.bannerz.util.isBanner
-import org.bukkit.Bukkit
-import org.bukkit.DyeColor
-import org.bukkit.Sound
+import org.bukkit.*
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -110,6 +108,25 @@ object BannerZCommand : CommandExecutor {
                 AlphabetMenu.open(sender)
                 return true
             }
+            "name" -> {
+                if (!checkPermission(sender, "banners.name")) return true
+
+                if (args.size < 2) {
+                    sender.sendMessage("§cUsage: /bannerz name <name>")
+                }
+
+                val item = sender.inventory.itemInMainHand
+
+                if (item.type == Material.AIR) {
+                    sender.sendMessage("§cYou must be holding an item!")
+                    return true
+                }
+
+                val itemMeta = item.itemMeta
+                val name = ChatColor.translateAlternateColorCodes('&', args.drop(1).joinToString(" "))
+                itemMeta.setDisplayName(name)
+                item.itemMeta = itemMeta
+            }
             else -> {
                 sender.sendMessage("""
                     §ePossible subcommands:
@@ -120,6 +137,7 @@ object BannerZCommand : CommandExecutor {
                     §f- /bannerz mine : Show your personal banner library
                     §f- /banners library [category] : Open banner library category
                     §f- /bannerz player <player> : Show player's banner library
+                    §f- /bannerz name <name> : Name an item in your hand
                     §f- /bannerz reload : Reload config
                 """.trimIndent())
             }
