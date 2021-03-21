@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
 
 fun checkSurvivalCrafting(item: ItemStack, player: Player) : Boolean {
-    val config = BannerZPlugin.instance!!.config
+    val config = BannerZPlugin.instance.config
 
     if (config.getBoolean("settings.survival.enabled")) {
         val bannerMeta = item.itemMeta as BannerMeta
