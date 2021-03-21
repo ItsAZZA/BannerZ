@@ -117,8 +117,8 @@ object BannerZCommand : CommandExecutor {
 
                 val item = sender.inventory.itemInMainHand
 
-                if (item.type == Material.AIR) {
-                    sender.sendMessage("§cYou must be holding an item!")
+                if (isBanner(item)) {
+                    sender.sendMessage("§cYou must be holding a banner!")
                     return true
                 }
 
