@@ -5,10 +5,7 @@ import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.color.dyes
 import com.itsazza.bannerz.menus.main.MainMenu
-import com.itsazza.bannerz.util.concreteMaterial
-import com.itsazza.bannerz.util.dyeMaterial
-import com.itsazza.bannerz.util.item
-import com.itsazza.bannerz.util.tippedArrow
+import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -17,6 +14,7 @@ import org.bukkit.DyeColor
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
+import org.bukkit.inventory.meta.ItemMeta
 
 object AlphabetMenu  {
     fun open(player: Player, backgroundColor: DyeColor = DyeColor.WHITE, foregroundColor: DyeColor = DyeColor.BLACK) {
@@ -56,7 +54,7 @@ object AlphabetMenu  {
         val item = color.concreteMaterial.item
 
         if(color == backgroundColor) {
-            val itemMeta = item.itemMeta
+            val itemMeta = item.itemMeta!!
             itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
             itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
             item.itemMeta = itemMeta
@@ -69,8 +67,8 @@ object AlphabetMenu  {
                 open(player, color, foregroundColor)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.replace("_", " ").toLowerCase().capitalize()}",
-            "§7Select ${color.name.toLowerCase()} as the",
+            "§6§l${color.name.replace("_", " ").lowercase().capitalizeFirst()}",
+            "§7Select ${color.name.lowercase()} as the",
             "§7background color",
             "§0 ",
             "§e§lCLICK §7to select"
@@ -81,10 +79,10 @@ object AlphabetMenu  {
         val item = color.dyeMaterial.item
 
         if(color == foregroundColor) {
-            val itemMeta = item.itemMeta
-            itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
-            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-            item.itemMeta = itemMeta
+            item.mutateMeta<ItemMeta> {
+                it.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
+                it.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+            }
         }
 
         return StaticGuiElement('@',
@@ -94,8 +92,8 @@ object AlphabetMenu  {
                 open(player, backgroundColor, color)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.replace("_", " ").toLowerCase().capitalize()}",
-            "§7Select ${color.name.toLowerCase()} as the",
+            "§6§l${color.name.replace("_", " ").lowercase().capitalizeFirst()}",
+            "§7Select ${color.name.lowercase()} as the",
             "§7foreground/font color",
             "§0 ",
             "§e§lCLICK §7to select"

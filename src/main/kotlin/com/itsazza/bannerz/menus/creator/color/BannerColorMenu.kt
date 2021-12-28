@@ -6,7 +6,9 @@ import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.util.bannerMaterial
+import com.itsazza.bannerz.util.capitalizeFirst
 import com.itsazza.bannerz.util.item
+import com.itsazza.bannerz.util.mutateMeta
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -16,6 +18,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.ItemMeta
 
 object BannerColorMenu {
     fun open(player: Player, banner: ItemStack, creatorMode: CreatorMode, block: Block?) {
@@ -46,13 +49,13 @@ object BannerColorMenu {
 
     private fun createColorSelectButton(banner: ItemStack, color: DyeColor, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         val item = color.bannerMaterial.item
-        val colorName = color.name.replace("_", " ").toLowerCase()
+        val colorName = color.name.replace("_", " ").lowercase()
 
         if(banner.type == color.bannerMaterial) {
-            val itemMeta = item.itemMeta
-            itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
-            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-            item.itemMeta = itemMeta
+            item.mutateMeta<ItemMeta> {
+                it.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
+                it.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+            }
         }
 
         return StaticGuiElement('@',
@@ -63,7 +66,7 @@ object BannerColorMenu {
                 BannerCreatorMenu.open(player, banner, creatorMode, block)
                 return@StaticGuiElement true
             },
-            "§6§l${colorName.capitalize()}",
+            "§6§l${colorName.capitalizeFirst()}",
             "§7Select $colorName as the",
             "§7pattern color",
             "§0 ",

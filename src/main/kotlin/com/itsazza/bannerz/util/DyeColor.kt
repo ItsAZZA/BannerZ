@@ -47,27 +47,35 @@ val DyeColor.woolMaterial : Material
         }
     }
 
-val DyeColor.dyeMaterial : Material
+val DyeColor.dyeMaterial: Material
     get() {
-        return when(this) {
-            DyeColor.WHITE -> Material.WHITE_DYE
+        return when (this) {
+            DyeColor.WHITE -> Material.values().firstOrNull { it.name == "WHITE_DYE" }
+                ?: Material.valueOf("BONE_MEAL")
             DyeColor.ORANGE -> Material.ORANGE_DYE
             DyeColor.MAGENTA -> Material.MAGENTA_DYE
             DyeColor.LIGHT_BLUE -> Material.LIGHT_BLUE_DYE
-            DyeColor.YELLOW -> Material.YELLOW_DYE
+            DyeColor.YELLOW -> Material.values().firstOrNull { it.name == "YELLOW_DYE" }
+                ?: Material.valueOf("DANDELION_YELLOW")
             DyeColor.LIME -> Material.LIME_DYE
             DyeColor.PINK -> Material.PINK_DYE
             DyeColor.GRAY -> Material.GRAY_DYE
             DyeColor.LIGHT_GRAY -> Material.LIGHT_GRAY_DYE
             DyeColor.CYAN -> Material.CYAN_DYE
             DyeColor.PURPLE -> Material.PURPLE_DYE
-            DyeColor.BLUE -> Material.BLUE_DYE
-            DyeColor.BROWN -> Material.BROWN_DYE
-            DyeColor.GREEN -> Material.GREEN_DYE
-            DyeColor.RED -> Material.RED_DYE
-            DyeColor.BLACK -> Material.BLACK_DYE
+            DyeColor.BLUE -> Material.values().firstOrNull { it.name == "BLUE_DYE" }
+                ?: Material.valueOf("LAPIS_LAZULI")
+            DyeColor.BROWN -> Material.values().firstOrNull { it.name == "BROWN_DYE" }
+                ?: Material.valueOf("COCOA_BEANS")
+            DyeColor.GREEN -> Material.values().firstOrNull { it.name == "GREEN_DYE" }
+                ?: Material.valueOf("CACTUS_GREEN")
+            DyeColor.RED -> Material.values().firstOrNull { it.name == "RED_DYE" }
+                ?: Material.valueOf("ROSE_RED")
+            DyeColor.BLACK -> Material.values().firstOrNull { it.name == "BLACK_DYE" }
+                ?: Material.valueOf("INK_SAC")
         }
     }
+
 
 val DyeColor.concreteMaterial : Material
 get() {

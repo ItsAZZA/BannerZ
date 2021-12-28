@@ -7,13 +7,17 @@ import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
 import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMainMenu
+import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.item
+import com.itsazza.bannerz.util.mutateMeta
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.ItemMeta
 
 object MainMenu {
     fun open(player: Player) {
@@ -43,8 +47,10 @@ object MainMenu {
             "§e§lCLICK §7to open"
         ))
 
-        val globeBannerPatternItem = ItemStack(Material.GLOBE_BANNER_PATTERN)
-        globeBannerPatternItem.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        val globeBannerPatternItem = ItemStack(Material.values().firstOrNull{ it.name == "GLOBE_BANNER_PATTERN" } ?: Material.PAPER)
+        globeBannerPatternItem.mutateMeta<ItemMeta> {
+            it.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        }
 
         gui.addElement(StaticGuiElement(
             '1',

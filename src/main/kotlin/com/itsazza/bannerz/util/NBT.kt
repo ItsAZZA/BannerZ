@@ -9,7 +9,7 @@ object NBT {
         val item = NBTItem(banner)
         val bannerPatternCompound = item.compound.toString()
         println(bannerPatternCompound)
-        val commandString = "minecraft:give @p minecraft:${banner.type.name.toLowerCase()}$bannerPatternCompound 1"
+        val commandString = "minecraft:give @p minecraft:${banner.type.name.lowercase()}$bannerPatternCompound 1"
         val commandBlockItem = NBTItem(Material.COMMAND_BLOCK.item)
 
         val tag = commandBlockItem.getOrCreateCompound("BlockEntityTag")

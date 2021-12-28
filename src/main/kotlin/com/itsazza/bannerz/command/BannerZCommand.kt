@@ -3,17 +3,21 @@ package com.itsazza.bannerz.command
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.alphabet.AlphabetMenu
-import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
+import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
-import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMainMenu
 import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMenu
 import com.itsazza.bannerz.util.Sounds
+import com.itsazza.bannerz.util.bannerMaterial
 import com.itsazza.bannerz.util.checkPermission
 import com.itsazza.bannerz.util.isBanner
-import org.bukkit.*
+import com.itsazza.bannerz.util.storage.BannerLibraryStorage
+import org.bukkit.Bukkit
+import org.bukkit.ChatColor
+import org.bukkit.DyeColor
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -33,7 +37,7 @@ object BannerZCommand : CommandExecutor {
             return true
         }
 
-        when (args[0].toLowerCase()) {
+        when (args[0].lowercase()) {
             "reload" -> {
                 val plugin = BannerZPlugin.instance
                 plugin.reloadConfig()
@@ -42,7 +46,7 @@ object BannerZCommand : CommandExecutor {
             }
             "create", "creator" -> {
                 if (!checkPermission(sender, "bannerz.menu.create")) return true
-                BannerCreatorMenu.open(sender, banner(DyeColor.WHITE.bannerMaterial){})
+                BannerCreatorMenu.open(sender, banner(DyeColor.WHITE.bannerMaterial) {})
                 return true
             }
             "edit", "editor" -> {
@@ -57,6 +61,17 @@ object BannerZCommand : CommandExecutor {
                 BannerCreatorMenu.open(sender, block)
                 return true
             }
+            "search" -> { // Only works on public library for now
+                if (!checkPermission(sender, "bannerz.menu.search")) return true
+                if (args.size < 2) {
+                    sender.sendMessage("§cUsage: /bannerz search <query>")
+                    return true
+                }
+
+                val query = args.drop(1).joinToString(" ")
+                PublicLibraryMenu.open(sender, "Search for $query", BannerLibraryStorage.searchForBanners(query))
+                return true
+            }
             "library", "bannerlibrary", "bl" -> {
                 if (!checkPermission(sender, "bannerz.menu.library")) return true
                 if (args.size < 2) {
@@ -64,19 +79,25 @@ object BannerZCommand : CommandExecutor {
                     return true
                 }
 
-                val library = args[1].toLowerCase()
-                PublicLibraryMenu.open(sender, library)
+                val library = args[1].lowercase()
+                BannerLibraryStorage.categories[library]?.let {
+                    PublicLibraryMenu.open(sender, it.name, it.banners.values.toList())
+                    return true
+                }
+
+                sender.sendMessage("§cInvalid library name!")
                 return true
             }
             "playerlibrary", "player", "pl" -> {
-                if(args.size >= 2) {
+                if (args.size >= 2) {
                     if (!checkPermission(sender, "bannerz.menu.playerlibrary")) return true
-                    val offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[1])
-                    if (offlinePlayer == null) {
-                        sender.sendMessage("§cNo player found with that name!")
+                    val player = Bukkit.getOfflinePlayer(args[1])
+                    if (!player.hasPlayedBefore()) {
+                        sender.sendMessage("§cThat player never played here!")
                         return true
                     }
-                    PlayerLibraryMenu.open(offlinePlayer.uniqueId, sender)
+
+                    PlayerLibraryMenu.open(player.uniqueId, sender)
                     return true
                 }
             }
@@ -124,22 +145,25 @@ object BannerZCommand : CommandExecutor {
 
                 val itemMeta = item.itemMeta
                 val name = ChatColor.translateAlternateColorCodes('&', args.drop(1).joinToString(" "))
-                itemMeta.setDisplayName(name)
+                itemMeta!!.setDisplayName(name)
                 item.itemMeta = itemMeta
             }
             else -> {
-                sender.sendMessage("""
+                sender.sendMessage(
+                    """
                     §ePossible subcommands:
                     §f- /bannerz create : Open banner creator
                     §f- /bannerz edit : Open banner in hand in the editor
                     §f- /bannerz save : Save banner in hand to personal library
                     §f- /bannerz alphabet : Open alphabet & numerals creator
                     §f- /bannerz mine : Show your personal banner library
-                    §f- /banners library [category] : Open banner library category
+                    §f- /bannerz library [category] : Show public banner library
+                    §f- /bannerz search <query> : Search for banners in the public library
                     §f- /bannerz player <player> : Show player's banner library
                     §f- /bannerz name <name> : Name an item in your hand
                     §f- /bannerz reload : Reload config
-                """.trimIndent())
+                """.trimIndent()
+                )
             }
         }
         return true

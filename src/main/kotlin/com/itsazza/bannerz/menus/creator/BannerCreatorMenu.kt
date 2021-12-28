@@ -23,6 +23,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
+import org.bukkit.inventory.meta.ItemMeta
 
 object BannerCreatorMenu {
     fun open(player: Player, banner: ItemStack, creatorMode: CreatorMode = CreatorMode.CREATE, block: Block? = null) {
@@ -75,7 +76,7 @@ object BannerCreatorMenu {
             },
             "§6§lBase Color",
             "§7Change the banner's base",
-            "§7color from ${baseBanner.type.bannerColor.name.toLowerCase()}",
+            "§7color from ${baseBanner.type.bannerColor.name.lowercase()}",
             "§0 ",
             "§e§lCLICK §7to change"
         )
@@ -87,7 +88,7 @@ object BannerCreatorMenu {
             item.type = Material.BLACK_BANNER
         }
 
-        val patternName = bannerPattern.pattern.name.toLowerCase().split("_").joinToString(" "){ it.capitalize() }
+        val patternName = bannerPattern.pattern.name.lowercase().split("_").joinToString(" "){ it.capitalizeFirst() }
 
         return StaticGuiElement('@',
             item,
@@ -127,7 +128,7 @@ object BannerCreatorMenu {
                 }
             },
             "§6§l${patternName}",
-            "§7A ${bannerPattern.color.name.toLowerCase()} $patternName",
+            "§7A ${bannerPattern.color.name.lowercase()} $patternName",
             "§7banner pattern",
             "§0 ",
             "§e§lL-CLICK §7to edit",
@@ -154,9 +155,9 @@ object BannerCreatorMenu {
     }
 
     private fun createPreviewButton(banner: ItemStack) : StaticGuiElement {
-        val itemMeta = banner.itemMeta
-        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
-        banner.itemMeta = itemMeta
+        banner.mutateMeta<ItemMeta> {
+            it.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        }
 
         return StaticGuiElement('p',
             banner,

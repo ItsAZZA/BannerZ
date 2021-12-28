@@ -5,34 +5,34 @@ import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.playerlibrary.libraryMenuTemplate
 import com.itsazza.bannerz.util.Sounds
+import com.itsazza.bannerz.util.capitalizeFirst
 import com.itsazza.bannerz.util.checkSurvivalCrafting
-import com.itsazza.bannerz.util.storage.BannerLibraryStorage
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
+import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 object PublicLibraryMenu {
-    fun open(player: Player, category: String) : Boolean {
-        create(category)?.show(player) ?: return false
+    fun open(player: Player, name: String, banners: List<ItemStack>): Boolean {
+        create(banners, name).show(player)
         return true
     }
 
-    fun create(category: String): InventoryGui? {
+    fun create(banners: List<ItemStack>, name: String): InventoryGui {
         val gui = InventoryGui(
             BannerZPlugin.instance,
             null,
-            category.capitalize(),
+            name.capitalizeFirst(),
             libraryMenuTemplate
         )
 
         val group = GuiElementGroup('0')
 
-        val bannerCategory = BannerLibraryStorage.getCategory(category) ?: return null
-        bannerCategory.banners.forEach {
-            group.addElement(createBannerButton(it, category))
+        banners.forEach {
+            group.addElement(createBannerButton(it))
         }
 
         gui.addElements(
@@ -40,20 +40,21 @@ object PublicLibraryMenu {
             Buttons.previousPage,
             Buttons.nextPage,
             Buttons.close,
-            Buttons.createBackButton(PublicLibraryMainMenu.create())
+            Buttons.createBackButton(PublicLibraryMainMenu.create()),
         )
 
         gui.setCloseAction { false }
         return gui
     }
 
-    private fun createBannerButton(banner: ItemStack, category: String): StaticGuiElement {
-        var bannerName = "Banner"
-        if (banner.itemMeta.hasDisplayName()) {
-            bannerName = banner.itemMeta.displayName
-        }
+    private fun createBannerButton(banner: ItemStack): StaticGuiElement {
+        val bannerName = if (banner.itemMeta!!.hasDisplayName()) ChatColor.translateAlternateColorCodes(
+            '&',
+            banner.itemMeta!!.displayName
+        ) else "§6Banner"
 
-        return StaticGuiElement('@',
+        return StaticGuiElement(
+            '@',
             banner,
             {
                 val player = it.event.whoClicked as Player
@@ -72,7 +73,6 @@ object PublicLibraryMenu {
                 }
             },
             "§6$bannerName",
-            "§8${category.capitalize()}",
             "§0 ",
             "§e§lL-CLICK §7to get",
             "§e§lR-CLICK §7to edit"

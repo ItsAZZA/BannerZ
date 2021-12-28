@@ -9,9 +9,7 @@ import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.color.ColorMenu
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
-import com.itsazza.bannerz.util.dyeMaterial
-import com.itsazza.bannerz.util.item
-import com.itsazza.bannerz.util.tippedArrow
+import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -25,7 +23,9 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
+import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.inventory.meta.PotionMeta
+import kotlin.text.capitalize
 
 object PatternMenu {
     fun open(player: Player, banner: ItemStack, color: DyeColor = DyeColor.RED, index: Int? = null, creatorMode: CreatorMode, block: Block?) {
@@ -67,7 +67,7 @@ object PatternMenu {
         }
 
         val bannerMeta = banner.itemMeta as BannerMeta
-        val patternName = patternType.name.toLowerCase().split("_").joinToString(" ") { it.capitalize() }
+        val patternName = patternType.name.lowercase().split("_").joinToString(" ") { it.capitalizeFirst() }
         val pattern = Pattern(color, patternType)
 
         return StaticGuiElement('@',
@@ -88,7 +88,7 @@ object PatternMenu {
             },
             "§6§l$patternName",
             "§7Adds a $patternName pattern",
-            "§7in ${color.name.toLowerCase()} color",
+            "§7in ${color.name.lowercase()} color",
             "§0 ",
             "§e§lCLICK §7to add"
             )
@@ -117,9 +117,9 @@ object PatternMenu {
     }
 
     private fun createPreviewButton(banner: ItemStack) : StaticGuiElement {
-        val itemMeta = banner.itemMeta
-        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
-        banner.itemMeta = itemMeta
+        banner.mutateMeta<ItemMeta> {
+            it.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        }
 
         return StaticGuiElement('p',
             banner,
@@ -140,7 +140,7 @@ object PatternMenu {
             },
             "§6§lPattern Color",
             "§7Change the pattern color",
-            "§7from ${color.name.toLowerCase()}",
+            "§7from ${color.name.lowercase()}",
             "§0 ",
             "§e§lCLICK §7to change"
             )

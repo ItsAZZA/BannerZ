@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
+import kotlin.system.measureTimeMillis
 
 object BannerZAdminCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, p1: Command, p2: String, args: Array<out String>): Boolean {
@@ -33,8 +34,7 @@ object BannerZAdminCommand : CommandExecutor {
         when (args[0]) {
             "reload" -> {
                 sender.sendMessage("§eReloading banner categories from disk...")
-                BannerLibraryStorage.load()
-                sender.sendMessage("§cComplete!")
+                measureTimeMillis {BannerLibraryStorage.load() }.also { sender.sendMessage("§eComplete in ${it}ms") }
                 return true
             }
             "add" -> {
@@ -43,7 +43,7 @@ object BannerZAdminCommand : CommandExecutor {
                     return true
                 }
 
-                val category = args[1].toLowerCase()
+                val category = args[1].lowercase()
                 if (!BannerLibraryStorage.categoryExists(category)) {
                     sender.sendMessage("§cNo category found with name \"$category\"!")
                     return true
@@ -56,7 +56,9 @@ object BannerZAdminCommand : CommandExecutor {
                 }
 
                 banner.amount = 1
-                banner.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+                val meta = banner.itemMeta!!
+                meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+                banner.itemMeta = meta
                 sender.sendMessage("§eAdded banner to category $category")
                 BannerLibraryStorage.addBanner(banner, category)
                 return true
@@ -67,9 +69,8 @@ object BannerZAdminCommand : CommandExecutor {
                     return true
                 }
 
-                val category = args[1].toLowerCase()
-                val index = args[2].toInt()
-
+                val category = args[1].lowercase()
+                val index = args[2]
                 if (!BannerLibraryStorage.categoryExists(category)) {
                     sender.sendMessage("§cNo category found with name \"$category\"!")
                     return true
@@ -113,7 +114,7 @@ object BannerZAdminCommand : CommandExecutor {
                             return true
                         }
 
-                        val category = args[2].toLowerCase()
+                        val category = args[2].lowercase()
                         BannerLibraryStorage.removeCategory(category).also { response ->
                             if (response) {
                                 sender.sendMessage("§eRemoved category $category")
@@ -129,7 +130,7 @@ object BannerZAdminCommand : CommandExecutor {
                             return true
                         }
 
-                        val category = args[2].toLowerCase()
+                        val category = args[2].lowercase()
                         val item = sender.inventory.itemInMainHand
 
                         BannerLibraryStorage.setCategoryIcon(category, item).also { response ->
@@ -147,7 +148,7 @@ object BannerZAdminCommand : CommandExecutor {
                             return true
                         }
 
-                        val category = args[2].toLowerCase()
+                        val category = args[2].lowercase()
                         val description = args.drop(3).chunked(4) { it.joinToString(" ") }.toCollection(ArrayList())
 
                         BannerLibraryStorage.setCategoryDescription(category, description).also { response ->

@@ -1,5 +1,5 @@
 group 'com.itsazza'
-version 'BETA-1.0.0'
+version '1.0.0'
 
 String depedencyPath = 'com.itsazza.depedencies'
 
@@ -10,7 +10,7 @@ targetCompatibility = 1.8
 
 buildscript {
     ext {
-        kotlin_version = '1.4.31'
+        kotlin_version = '1.6.0'
     }
     repositories {
         mavenCentral()
@@ -29,14 +29,15 @@ repositories {
     mavenCentral()
     maven { url "https://repo.minebench.de" }
     maven { url "https://repo.codemc.org/repository/maven-public/" }
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"}
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "de.themoep:inventorygui:1.4.2-SNAPSHOT"
     implementation "org.bstats:bstats-bukkit:2.2.1"
-    implementation "de.tr7zw:item-nbt-api:2.7.1"
-    compileOnly group: 'com.destroystokyo.paper', name: 'paper', version: '1.16.4-R0.1-SNAPSHOT'
+    implementation "de.tr7zw:item-nbt-api:2.9.0-SNAPSHOT"
+    compileOnly "org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT"
 }
 
 shadowJar {

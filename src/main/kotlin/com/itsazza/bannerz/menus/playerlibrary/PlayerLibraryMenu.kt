@@ -9,7 +9,6 @@ import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
-import com.itsazza.bannerz.menus.playerlibrary.data.deSerializeItemStack
 import com.itsazza.bannerz.util.*
 import com.itsazza.bannerz.util.storage.Storage
 import de.themoep.inventorygui.GuiElementGroup
@@ -22,6 +21,7 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.*
+import kotlin.collections.HashMap
 
 object PlayerLibraryMenu {
     private val plugin = BannerZPlugin.instance
@@ -46,7 +46,7 @@ object PlayerLibraryMenu {
         }
     }
 
-    fun create(ownerUUID: UUID, banners: MutableList<String>): InventoryGui {
+    fun create(ownerUUID: UUID, banners: HashMap<Int, ItemStack>): InventoryGui {
         val gui = InventoryGui(
             plugin,
             null,
@@ -56,8 +56,8 @@ object PlayerLibraryMenu {
 
         val group = GuiElementGroup('0')
 
-        for ((i, banner) in banners.withIndex()) {
-            group.addElement(createBannerLibraryButton(deSerializeItemStack(banner), i))
+        for ((index, banner) in banners) {
+            group.addElement(createBannerLibraryButton(banner, index))
         }
 
         val toggleButton = toggleVisitorsButton
@@ -76,7 +76,7 @@ object PlayerLibraryMenu {
         return gui
     }
 
-    private fun createSpectateMenu(owner: UUID, banners: MutableList<String>): InventoryGui {
+    private fun createSpectateMenu(owner: UUID, banners: HashMap<Int, ItemStack>): InventoryGui {
         val playerName = Bukkit.getOfflinePlayer(owner).name ?: "Unknown"
         val gui = InventoryGui(
             plugin,
@@ -87,7 +87,7 @@ object PlayerLibraryMenu {
 
         val group = GuiElementGroup('0')
         for (banner in banners) {
-            group.addElement(createBannerSpectateLibraryButton(playerName, deSerializeItemStack(banner)))
+            group.addElement(createBannerSpectateLibraryButton(playerName, banner.value))
         }
 
         gui.addElements(
@@ -118,9 +118,7 @@ object PlayerLibraryMenu {
                     return@StaticGuiElement true
                 }
             },
-            "§6§lBanner",
-            "§7Banner #$index in your",
-            "§7personal banner library",
+            if (banner.itemMeta!!.hasDisplayName()) "§6§l${banner.itemMeta!!.displayName}" else "§6§lBanner",
             "§0 ",
             "§e§lL-CLICK §7to get",
             "§e§lR-CLICK §7for more options"
@@ -152,7 +150,7 @@ object PlayerLibraryMenu {
                 }
                 return@StaticGuiElement true
             },
-            "§6§lBanner",
+            if (banner.itemMeta!!.hasDisplayName()) "§6§l${banner.itemMeta!!.displayName}" else "§6§lBanner",
             "§7Banner in ${ownerName}'s",
             "§7personal banner library",
             "§0 ",

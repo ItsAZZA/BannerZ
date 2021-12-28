@@ -6,7 +6,9 @@ import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
+import com.itsazza.bannerz.util.capitalizeFirst
 import com.itsazza.bannerz.util.item
+import com.itsazza.bannerz.util.mutateMeta
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -16,6 +18,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.ItemMeta
 
 object ColorMenu  {
     fun open(player: Player, banner: ItemStack, index: Int?, currentColor: DyeColor, creatorMode: CreatorMode, block: Block?) {
@@ -49,13 +52,13 @@ object ColorMenu  {
                                         creatorMode: CreatorMode, block: Block?) : StaticGuiElement
     {
         val item = color.dyeMaterial.item
-        val colorName = color.name.replace("_", " ").toLowerCase()
+        val colorName = color.name.replace("_", " ").lowercase()
 
         if(currentColor == color) {
-            val itemMeta = item.itemMeta
-            itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
-            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-            item.itemMeta = itemMeta
+            item.mutateMeta<ItemMeta> {
+                it.addEnchant(Enchantment.LOOT_BONUS_MOBS, 1, true)
+                it.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+            }
         }
 
         return StaticGuiElement('@',
@@ -64,7 +67,7 @@ object ColorMenu  {
                 PatternMenu.open(player, banner, color, index, creatorMode, block)
                 return@StaticGuiElement true
             },
-            "§6§l${colorName.capitalize()}",
+            "§6§l${colorName.capitalizeFirst()}",
             "§7Select $colorName as the",
             "§7pattern color",
             "§0 ",
