@@ -1,12 +1,11 @@
 category:
   name: Flags
   description:
-    - There are a lot
-    - of flags in the
-    - world, eh?
+    - "&7There are a lot of flags"
+    - "&7in the world, eh?"
   icon: PAINTING
 banners:
-  '1':
+  'd2b8e341-4709-4406-9895-eeb2f2dff270':
     name: '&6Finland'
     base: WHITE_BANNER
     patterns:
@@ -14,72 +13,72 @@ banners:
       - WHITE STRIPE_MIDDLE
       - WHITE STRIPE_TOP
       - BLUE STRIPE_CENTER
-  '2':
+  '0c3822f9-0988-48d0-9347-267b5a2ef56b':
     name: '&6Sweden'
     base: BLUE_BANNER
     patterns:
       - YELLOW STRAIGHT_CROSS
       - YELLOW STRIPE_MIDDLE
-  '3':
+  '771dbbda-3b7e-4e64-97a0-caab75cadb21':
     name: '&6Norway'
     base: RED_BANNER
     patterns:
       - WHITE STRIPE_CENTER
       - WHITE STRIPE_MIDDLE
       - BLUE STRAIGHT_CROSS
-  '4':
+  'a75c7d05-3762-4386-869f-68e0b7951813':
     name: '&6Denmark'
     base: RED_BANNER
     patterns:
       - WHITE STRIPE_MIDDLE
       - WHITE STRIPE_CENTER
-  '5':
+  '94be2020-b67b-45af-a76f-12b04289853b':
     name: '&6Estonia'
     base: BLACK_BANNER
     patterns:
       - BLUE STRIPE_RIGHT
       - WHITE STRIPE_LEFT
-  '6':
+  '5a6f49fb-bfcc-4aa5-a553-471f74d06e95':
     name: '&6Latvia'
     base: BROWN_BANNER
     patterns:
       - WHITE STRIPE_CENTER
-  '7':
+  '07c7e9d2-86fe-4988-9824-2a2bfc484b99':
     name: '&6Lithuania'
     base: GREEN_BANNER
     patterns:
       - YELLOW STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '8':
+  'c4c51d13-45d9-4ddd-bdc4-9e66e85ca7ae':
     name: '&6Poland'
     base: RED_BANNER
     patterns:
       - WHITE HALF_VERTICAL_MIRROR
-  '9':
+  '5e10fb9f-3c59-40f5-aaf7-96e4fe689c9a':
     name: '&6Belarus'
     base: RED_BANNER
     patterns:
       - GREEN STRIPE_LEFT
       - WHITE TRIANGLES_TOP
-  '10':
+  '837ef468-3aba-48c0-a173-3952b905506d':
     name: '&6The Netherlands'
     base: WHITE_BANNER
     patterns:
       - RED STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '11':
+  '0707a987-e6de-400d-b450-fd6565a1a641':
     name: '&6Belgium'
     base: YELLOW_BANNER
     patterns:
       - RED STRIPE_BOTTOM
       - BLACK STRIPE_TOP
-  '12':
+  'b6aceb43-949a-4077-bdab-910f05ef6ace':
     name: '&6Luxembourg'
     base: WHITE_BANNER
     patterns:
       - RED STRIPE_RIGHT
       - LIGHT_BLUE STRIPE_LEFT
-  '13':
+  '98c8b1a1-829c-4421-bc62-d51e2244387e':
     name: '&6Switzerland'
     base: RED_BANNER
     patterns:
@@ -88,24 +87,24 @@ banners:
       - RED BORDER
       - RED STRIPE_TOP
       - RED STRIPE_BOTTOM
-  '14':
+  'dd6e5216-a2f5-4533-b872-81c7ee80608b':
     name: '&6Germany'
     base: RED_BANNER
     patterns:
       - BLACK STRIPE_RIGHT
       - YELLOW STRIPE_LEFT
-  '15':
+  '443fb74b-29b5-4096-9faf-5ba17b57a8f1':
     name: '&6Austria'
     base: RED_BANNER
     patterns:
       - WHITE STRIPE_CENTER
-  '16':
+  'c1b80aed-ec37-4536-9125-85d56aff23d9':
     name: '&6Czech Republic'
     base: WHITE_BANNER
     patterns:
       - RED HALF_VERTICAL
       - BLUE TRIANGLE_TOP
-  '17':
+  'aa177253-944e-4492-a8f6-4c021fa36ef5':
     name: '&6Slovakia'
     base: BLUE_BANNER
     patterns:
@@ -113,13 +112,13 @@ banners:
       - BLUE STRIPE_TOP
       - WHITE STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '18':
+  '9acd3cd4-fccc-4bea-81a0-1b02ab240f0f':
     name: '&6Hungary'
     base: WHITE_BANNER
     patterns:
       - RED STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '19':
+  '79fb466a-3faf-425a-9518-cb5e75521498':
     name: '&6Slovenia'
     base: CYAN_BANNER
     patterns:
@@ -127,21 +126,21 @@ banners:
       - CYAN STRIPE_TOP
       - WHITE STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '20':
+  '6463aa49-ccc1-49cf-8e5c-d72707f5c2ce':
     name: '&6Croatia'
     base: WHITE_BANNER
     patterns:
       - RED FLOWER
       - BLUE STRIPE_LEFT
       - RED STRIPE_RIGHT
-  '21':
+  '09cb40a6-894f-4449-8c28-ca765f91610f':
     name: '&6Bosnia and Herzegovina'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_DOWNLEFT
       - YELLOW DIAGONAL_RIGHT
       - BLUE STRIPE_BOTTOM
-  '22':
+  '3d576581-8830-4df0-bf59-61f51ef32f41':
     name: '&6Serbia'
     base: BLUE_BANNER
     patterns:
@@ -149,13 +148,13 @@ banners:
       - BLUE STRIPE_TOP
       - RED STRIPE_RIGHT
       - WHITE STRIPE_LEFT
-  '23':
+  '8f3e2639-1e0f-4ca3-b935-19b3884df231':
     name: '&6Bulgaria'
     base: GREEN_BANNER
     patterns:
       - WHITE STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '24':
+  '801191d2-50d4-4c53-994f-b428cdf464e6':
     name: '&6Montenegro'
     base: RED_BANNER
     patterns:
@@ -164,7 +163,7 @@ banners:
       - RED STRIPE_RIGHT
       - YELLOW BORDER
       - BLUE CIRCLE_MIDDLE
-  '25':
+  '71ad78d9-81d5-4f4b-875b-4ce53a8316d6':
     name: '&6Macedonia'
     base: RED_BANNER
     patterns:
@@ -172,37 +171,37 @@ banners:
       - YELLOW CROSS
       - RED RHOMBUS_MIDDLE
       - YELLOW CIRCLE_MIDDLE
-  '26':
+  'accf7224-d464-432f-8ba9-ad30761b9d55':
     name: '&6Greece'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - BLUE SQUARE_TOP_RIGHT
-  '27':
+  'd8e30266-2b8c-4966-86ac-373b736f42eb':
     name: '&6Vatican City'
     base: WHITE_BANNER
     patterns:
       - YELLOW STRIPE_TOP
       - YELLOW STRIPE_BOTTOM
       - LIGHT_GRAY CIRCLE_MIDDLE
-  '28':
+  '484823f3-2397-4cf7-a5a3-82443f66dcc2':
     name: '&6Italy'
     base: WHITE_BANNER
     patterns:
       - GREEN STRIPE_TOP
       - RED STRIPE_BOTTOM
-  '29':
+  'a657241a-f7b2-4654-a9bb-1729802c31cf':
     name: '&6Monaco'
     base: WHITE_BANNER
     patterns:
       - RED HALF_VERTICAL_MIRROR
-  '30':
+  'ea9b379e-c747-434d-8785-99eb06b05e07':
     name: '&6France'
     base: WHITE_BANNER
     patterns:
       - RED STRIPE_BOTTOM
       - BLUE STRIPE_TOP
-  '31':
+  'c6c9d604-2994-48a9-9919-7ce716a810f0':
     name: '&6Spain'
     base: YELLOW_BANNER
     patterns:
@@ -210,13 +209,13 @@ banners:
       - YELLOW STRIPE_TOP
       - RED STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '32':
+  'bd8e62b6-d92b-4d64-af87-839891711299':
     name: '&6Portugal'
     base: RED_BANNER
     patterns:
       - GREEN STRIPE_TOP
       - YELLOW FLOWER
-  '33':
+  'd3136848-9d28-428e-992d-8440de962a91':
     name: '&6United Kingdom'
     base: BLUE_BANNER
     patterns:
@@ -226,19 +225,19 @@ banners:
       - WHITE STRIPE_MIDDLE
       - WHITE STRIPE_CENTER
       - RED STRAIGHT_CROSS
-  '34':
+  '45eab8bd-a8b7-4514-8ddf-c18141f8178c':
     name: '&6Ireland'
     base: WHITE_BANNER
     patterns:
       - GREEN STRIPE_TOP
       - ORANGE STRIPE_BOTTOM
-  '35':
+  'bce30a44-8fd1-4bc9-b559-f057deea22f3':
     name: '&6Romania'
     base: YELLOW_BANNER
     patterns:
       - RED STRIPE_BOTTOM
       - BLUE STRIPE_TOP
-  '36':
+  '4a50da18-5e23-4550-a433-99abdf470c2f':
     name: '&6Moldova'
     base: YELLOW_BANNER
     patterns:
@@ -247,12 +246,12 @@ banners:
       - YELLOW STRIPE_RIGHT
       - RED STRIPE_BOTTOM
       - BLUE STRIPE_TOP
-  '37':
+  'ace9baca-aa31-4b17-b0f1-ea1aaba25da0':
     name: '&6Ukraine'
     base: YELLOW_BANNER
     patterns:
       - CYAN HALF_VERTICAL_MIRROR
-  '38':
+  '39afedcf-ef0a-422f-a11a-0205c40a7d82':
     name: '&6Georgia'
     base: WHITE_BANNER
     patterns:
@@ -261,13 +260,13 @@ banners:
       - WHITE STRIPE_TOP
       - WHITE STRIPE_BOTTOM
       - RED STRAIGHT_CROSS
-  '39':
+  'c611505a-aafc-4750-9aee-d253f7b32ccc':
     name: '&6Armenia'
     base: BLUE_BANNER
     patterns:
       - RED STRIPE_RIGHT
       - ORANGE STRIPE_LEFT
-  '40':
+  '6af589bd-67d5-49a6-bb52-d990e71f77d3':
     name: '&6Azerbaijan'
     base: RED_BANNER
     patterns:
@@ -275,7 +274,7 @@ banners:
       - RED STRIPE_TOP
       - CYAN STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '41':
+  '9019dde2-0a0e-4fd3-b654-1ba2bf85fa38':
     name: '&6Iran'
     base: WHITE_BANNER
     patterns:
@@ -283,7 +282,7 @@ banners:
       - WHITE FLOWER
       - GREEN STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '42':
+  '02038221-cb4e-4ae7-9c42-e85ecfcdd23f':
     name: '&6Iraq'
     base: GREEN_BANNER
     patterns:
@@ -292,7 +291,7 @@ banners:
       - WHITE STRIPE_BOTTOM
       - RED STRIPE_RIGHT
       - BLACK STRIPE_LEFT
-  '43':
+  '7a0f7059-0e5b-4a9e-ac03-86935076a293':
     name: '&6Syria'
     base: WHITE_BANNER
     patterns:
@@ -300,33 +299,33 @@ banners:
       - WHITE STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - BLACK STRIPE_LEFT
-  '44':
+  '9353f512-5907-41f1-af0f-87002d676df1':
     name: '&6Lebanon'
     base: WHITE_BANNER
     patterns:
       - GREEN STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '45':
+  '7122c1cd-720c-4a82-92df-abde43fb7a79':
     name: '&6Palestine'
     base: WHITE_BANNER
     patterns:
       - GREEN STRIPE_LEFT
       - BLACK STRIPE_RIGHT
       - RED TRIANGLE_TOP
-  '46':
+  '5e8fd0e2-2d1b-4e3b-a512-a3e40cb15c65':
     name: '&6Kuwait'
     base: GREEN_BANNER
     patterns:
       - RED STRIPE_LEFT
       - WHITE STRIPE_CENTER
       - BLACK TRIANGLE_TOP
-  '47':
+  '3b327022-e2ec-459b-9217-9a438045fdea':
     name: '&6Bahrain'
     base: RED_BANNER
     patterns:
       - WHITE TRIANGLES_TOP
-  '48':
+  '7b564d89-7f79-4700-8de7-c25d4178d653':
     name: '&6Saudi Arabia'
     base: WHITE_BANNER
     patterns:
@@ -334,41 +333,41 @@ banners:
       - GREEN STRIPE_RIGHT
       - WHITE STRIPE_LEFT
       - GREEN BORDER
-  '49':
+  '7e666872-7b91-47a4-a54b-f0b147f812f0':
     name: '&6Egypt'
     base: WHITE_BANNER
     patterns:
       - YELLOW STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - BLACK STRIPE_LEFT
-  '50':
+  '9188646f-361c-470c-85c8-f39113782d2a':
     name: '&6Oman'
     base: WHITE_BANNER
     patterns:
       - GREEN HALF_VERTICAL
       - RED STRIPE_CENTER
       - RED STRIPE_TOP
-  '51':
+  '167bb898-7422-476d-8e9c-1ffb8934095d':
     name: '&6United Arab Emirates'
     base: GREEN_BANNER
     patterns:
       - BLACK STRIPE_LEFT
       - WHITE STRIPE_CENTER
       - RED STRIPE_TOP
-  '52':
+  'c3c4ed61-ddf8-493a-8977-dc2d092b3e79':
     name: '&6Yemen'
     base: WHITE_BANNER
     patterns:
       - BLACK STRIPE_LEFT
       - RED STRIPE_RIGHT
-  '53':
+  '393ec62d-12e9-4264-84e0-7e03070580c1':
     name: '&6Pakistan'
     base: GREEN_BANNER
     patterns:
       - WHITE MOJANG
       - GREEN STRIPE_RIGHT
       - WHITE STRIPE_TOP
-  '54':
+  'efec85d9-9c11-4167-a854-4387fe729c8f':
     name: '&6India'
     base: WHITE_BANNER
     patterns:
@@ -376,7 +375,7 @@ banners:
       - WHITE FLOWER
       - ORANGE STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '55':
+  'e37b4b46-c985-465d-bc9d-3a79b50524cc':
     name: '&6Sri Lanka'
     base: RED_BANNER
     patterns:
@@ -385,13 +384,13 @@ banners:
       - ORANGE HALF_HORIZONTAL
       - GREEN STRIPE_TOP
       - YELLOW BORDER
-  '56':
+  'dc7ad475-dc5a-41d4-b6f1-fa6a1965f686':
     name: '&6Bhutan'
     base: ORANGE_BANNER
     patterns:
       - RED DIAGONAL_LEFT_MIRROR
       - WHITE FLOWER
-  '57':
+  '4dbc7578-6720-4946-9891-70233d19ac8e':
     name: '&6China'
     base: RED_BANNER
     patterns:
@@ -400,25 +399,25 @@ banners:
       - RED BORDER
       - RED HALF_VERTICAL
       - RED HALF_HORIZONTAL_MIRROR
-  '58':
+  'c62255c7-79ad-4617-8e64-f72478c1f7aa':
     name: '&6Mongolia'
     base: CYAN_BANNER
     patterns:
       - RED STRIPE_TOP
       - RED STRIPE_BOTTOM
       - YELLOW TRIANGLES_TOP
-  '59':
+  '1d3ee8f9-569a-43c5-8717-ab98aab4e41d':
     name: '&6Russia'
     base: BLUE_BANNER
     patterns:
       - RED STRIPE_LEFT
       - WHITE STRIPE_RIGHT
-  '60':
+  '028a96f3-bf49-4bbd-a12d-75b128d2f4fc':
     name: '&6Japan'
     base: WHITE_BANNER
     patterns:
       - RED CIRCLE_MIDDLE
-  '61':
+  'afb9237f-d1d5-4822-a700-2659d933f87d':
     name: '&6South Korea'
     base: RED_BANNER
     patterns:
@@ -428,7 +427,7 @@ banners:
       - WHITE STRIPE_BOTTOM
       - BLACK TRIANGLES_BOTTOM
       - BLACK TRIANGLES_TOP
-  '62':
+  '5c4e0490-42f0-4fb8-99d0-7cb61228bf74':
     name: '&6North Korea'
     base: BLUE_BANNER
     patterns:
@@ -436,31 +435,31 @@ banners:
       - RED STRIPE_CENTER
       - WHITE CIRCLE_MIDDLE
       - WHITE BORDER
-  '63':
+  '830dd286-1b44-49ca-904e-9fd9f45ddea4':
     name: '&6Hong Kong'
     base: RED_BANNER
     patterns:
       - WHITE FLOWER
-  '64':
+  'e905c67a-7566-46c8-8abf-ef9bc9f9def0':
     name: '&6Vietnam'
     base: RED_BANNER
     patterns:
       - YELLOW CIRCLE_MIDDLE
-  '65':
+  'a7d764e4-577e-4063-823a-bd7e0059ebd9':
     name: '&6Cambodia'
     base: RED_BANNER
     patterns:
       - WHITE CIRCLE_MIDDLE
       - BLUE STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '66':
+  '19b66691-811a-4815-9a43-54377b56f709':
     name: '&6Thailand'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - RED STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '67':
+  '1460b12f-1841-414e-8bef-7dbc231a2e1d':
     name: '&6Laos'
     base: BLUE_BANNER
     patterns:
@@ -469,13 +468,13 @@ banners:
       - BLUE STRIPE_LEFT
       - RED STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '68':
+  'bc920efc-d0ae-45a1-aebb-333cac717ed5':
     name: '&6Malaysia'
     base: RED_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - BLUE SQUARE_TOP_RIGHT
-  '69':
+  '087dca9d-7545-4605-849a-2791c6278760':
     name: '&6Singapore'
     base: RED_BANNER
     patterns:
@@ -484,12 +483,12 @@ banners:
       - RED BORDER
       - RED HALF_VERTICAL
       - WHITE HALF_VERTICAL
-  '70':
+  '4753f910-0a04-42a7-955c-0068a2010b03':
     name: '&6Indonesia'
     base: WHITE_BANNER
     patterns:
       - RED HALF_VERTICAL_MIRROR
-  '71':
+  '642eade6-3049-4e11-a153-742e74c9c04c':
     name: '&6Brunei'
     base: YELLOW_BANNER
     patterns:
@@ -498,19 +497,19 @@ banners:
       - YELLOW DIAGONAL_LEFT
       - YELLOW STRIPE_DOWNRIGHT
       - RED CIRCLE_MIDDLE
-  '72':
+  '8fd5feda-19e1-4652-8d24-fd340360503a':
     name: '&6Palau'
     base: LIGHT_BLUE_BANNER
     patterns:
       - YELLOW CIRCLE_MIDDLE
-  '73':
+  'ba11f8f1-44fa-4fb4-900d-6083c8209895':
     name: '&6Kiribati'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - RED HALF_VERTICAL_MIRROR
       - YELLOW CIRCLE_MIDDLE
-  '74':
+  'f6decf99-c75b-49c9-ae2e-c0287de09ce3':
     name: '&6Mexico'
     base: WHITE_BANNER
     patterns:
@@ -519,13 +518,13 @@ banners:
       - WHITE STRIPE_LEFT
       - RED STRIPE_BOTTOM
       - GREEN STRIPE_TOP
-  '75':
+  'e6758afc-c027-4805-a726-d476ffea9f50':
     name: '&6United States'
     base: RED_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - BLUE SQUARE_TOP_RIGHT
-  '76':
+  'b5d410a2-4cee-42b3-a564-c4c8dfd0446f':
     name: '&6Canada'
     base: WHITE_BANNER
     patterns:
@@ -535,19 +534,19 @@ banners:
       - WHITE BORDER
       - RED STRIPE_TOP
       - RED STRIPE_BOTTOM
-  '77':
+  '179eba44-e6c1-46c6-b4db-054dcb06728d':
     name: '&6Jamaica'
     base: GREEN_BANNER
     patterns:
       - BLACK TRIANGLE_TOP
       - BLACK TRIANGLE_BOTTOM
       - YELLOW CROSS
-  '78':
+  'be786cb6-f7eb-4861-a1b3-98b76bc413ef':
     name: '&6Haiti'
     base: BLUE_BANNER
     patterns:
       - RED HALF_VERTICAL
-  '79':
+  'e00b47f7-46c8-47ef-9e23-3aac7e29b717':
     name: '&6Dominican Republic'
     base: WHITE_BANNER
     patterns:
@@ -556,7 +555,7 @@ banners:
       - RED SQUARE_TOP_LEFT
       - RED SQUARE_BOTTOM_RIGHT
       - WHITE STRIPE_CENTER
-  '80':
+  'd8e38ba7-1038-4322-bfbe-cf9d75b3d3d4':
     name: '&6Virgin Islands'
     base: BLACK_BANNER
     patterns:
@@ -566,7 +565,7 @@ banners:
       - RED SQUARE_TOP_LEFT
       - RED STRIPE_LEFT
       - RED SQUARE_BOTTOM_LEFT
-  '81':
+  '6d866607-fef4-463d-bd9a-f76b930adb4f':
     name: '&6Trinidad and Tobago'
     base: RED_BANNER
     patterns:
@@ -574,7 +573,7 @@ banners:
       - BLACK CROSS
       - RED SQUARE_BOTTOM_LEFT
       - RED SQUARE_TOP_RIGHT
-  '82':
+  '56a4b125-ca6a-47b6-b880-d11663905736':
     name: '&6Guyana'
     base: GREEN_BANNER
     patterns:
@@ -583,7 +582,7 @@ banners:
       - BLACK TRIANGLE_TOP
       - BLACK TRIANGLE_TOP
       - RED TRIANGLE_TOP
-  '83':
+  'd2386192-2204-4d92-84cf-5cccd2f3c070':
     name: '&6Suriname'
     base: WHITE_BANNER
     patterns:
@@ -592,33 +591,33 @@ banners:
       - WHITE STRIPE_CENTER
       - RED STRIPE_CENTER
       - YELLOW CIRCLE_MIDDLE
-  '84':
+  '34e99f77-dddd-4b0d-8461-34cdcc8b0539':
     name: '&6Brazil'
     base: GREEN_BANNER
     patterns:
       - YELLOW RHOMBUS_MIDDLE
       - BLUE CIRCLE_MIDDLE
-  '85':
+  '75fe5319-7997-4c66-83cf-e6828851f8f7':
     name: '&6Bolivia'
     base: YELLOW_BANNER
     patterns:
       - BROWN STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '86':
+  'e0212337-d75e-467d-b445-e6a027478168':
     name: '&6Paraguay'
     base: WHITE_BANNER
     patterns:
       - GREEN STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '87':
+  'b6ca9272-566b-4b57-97f2-73d028eff300':
     name: '&6Uruguay'
     base: WHITE_BANNER
     patterns:
       - BLUE STRIPE_SMALL
       - YELLOW SQUARE_TOP_RIGHT
-  '88':
+  'cbb52c45-c12e-4143-8a05-8050921d0016':
     name: '&6Chile'
     base: BLUE_BANNER
     patterns:
@@ -627,34 +626,34 @@ banners:
       - BLUE STRIPE_CENTER
       - WHITE HALF_HORIZONTAL_MIRROR
       - RED HALF_VERTICAL
-  '89':
+  '86c14c25-37b9-4ac3-8dca-8efec6d7f156':
     name: '&6Argentina'
     base: WHITE_BANNER
     patterns:
       - CYAN STRIPE_RIGHT
       - CYAN STRIPE_LEFT
       - YELLOW CIRCLE_MIDDLE
-  '90':
+  'bf790c2c-b5d3-4806-8686-2a0dfa1eb177':
     name: '&6Peru'
     base: WHITE_BANNER
     patterns:
       - GREEN CIRCLE_MIDDLE
       - RED STRIPE_BOTTOM
       - RED STRIPE_TOP
-  '91':
+  '64dcaee2-d26d-4c7d-ab60-ba0913eb7a98':
     name: '&6Ecuador'
     base: YELLOW_BANNER
     patterns:
       - BLUE HALF_VERTICAL
       - RED STRIPE_LEFT
       - LIGHT_BLUE CIRCLE_MIDDLE
-  '92':
+  'fc3f0fa6-4e34-4cc8-945f-937cb033f9e7':
     name: '&6Colombia'
     base: YELLOW_BANNER
     patterns:
       - BLUE HALF_VERTICAL
       - RED STRIPE_LEFT
-  '93':
+  '872408f3-2425-4e72-8769-d26b3ae02b31':
     name: '&6Panama'
     base: WHITE_BANNER
     patterns:
@@ -662,21 +661,21 @@ banners:
       - WHITE HALF_HORIZONTAL
       - BLUE HALF_VERTICAL
       - WHITE SQUARE_BOTTOM_LEFT
-  '94':
+  '7707e7df-f7d7-4d57-81a7-6eb7639a3b4b':
     name: '&6Costa Rica'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - RED STRIPE_CENTER
       - WHITE BORDER
-  '95':
+  '54bbd1ec-8b13-4ccf-997d-95a7eea4cd6a':
     name: '&6Nicaragua'
     base: WHITE_BANNER
     patterns:
       - CYAN STRIPE_MIDDLE
       - BLUE STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '96':
+  '63378e1c-8a5b-4a26-82ac-cfb3ae1589ce':
     name: '&6Honduras'
     base: WHITE_BANNER
     patterns:
@@ -684,7 +683,7 @@ banners:
       - WHITE STRAIGHT_CROSS
       - BLUE STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '97':
+  '917a5eb7-57ba-484c-8bb4-e8893aa2622a':
     name: '&6Belize'
     base: BLUE_BANNER
     patterns:
@@ -692,35 +691,35 @@ banners:
       - BLUE TRIANGLE_TOP
       - BLUE TRIANGLE_BOTTOM
       - WHITE CIRCLE_MIDDLE
-  '98':
+  '8d3b5168-0800-4348-a6e5-8d30c6d9a700':
     name: '&6El Salvador'
     base: WHITE_BANNER
     patterns:
       - CYAN STRIPE_MIDDLE
       - BLUE STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '99':
+  'd7ee17ae-c245-4538-bb06-ec890b7f086a':
     name: '&6Guatemala'
     base: WHITE_BANNER
     patterns:
       - GREEN CIRCLE_MIDDLE
       - LIGHT_BLUE STRIPE_TOP
       - LIGHT_BLUE STRIPE_BOTTOM
-  '100':
+  '9a6a9c88-2c68-4db3-9fa0-4d73cfc3f36e':
     name: '&6Iceland'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_CENTER
       - WHITE STRIPE_MIDDLE
       - RED STRAIGHT_CROSS
-  '101':
+  '8950eb43-8519-4540-aa7f-bb5def398294':
     name: '&6Morocco'
     base: RED_BANNER
     patterns:
       - GREEN STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - RED STRIPE_LEFT
-  '102':
+  'fc0b7f6e-f9b2-4eb9-b703-0c86357c6d8d':
     name: '&6Senegal'
     base: YELLOW_BANNER
     patterns:
@@ -729,69 +728,69 @@ banners:
       - YELLOW STRIPE_LEFT
       - GREEN STRIPE_TOP
       - RED STRIPE_BOTTOM
-  '103':
+  'c43439a6-e9ad-41a9-baca-4f0e3378df07':
     name: '&6Gambia'
     base: BLUE_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - RED STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '104':
+  'af52cd36-61ca-47bc-b3e9-b3715e84df3f':
     name: '&6Guinea-Bissau'
     base: YELLOW_BANNER
     patterns:
       - GREEN HALF_VERTICAL
       - RED STRIPE_TOP
-  '105':
+  'd7f61d77-1baf-451e-9c01-975f21ff207c':
     name: '&6Guinea'
     base: YELLOW_BANNER
     patterns:
       - RED STRIPE_TOP
       - GREEN STRIPE_BOTTOM
-  '106':
+  'c1ea0e7c-8802-4fe4-98bb-7f55ac0e6648':
     name: '&6Sierra Leone'
     base: WHITE_BANNER
     patterns:
       - CYAN STRIPE_LEFT
       - GREEN STRIPE_RIGHT
-  '107':
+  '87ee1c38-e697-44ab-ac15-d27e46bb67c8':
     name: '&6Liberia'
     base: RED_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - BLUE SQUARE_TOP_RIGHT
-  '108':
+  'c4a9eb1b-0b66-4450-aca7-89ed2dfd81a0':
     name: '&6Ivory Coast'
     base: WHITE_BANNER
     patterns:
       - ORANGE STRIPE_TOP
       - GREEN STRIPE_BOTTOM
-  '109':
+  'a2784484-7e0e-48c2-93af-0c2ffb4a8afb':
     name: '&6Ghana'
     base: YELLOW_BANNER
     patterns:
       - BLACK STRIPE_MIDDLE
       - RED STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '110':
+  '0317c9a0-1514-4de9-ac9c-8c166140c2ab':
     name: '&6Togo'
     base: YELLOW_BANNER
     patterns:
       - GREEN STRIPE_SMALL
       - RED SQUARE_TOP_RIGHT
-  '111':
+  '75a1017b-4f95-485d-b3af-7d88200fc3f4':
     name: '&6Benin'
     base: RED_BANNER
     patterns:
       - YELLOW HALF_VERTICAL_MIRROR
       - GREEN STRIPE_TOP
-  '112':
+  '7a6bc6d4-870e-4f15-a602-cf07ddfba3d6':
     name: '&6Nigeria'
     base: WHITE_BANNER
     patterns:
       - GREEN STRIPE_TOP
       - GREEN STRIPE_BOTTOM
-  '113':
+  '86938aed-b1eb-4337-9517-9e2900c6711c':
     name: '&6Cameroon'
     base: RED_BANNER
     patterns:
@@ -800,7 +799,7 @@ banners:
       - RED STRIPE_LEFT
       - GREEN STRIPE_TOP
       - YELLOW STRIPE_BOTTOM
-  '114':
+  '83170986-233a-452d-a1a9-5b7861939604':
     name: '&6Equatorial Guinea'
     base: WHITE_BANNER
     patterns:
@@ -809,19 +808,19 @@ banners:
       - RED STRIPE_LEFT
       - GREEN STRIPE_RIGHT
       - CYAN TRIANGLE_TOP
-  '115':
+  '9c3252e6-e1fa-405b-830f-ddfe8a888a24':
     name: '&6Congo'
     base: RED_BANNER
     patterns:
       - GREEN DIAGONAL_RIGHT_MIRROR
       - YELLOW STRIPE_DOWNRIGHT
-  '116':
+  'd86f1b22-1344-4fcc-ae45-371f5d345c11':
     name: '&6Gabon'
     base: YELLOW_BANNER
     patterns:
       - LIGHT_BLUE STRIPE_LEFT
       - GREEN STRIPE_RIGHT
-  '117':
+  'c91a9a13-cfa2-4e69-9f89-2f9e05124d8e':
     name: '&6Angola'
     base: RED_BANNER
     patterns:
@@ -830,7 +829,7 @@ banners:
       - BLACK STRIPE_LEFT
       - RED STRIPE_RIGHT
       - YELLOW MOJANG
-  '118':
+  '1386bd39-bea2-4aed-89e6-ac18cd31d2f3':
     name: '&6Zambia'
     base: GREEN_BANNER
     patterns:
@@ -838,14 +837,14 @@ banners:
       - BLACK STRIPE_BOTTOM
       - ORANGE TRIANGLES_BOTTOM
       - GREEN STRIPE_RIGHT
-  '119':
+  'eccababe-0b7c-4f55-9025-979ea13b097d':
     name: '&6Botswana'
     base: BLACK_BANNER
     patterns:
       - WHITE STRIPE_SMALL
       - LIGHT_BLUE STRIPE_LEFT
       - LIGHT_BLUE STRIPE_RIGHT
-  '120':
+  'd3282ca9-9c02-4ce2-b679-a5e5cc6327be':
     name: '&6Namibia'
     base: BLUE_BANNER
     patterns:
@@ -855,7 +854,7 @@ banners:
       - WHITE STRIPE_DOWNRIGHT
       - WHITE STRIPE_DOWNRIGHT
       - RED STRIPE_DOWNRIGHT
-  '121':
+  '06d0f30f-daa8-4b7c-bc07-6b84ad38935e':
     name: '&6South Africa'
     base: GREEN_BANNER
     patterns:
@@ -865,14 +864,14 @@ banners:
       - GREEN TRIANGLE_TOP
       - GREEN TRIANGLE_TOP
       - BLACK TRIANGLE_TOP
-  '122':
+  '8f41afe6-2300-4136-b123-a26d5557c004':
     name: '&6Lesotho'
     base: WHITE_BANNER
     patterns:
       - BLACK STRIPE_MIDDLE
       - BLUE STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '123':
+  'b45c7dbb-7c78-4b49-9dee-7f9524e82a44':
     name: '&6Swaziland'
     base: BLACK_BANNER
     patterns:
@@ -881,7 +880,7 @@ banners:
       - RED STRIPE_TOP
       - BLUE STRIPE_RIGHT
       - BLUE STRIPE_LEFT
-  '124':
+  '1eac9654-f960-4762-a211-f855e8545622':
     name: '&6Mozambique'
     base: BLACK_BANNER
     patterns:
@@ -889,20 +888,20 @@ banners:
       - YELLOW STRIPE_LEFT
       - GREEN STRIPE_RIGHT
       - RED TRIANGLE_TOP
-  '125':
+  'e89dc2c7-6bdf-4b2d-8139-c0a53d17b0f8':
     name: '&6Madagascar'
     base: GREEN_BANNER
     patterns:
       - RED HALF_VERTICAL_MIRROR
       - WHITE STRIPE_TOP
-  '126':
+  '2703e973-4e27-4c07-bbb0-6c414db5c21d':
     name: '&6Mauritius'
     base: BLUE_BANNER
     patterns:
       - RED STRIPE_RIGHT
       - YELLOW HALF_VERTICAL
       - GREEN STRIPE_LEFT
-  '127':
+  '9abe2685-de72-400d-9f28-0da3f0bf1202':
     name: '&6Seychelles'
     base: WHITE_BANNER
     patterns:
@@ -910,7 +909,7 @@ banners:
       - GREEN STRIPE_LEFT
       - RED STRIPE_DOWNRIGHT
       - BLUE TRIANGLES_TOP
-  '128':
+  '5a5f2b80-0f58-4ed1-b4ce-84685da8808d':
     name: '&6Papua New Guinea'
     base: BLACK_BANNER
     patterns:
@@ -920,7 +919,7 @@ banners:
       - RED DIAGONAL_RIGHT
       - YELLOW SQUARE_BOTTOM_RIGHT
       - RED TRIANGLES_BOTTOM
-  '129':
+  '433c5d81-6c36-4869-b24e-24a96acd434d':
     name: '&6Australia'
     base: BLUE_BANNER
     patterns:
@@ -929,7 +928,7 @@ banners:
       - WHITE SQUARE_TOP_RIGHT
       - WHITE SQUARE_TOP_RIGHT
       - RED SQUARE_TOP_RIGHT
-  '130':
+  '8e2c7932-2b4b-4e0d-aecc-7fc6c35ca95c':
     name: '&6New Zealand'
     base: BLUE_BANNER
     patterns:
@@ -939,7 +938,7 @@ banners:
       - WHITE SQUARE_TOP_RIGHT
       - WHITE SQUARE_TOP_RIGHT
       - RED SQUARE_TOP_RIGHT
-  '131':
+  'ef5842ef-da32-4e42-8a2f-40947659cae9':
     name: '&6Niger'
     base: WHITE_BANNER
     patterns:
@@ -948,20 +947,20 @@ banners:
       - WHITE STRIPE_LEFT
       - ORANGE STRIPE_RIGHT
       - GREEN STRIPE_LEFT
-  '132':
+  '52eff4b7-5cc0-46cd-a5f4-ece36ae460ae':
     name: '&6Chad'
     base: YELLOW_BANNER
     patterns:
       - BLUE STRIPE_TOP
       - RED STRIPE_BOTTOM
-  '133':
+  '07d49ba6-51a2-4f22-a6f5-336642dba516':
     name: '&6Uganda'
     base: RED_BANNER
     patterns:
       - YELLOW STRIPE_SMALL
       - BLACK STRIPE_CENTER
       - WHITE CIRCLE_MIDDLE
-  '134':
+  'af979d1c-12e1-4c51-8afb-ac0eaebd5866':
     name: '&6Rwanda'
     base: CYAN_BANNER
     patterns:
@@ -970,7 +969,7 @@ banners:
       - CYAN BORDER
       - YELLOW HALF_VERTICAL
       - GREEN STRIPE_LEFT
-  '135':
+  '5c4dc2e7-b694-4ad1-b1b0-c499fdfdf8ef':
     name: '&6Tanzania'
     base: CYAN_BANNER
     patterns:
@@ -978,7 +977,7 @@ banners:
       - YELLOW STRIPE_DOWNRIGHT
       - YELLOW STRIPE_DOWNRIGHT
       - BLACK STRIPE_DOWNRIGHT
-  '136':
+  '07ad0e26-915c-41ae-9442-08bdd4fe9d75':
     name: '&6Kenya'
     base: RED_BANNER
     patterns:
@@ -1001,3 +1000,91 @@ banners:
     patterns:
       - WHITE HALF_VERTICAL_MIRROR
       - RED CIRCLE_MIDDLE
+  73c9b945-88ea-456e-bbee-5e07681396be:
+    name: '&6Central African Republic'
+    base: WHITE_BANNER
+    patterns:
+      - BLUE STRIPE_RIGHT
+      - GREEN HALF_VERTICAL
+      - YELLOW STRIPE_LEFT
+      - RED STRIPE_MIDDLE
+  c3e33d01-6883-42b2-b9fd-d0a84869c1a2:
+    name: '&6Scotland'
+    base: BLUE_BANNER
+    patterns:
+      - WHITE CROSS
+  a2554d82-05e5-4142-868d-596e930cf9cc:
+    name: '&6San Marino'
+    base: LIGHT_BLUE_BANNER
+    patterns:
+      - WHITE HALF_VERTICAL
+      - YELLOW FLOWER
+  fb473b54-eba0-47e8-a63d-5d1652432cd3:
+    name: '&6Mauritania'
+    base: GREEN_BANNER
+    patterns:
+      - YELLOW MOJANG
+      - GREEN STRIPE_RIGHT
+  600c4d5d-c6f0-4b69-b356-c57d53c1980f:
+    name: '&6Mali'
+    base: YELLOW_BANNER
+    patterns:
+      - GREEN STRIPE_TOP
+      - RED STRIPE_BOTTOM
+  753e040e-9cf5-4f42-b7ef-a73513345c06:
+    name: '&6Somalia'
+    base: LIGHT_BLUE_BANNER
+    patterns:
+      - WHITE CIRCLE_MIDDLE
+  ac980c63-60e2-4ac7-9f2d-6c3e078fef8f:
+    name: '&6Democratic Republic of the Congo'
+    base: CYAN_BANNER
+    patterns:
+      - YELLOW SQUARE_TOP_RIGHT
+      - CYAN BORDER
+      - YELLOW STRIPE_DOWNRIGHT
+      - YELLOW STRIPE_DOWNRIGHT
+      - RED STRIPE_DOWNRIGHT
+  7da19dcb-1e54-4216-8d86-83cb498ecec8:
+    name: '&6St. Lucia'
+    base: LIGHT_BLUE_BANNER
+    patterns:
+      - WHITE RHOMBUS_MIDDLE
+      - BLACK RHOMBUS_MIDDLE
+      - YELLOW CIRCLE_MIDDLE
+      - LIGHT_BLUE HALF_VERTICAL
+  9397bb03-2df4-4f9b-8b24-86a0f624d8af:
+    name: '&6Uzbekistan'
+    base: RED_BANNER
+    patterns:
+      - BLUE STRIPE_RIGHT
+      - GREEN STRIPE_LEFT
+      - WHITE STRIPE_CENTER
+  2332b9cc-8cda-415a-a788-a8ea13f43c1c:
+    name: '&6Dominica'
+    base: GREEN_BANNER
+    patterns:
+      - YELLOW STRIPE_MIDDLE
+      - WHITE STRIPE_CENTER
+      - BLACK STRAIGHT_CROSS
+      - RED CIRCLE_MIDDLE
+  c4afb50b-961f-44f4-9077-34c28404343a:
+    name: '&6Cabo Verde'
+    base: RED_BANNER
+    patterns:
+      - WHITE STRIPE_SMALL
+      - BLUE STRIPE_LEFT
+      - BLUE STRIPE_RIGHT
+  74e95105-f767-4fa2-8c64-eb306cec433a:
+    name: '&6Ethiopia'
+    base: YELLOW_BANNER
+    patterns:
+      - GREEN STRIPE_RIGHT
+      - RED STRIPE_LEFT
+      - CYAN CIRCLE_MIDDLE
+  f333331b-90f9-444c-936f-acbd7493b0d4:
+    name: '&6Burkina Faso'
+    base: GREEN_BANNER
+    patterns:
+      - RED HALF_VERTICAL_MIRROR
+      - YELLOW CIRCLE_MIDDLE
