@@ -1088,3 +1088,26 @@ banners:
     patterns:
       - RED HALF_VERTICAL_MIRROR
       - YELLOW CIRCLE_MIDDLE
+  74d0b657-d7b9-4144-87db-faa6780469b2:
+    name: '&6Turkey'
+    base: RED_BANNER
+    patterns:
+      - WHITE CIRCLE_MIDDLE
+      - RED FLOWER
+      - RED HALF_HORIZONTAL_MIRROR
+      - WHITE TRIANGLE_BOTTOM
+      - RED STRIPE_BOTTOM
+  837feea9-580d-40fe-99f7-9e2179d7cf3b:
+    name: '&6Malawi'
+    base: BLACK_BANNER
+    patterns:
+      - RED FLOWER
+      - RED STRIPE_CENTER
+      - RED HALF_VERTICAL
+      - GREEN STRIPE_LEFT
+  e9731063-139f-4ed8-8edb-6e663b121527:
+    name: '&6Tunisia'
+    base: RED_BANNER
+    patterns:
+      - WHITE CIRCLE_MIDDLE
+      - RED FLOWER
