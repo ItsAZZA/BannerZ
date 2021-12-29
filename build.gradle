@@ -1,28 +1,11 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.6.0"
+    id "com.github.johnrengelman.shadow" version "7.1.0"
+}
+
 group 'com.itsazza'
 version '1.0.0'
-
-String depedencyPath = 'com.itsazza.depedencies'
-
-apply plugin: 'kotlin'
-apply plugin: 'com.github.johnrengelman.shadow'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-buildscript {
-    ext {
-        kotlin_version = '1.6.0'
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
-    }
-}
+String dependencyPath = 'com.itsazza.depedencies'
 
 repositories {
     mavenLocal()
@@ -33,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:1.6.0"
     implementation "de.themoep:inventorygui:1.4.2-SNAPSHOT"
     implementation "org.bstats:bstats-bukkit:2.2.1"
     implementation "de.tr7zw:item-nbt-api:2.9.0-SNAPSHOT"
@@ -41,9 +24,9 @@ dependencies {
 }
 
 shadowJar {
-    relocate('org.bstats', depedencyPath + '.bstats')
-    relocate('de.tr7zw', depedencyPath + '.item-nbt-api')
-    relocate('de.themoep', depedencyPath + '.themoep')
+    relocate('org.bstats', dependencyPath + '.bstats')
+    relocate('de.tr7zw', dependencyPath + '.item-nbt-api')
+    relocate('de.themoep', dependencyPath + '.themoep')
     archiveName("BannerZ-${this.version}.jar")
     minimize()
 }

@@ -3,6 +3,8 @@ main: com.itsazza.bannerz.BannerZPlugin
 version: 1.0.0
 author: ItsAZZA
 api-version: 1.13
+libraries:
+  - "org.jetbrains.kotlin:kotlin-stdlib:1.6.0"
 commands:
   banner:
     aliases: [banners, bannerz]
