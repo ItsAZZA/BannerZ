@@ -68,6 +68,8 @@ object PublicLibraryMainMenu {
                 return@StaticGuiElement true
             },
             "§6§l${bannerCategory.name.capitalizeFirst()}",
+            "§8${bannerCategory.banners.values.size} banners",
+            "§0 ",
             *bannerCategory.description.toTypedArray(),
             "§0 ",
             "§e§lCLICK §7to browse"
