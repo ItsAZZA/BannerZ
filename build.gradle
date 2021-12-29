@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.itsazza'
-version '1.0.0'
+version '1.1.0'
 String dependencyPath = 'com.itsazza.depedencies'
 
 repositories {
@@ -27,6 +27,6 @@ shadowJar {
     relocate('org.bstats', dependencyPath + '.bstats')
     relocate('de.tr7zw', dependencyPath + '.item-nbt-api')
     relocate('de.themoep', dependencyPath + '.themoep')
-    archiveName("BannerZ-${this.version}.jar")
+    archiveName("BannerZ.jar")
     minimize()
 }
