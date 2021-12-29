@@ -7,8 +7,6 @@ import org.bukkit.conversations.ConversationFactory
 import org.bukkit.conversations.Prompt
 import org.bukkit.conversations.StringPrompt
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
-import org.bukkit.scheduler.BukkitRunnable
 
 object SearchConversation {
     private val instance = BannerZPlugin.instance
@@ -31,16 +29,7 @@ object SearchConversation {
 
         override fun acceptInput(context: ConversationContext, input: String?): Prompt? {
             input ?: return null
-
-            object : BukkitRunnable() {
-                override fun run() {
-                    object : BukkitRunnable() {
-                        override fun run() {
-                            PublicLibraryMenu.open(player, "Results for ${input.lowercase()}", BannerLibraryStorage.searchForBanners(input))
-                        }
-                    }.runTask(instance)
-                }
-            }.runTaskAsynchronously(instance)
+            PublicLibraryMenu.open(player, "Results for ${input.lowercase()}", BannerLibraryStorage.searchForBanners(input))
             return END_OF_CONVERSATION
         }
     }
