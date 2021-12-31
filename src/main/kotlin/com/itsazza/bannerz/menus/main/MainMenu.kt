@@ -8,6 +8,7 @@ import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
 import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMainMenu
 import com.itsazza.bannerz.util.Sounds
+import com.itsazza.bannerz.util.checkPermission
 import com.itsazza.bannerz.util.item
 import com.itsazza.bannerz.util.mutateMeta
 import de.themoep.inventorygui.InventoryGui
@@ -37,6 +38,7 @@ object MainMenu {
             Material.BOOKSHELF.item,
             {
                 val player = it.event.whoClicked as Player
+                if (!checkPermission(player, "bannerz.menu.public")) return@StaticGuiElement true
                 PublicLibraryMainMenu.open(player)
                 return@StaticGuiElement true
             },
@@ -57,6 +59,7 @@ object MainMenu {
             globeBannerPatternItem,
             {
                 val player = it.event.whoClicked as Player
+                if (!checkPermission(player, "bannerz.menu.alphabet")) return@StaticGuiElement true
                 AlphabetMenu.open(player)
                 return@StaticGuiElement true
             },
@@ -72,6 +75,7 @@ object MainMenu {
             Material.WRITABLE_BOOK.item,
             {
                 val player = it.event.whoClicked as Player
+                if (!checkPermission(player, "bannerz.menu.create")) return@StaticGuiElement true
                 BannerCreatorMenu.open(player, banner(Material.WHITE_BANNER){})
                 return@StaticGuiElement true
             },
@@ -87,6 +91,7 @@ object MainMenu {
             Material.BOOK.item,
             {
                 val player = it.event.whoClicked as Player
+                if (!checkPermission(player, "bannerz.menu.own")) return@StaticGuiElement true
                 PlayerLibraryMenu.open(player.uniqueId, player)
                 return@StaticGuiElement true
             },
