@@ -39,6 +39,7 @@ object BannerZCommand : CommandExecutor {
 
         when (args[0].lowercase()) {
             "reload" -> {
+                if (!checkPermission(sender, "bannerz.reload")) return true
                 val plugin = BannerZPlugin.instance
                 plugin.reloadConfig()
                 sender.sendMessage("§eReloaded config!")
