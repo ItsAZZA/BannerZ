@@ -8,7 +8,6 @@ object NBT {
     fun getBannerCommandBlock(banner: ItemStack): ItemStack {
         val item = NBTItem(banner)
         val bannerPatternCompound = item.compound.toString()
-        println(bannerPatternCompound)
         val commandString = "minecraft:give @p minecraft:${banner.type.name.lowercase()}$bannerPatternCompound 1"
         val commandBlockItem = NBTItem(Material.COMMAND_BLOCK.item)
 
