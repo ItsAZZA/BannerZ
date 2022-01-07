@@ -6,7 +6,7 @@ import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.playerlibrary.libraryMenuTemplate
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.capitalizeFirst
-import com.itsazza.bannerz.util.checkSurvivalCrafting
+import com.itsazza.bannerz.util.checkBanner
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -60,7 +60,7 @@ object PublicLibraryMenu {
                 val player = it.event.whoClicked as Player
                 when {
                     it.event.isLeftClick -> {
-                        if (!checkSurvivalCrafting(banner, player)) return@StaticGuiElement true
+                        if (!checkBanner(banner, player)) return@StaticGuiElement true
                         player.inventory.addItem(banner)
                         Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
                         return@StaticGuiElement true

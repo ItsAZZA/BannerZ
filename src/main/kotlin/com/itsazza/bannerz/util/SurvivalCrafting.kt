@@ -7,23 +7,24 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
 
-fun checkSurvivalCrafting(item: ItemStack, player: Player) : Boolean {
+fun checkBanner(item: ItemStack, player: Player): Boolean {
     val config = BannerZPlugin.instance.config
+    val bannerMeta = item.itemMeta as BannerMeta
+    val patterns = bannerMeta.patterns.size
+    val maxPatterns = config.getInt("settings.survival.patternLimit")
+    val playerMaxPatterns = Permissions.getNumberFromPermission(player, "bannerz.maxpatterns.", maxPatterns)
+
+    if (playerMaxPatterns < patterns && patterns > maxPatterns) {
+        player.sendMessage("§cYou don't have permission to get a banner with $patterns patterns!")
+        Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
+        return false
+    }
+
 
     if (config.getBoolean("settings.survival.enabled")) {
-        val bannerMeta = item.itemMeta as BannerMeta
-        val patternLimit = config.getInt("settings.survival.patternLimit")
-        val creativeByPass = config.getBoolean("settings.survival.bypassInCreative")
-
-        if (bannerMeta.patterns.size > patternLimit && !player.hasPermission("bannerz.crafting.bypasspatternlimit")) {
-            Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
-            player.sendMessage("§cThis banner has too many patterns! Limit is $patternLimit patterns.")
-            return false
-        }
-
-        if (creativeByPass && player.gameMode == GameMode.CREATIVE || player.hasPermission("bannerz.crafting.bypassmaterialcost")) {
-            return true
-        }
+        if (config.getBoolean("settings.survival.bypassInCreative")
+            && player.gameMode == GameMode.CREATIVE
+            || player.hasPermission("bannerz.crafting.bypassmaterialcost")) return true
 
         val materials = BannerMaterials.getRequired(item)
         val inventory = player.inventory
@@ -31,7 +32,7 @@ fun checkSurvivalCrafting(item: ItemStack, player: Player) : Boolean {
         if (!inventory.hasItems(materials)) {
             Sounds.play(player, Sound.ENTITY_VILLAGER_NO)
             player.sendMessage("§cYou do not have the items to craft this item!")
-            val needed = materials.map { "${it.value}x ${it.key.name.replace("_", " ").lowercase()}" }.joinToString()
+            val needed = materials.map { "${it.value}x ${it.key.name.beautify()}" }.joinToString()
             player.sendMessage("§eYou need: §7$needed")
             return false
         }

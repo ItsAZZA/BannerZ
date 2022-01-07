@@ -109,7 +109,7 @@ object PlayerLibraryMenu {
             {
                 val player = it.event.whoClicked as Player
                 if (it.event.isLeftClick) {
-                    if (!checkSurvivalCrafting(banner, player)) return@StaticGuiElement true
+                    if (!checkBanner(banner, player)) return@StaticGuiElement true
                     player.inventory.addItem(banner)
                     Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
                     return@StaticGuiElement true
@@ -138,7 +138,7 @@ object PlayerLibraryMenu {
                         return@StaticGuiElement true
                     }
                     it.event.isLeftClick -> {
-                        if (!checkSurvivalCrafting(banner, player)) return@StaticGuiElement true
+                        if (!checkBanner(banner, player)) return@StaticGuiElement true
                         player.inventory.addItem(banner)
                         Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
                         return@StaticGuiElement true
