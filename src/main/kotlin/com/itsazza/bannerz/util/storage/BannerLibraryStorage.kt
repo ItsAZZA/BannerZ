@@ -41,18 +41,23 @@ object BannerLibraryStorage {
             val bannerKeys = config.getConfigurationSection("banners")?.getKeys(false) ?: return@forEach
             val banners = hashMapOf<String, ItemStack>()
 
-            for (key in bannerKeys) {
+            bannerMain@ for (key in bannerKeys) {
                 val bannerNameConfig = config.getString("banners.$key.name") ?: "Unknown"
                 val bannerName = ChatColor.translateAlternateColorCodes('&', bannerNameConfig)
                 val base = config.getString("banners.$key.base") ?: continue
                 val bannerBase = Material.getMaterial(base) ?: continue
-                val patterns = config.getStringList("banners.$key.patterns")
+                val patternsList = config.getStringList("banners.$key.patterns")
+                val patterns = mutableListOf<Pattern>()
+
+                for (pattern in patternsList) {
+                    val data = pattern.split(" ")
+                    val color = DyeColor.values().firstOrNull{ color -> color.name == data.first() } ?: continue@bannerMain
+                    val patternType = PatternType.values().firstOrNull{ patternType -> patternType.name == data.last() } ?: continue@bannerMain
+                    patterns += Pattern(color, patternType)
+                }
 
                 banners[key] = banner(bannerBase) {
-                    patterns.forEach { pattern ->
-                        val data = pattern.split(" ")
-                        pattern(Pattern(DyeColor.valueOf(data.first()), PatternType.valueOf(data.last())))
-                    }
+                    patterns.forEach { pattern -> pattern(pattern)}
                 }.mutateMeta<ItemMeta> { item ->
                     item.setDisplayName(ChatColor.translateAlternateColorCodes('&', bannerName))
                 }
