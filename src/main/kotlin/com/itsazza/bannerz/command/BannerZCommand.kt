@@ -92,8 +92,8 @@ object BannerZCommand : CommandExecutor {
             "playerlibrary", "player", "pl" -> {
                 if (args.size >= 2) {
                     if (!Permissions.check(sender, "bannerz.menu.player")) return true
-                    val player = Bukkit.getOfflinePlayer(args[1])
-                    if (!player.hasPlayedBefore()) {
+                    val player = Bukkit.getPlayerExact(args[1])
+                    if (player == null) {
                         sender.sendMessage("§cThat player never played here!")
                         return true
                     }
