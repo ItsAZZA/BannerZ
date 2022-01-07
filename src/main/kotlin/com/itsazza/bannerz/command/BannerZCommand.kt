@@ -9,9 +9,9 @@ import com.itsazza.bannerz.menus.playerlibrary.PlayerLibraryMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMainMenu
 import com.itsazza.bannerz.menus.publiclibrary.PublicLibraryMenu
+import com.itsazza.bannerz.util.Permissions
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.bannerMaterial
-import com.itsazza.bannerz.util.checkPermission
 import com.itsazza.bannerz.util.isBanner
 import com.itsazza.bannerz.util.storage.BannerLibraryStorage
 import org.bukkit.Bukkit
@@ -30,7 +30,7 @@ object BannerZCommand : CommandExecutor {
             return true
         }
 
-        if (!checkPermission(sender, "bannerz.menu")) return true
+        if (!Permissions.check(sender, "bannerz.menu")) return true
 
         if (args.isEmpty()) {
             MainMenu.open(sender)
@@ -39,19 +39,19 @@ object BannerZCommand : CommandExecutor {
 
         when (args[0].lowercase()) {
             "reload" -> {
-                if (!checkPermission(sender, "bannerz.reload")) return true
+                if (!Permissions.check(sender, "bannerz.reload")) return true
                 val plugin = BannerZPlugin.instance
                 plugin.reloadConfig()
                 sender.sendMessage("§eReloaded config!")
                 return true
             }
             "create", "creator" -> {
-                if (!checkPermission(sender, "bannerz.menu.create")) return true
+                if (!Permissions.check(sender, "bannerz.menu.create")) return true
                 BannerCreatorMenu.open(sender, banner(DyeColor.WHITE.bannerMaterial) {})
                 return true
             }
             "edit", "editor" -> {
-                if (!checkPermission(sender, "bannerz.menu.create")) return true
+                if (!Permissions.check(sender, "bannerz.menu.create")) return true
                 val block = sender.inventory.itemInMainHand.clone()
 
                 if (!isBanner(block.type)) {
@@ -63,7 +63,7 @@ object BannerZCommand : CommandExecutor {
                 return true
             }
             "search" -> { // Only works on public library for now
-                if (!checkPermission(sender, "bannerz.search")) return true
+                if (!Permissions.check(sender, "bannerz.search")) return true
                 if (args.size < 2) {
                     sender.sendMessage("§cUsage: /bannerz search <query>")
                     return true
@@ -74,7 +74,7 @@ object BannerZCommand : CommandExecutor {
                 return true
             }
             "library", "bannerlibrary", "bl" -> {
-                if (!checkPermission(sender, "bannerz.menu.public")) return true
+                if (!Permissions.check(sender, "bannerz.menu.public")) return true
                 if (args.size < 2) {
                     PublicLibraryMainMenu.open(sender)
                     return true
@@ -91,7 +91,7 @@ object BannerZCommand : CommandExecutor {
             }
             "playerlibrary", "player", "pl" -> {
                 if (args.size >= 2) {
-                    if (!checkPermission(sender, "bannerz.menu.player")) return true
+                    if (!Permissions.check(sender, "bannerz.menu.player")) return true
                     val player = Bukkit.getOfflinePlayer(args[1])
                     if (!player.hasPlayedBefore()) {
                         sender.sendMessage("§cThat player never played here!")
@@ -103,12 +103,12 @@ object BannerZCommand : CommandExecutor {
                 }
             }
             "mine", "mybanners", "my" -> {
-                if (!checkPermission(sender, "bannerz.menu.own")) return true
+                if (!Permissions.check(sender, "bannerz.menu.own")) return true
                 PlayerLibraryMenu.open(sender.uniqueId, sender)
                 return true
             }
             "save" -> {
-                if (!checkPermission(sender, "bannerz.save")) return true
+                if (!Permissions.check(sender, "bannerz.save")) return true
                 val block = sender.inventory.itemInMainHand.clone()
                 block.amount = 1
 
@@ -126,12 +126,12 @@ object BannerZCommand : CommandExecutor {
                 }
             }
             "alphabet", "number" -> {
-                if (!checkPermission(sender, "bannerz.menu.alphabet")) return true
+                if (!Permissions.check(sender, "bannerz.menu.alphabet")) return true
                 AlphabetMenu.open(sender)
                 return true
             }
             "name" -> {
-                if (!checkPermission(sender, "bannerz.name")) return true
+                if (!Permissions.check(sender, "bannerz.name")) return true
 
                 if (args.size < 2) {
                     sender.sendMessage("§cUsage: /bannerz name <name>")

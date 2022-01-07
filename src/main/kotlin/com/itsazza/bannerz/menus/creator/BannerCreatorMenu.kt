@@ -1,14 +1,13 @@
 package com.itsazza.bannerz.menus.creator
 
-import com.google.gson.*
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
 import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.color.BannerColorMenu
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
-import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.menus.main.MainMenu
+import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -174,7 +173,7 @@ object BannerCreatorMenu {
             Material.CHEST.item,
             { click ->
                 val player = click.event.whoClicked as Player
-                if (!checkSurvivalCrafting(banner, player)) return@StaticGuiElement true
+                if (!checkBanner(banner, player)) return@StaticGuiElement true
                 player.inventory.addItem(banner)
                 player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F)
                 return@StaticGuiElement true
@@ -210,7 +209,7 @@ object BannerCreatorMenu {
             Material.COMMAND_BLOCK.item,
             {
                 val player = it.event.whoClicked as Player
-                if (!checkPermission(player, "bannerz.commandblock")) return@StaticGuiElement true
+                if (!Permissions.check(player, "bannerz.commandblock")) return@StaticGuiElement true
 
                 val item = NBT.getBannerCommandBlock(banner)
                 player.inventory.addItem(item)

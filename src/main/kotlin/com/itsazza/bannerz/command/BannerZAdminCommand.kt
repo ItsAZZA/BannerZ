@@ -1,6 +1,6 @@
 package com.itsazza.bannerz.command
 
-import com.itsazza.bannerz.util.checkPermission
+import com.itsazza.bannerz.util.Permissions
 import com.itsazza.bannerz.util.isBanner
 import com.itsazza.bannerz.util.storage.BannerLibraryStorage
 import org.bukkit.command.Command
@@ -14,7 +14,7 @@ object BannerZAdminCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, p1: Command, p2: String, args: Array<out String>): Boolean {
         if (sender !is Player) return true
 
-        if (!checkPermission(sender, "bannerz.admin")) return true
+        if (!Permissions.check(sender, "bannerz.admin")) return true
 
         if (args.isEmpty()) {
             val message = """
