@@ -3,12 +3,9 @@ package com.itsazza.bannerz.menus.creator.color
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.createBackButton
-import com.itsazza.bannerz.util.dyeMaterial
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
-import com.itsazza.bannerz.util.capitalizeFirst
-import com.itsazza.bannerz.util.item
-import com.itsazza.bannerz.util.mutateMeta
+import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -52,7 +49,7 @@ object ColorMenu  {
                                         creatorMode: CreatorMode, block: Block?) : StaticGuiElement
     {
         val item = color.dyeMaterial.item
-        val colorName = color.name.replace("_", " ").lowercase()
+        val colorName = color.name.beautify()
 
         if(currentColor == color) {
             item.mutateMeta<ItemMeta> {

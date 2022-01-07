@@ -67,7 +67,7 @@ object AlphabetMenu  {
                 open(player, color, foregroundColor)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.replace("_", " ").lowercase().capitalizeFirst()}",
+            "§6§l${color.name.beautifyCapitalize()}",
             "§7Select ${color.name.lowercase()} as the",
             "§7background color",
             "§0 ",
@@ -92,7 +92,7 @@ object AlphabetMenu  {
                 open(player, backgroundColor, color)
                 return@StaticGuiElement true
             },
-            "§6§l${color.name.replace("_", " ").lowercase().capitalizeFirst()}",
+            "§6§l${color.name.beautifyCapitalize()}",
             "§7Select ${color.name.lowercase()} as the",
             "§7foreground/font color",
             "§0 ",

@@ -6,17 +6,14 @@ import com.itsazza.bannerz.menus.Buttons.backInHistory
 import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.nextPage
 import com.itsazza.bannerz.menus.Buttons.previousPage
-import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu.createGiveCommandButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu.createSaveButton
 import com.itsazza.bannerz.util.Sounds
-import com.itsazza.bannerz.util.checkSurvivalCrafting
-import com.itsazza.bannerz.util.item
+import com.itsazza.bannerz.util.checkBanner
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
 import org.bukkit.DyeColor
-import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -65,7 +62,7 @@ object AlphabetBannerMenu {
             {
                 val player = it.event.whoClicked as Player
                 if (it.event.isLeftClick) {
-                    if (!checkSurvivalCrafting(item, player)) return@StaticGuiElement true
+                    if (!checkBanner(item, player)) return@StaticGuiElement true
                     player.inventory.addItem(item)
                     Sounds.play(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
                     return@StaticGuiElement true

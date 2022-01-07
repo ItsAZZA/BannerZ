@@ -5,10 +5,7 @@ import com.itsazza.bannerz.menus.Buttons.close
 import com.itsazza.bannerz.menus.Buttons.createBackButton
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
-import com.itsazza.bannerz.util.bannerMaterial
-import com.itsazza.bannerz.util.capitalizeFirst
-import com.itsazza.bannerz.util.item
-import com.itsazza.bannerz.util.mutateMeta
+import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
 import de.themoep.inventorygui.StaticGuiElement
@@ -49,7 +46,7 @@ object BannerColorMenu {
 
     private fun createColorSelectButton(banner: ItemStack, color: DyeColor, creatorMode: CreatorMode, block: Block?) : StaticGuiElement {
         val item = color.bannerMaterial.item
-        val colorName = color.name.replace("_", " ").lowercase()
+        val colorName = color.name.beautify()
 
         if(banner.type == color.bannerMaterial) {
             item.mutateMeta<ItemMeta> {
