@@ -37,7 +37,14 @@ object PatternMenu {
             BannerZPlugin.instance,
             null,
             "Pattern Editor",
-            patternMenuTemplate
+            arrayOf(
+                "    p    ",
+                " 0000000 ",
+                " 0000000 ",
+                " 0000000 ",
+                " 0000000 ",
+                "1 bscd  2",
+            )
         )
 
         val group = GuiElementGroup('0')
