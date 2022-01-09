@@ -2,14 +2,13 @@ package com.itsazza.bannerz.menus.playerlibrary
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.menus.Buttons
-import com.itsazza.bannerz.menus.Buttons.close
-import com.itsazza.bannerz.menus.Buttons.createBackButton
-import com.itsazza.bannerz.menus.Buttons.nextPage
-import com.itsazza.bannerz.menus.Buttons.previousPage
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
-import com.itsazza.bannerz.util.*
+import com.itsazza.bannerz.util.NBT
+import com.itsazza.bannerz.util.Sounds
+import com.itsazza.bannerz.util.checkBanner
+import com.itsazza.bannerz.util.item
 import com.itsazza.bannerz.util.storage.Storage
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.GuiStateElement
@@ -21,7 +20,6 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.*
-import kotlin.collections.HashMap
 
 object PlayerLibraryMenu {
     private val plugin = BannerZPlugin.instance
@@ -51,7 +49,14 @@ object PlayerLibraryMenu {
             plugin,
             null,
             "Your Banner Library",
-            libraryMenuTemplate
+            arrayOf (
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "1  bcs  2",
+            )
         )
 
         val group = GuiElementGroup('0')
@@ -63,14 +68,16 @@ object PlayerLibraryMenu {
         val toggleButton = toggleVisitorsButton
         toggleButton.setState(Storage.getVisitorStatus(ownerUUID.toString()).toString())
 
-        gui.addElements(
-            group,
-            toggleButton,
-            previousPage,
-            nextPage,
-            createBackButton(MainMenu.create()),
-            close
-        )
+        with (Buttons) {
+            gui.addElements(
+                group,
+                toggleButton,
+                previousPage,
+                nextPage,
+                createBackButton(MainMenu.create()),
+                close
+            )
+        }
 
         gui.setCloseAction { false }
         return gui
@@ -82,7 +89,14 @@ object PlayerLibraryMenu {
             plugin,
             null,
             "${playerName}'s banners",
-            libraryMenuTemplate
+            arrayOf (
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "1  bcs  2",
+            )
         )
 
         val group = GuiElementGroup('0')
@@ -90,13 +104,15 @@ object PlayerLibraryMenu {
             group.addElement(createBannerSpectateLibraryButton(playerName, banner.value))
         }
 
-        gui.addElements(
-            group,
-            previousPage,
-            nextPage,
-            createBackButton(MainMenu.create()),
-            close
-        )
+        with (Buttons) {
+            gui.addElements(
+                group,
+                previousPage,
+                nextPage,
+                createBackButton(MainMenu.create()),
+                close
+            )
+        }
 
         gui.setCloseAction { false }
         return gui
@@ -210,32 +226,38 @@ object PlayerLibraryMenu {
             )
         )
 
-        gui.addElement(BannerCreatorMenu.createGiveCommandButton(banner))
-        gui.addElement(Buttons.createEditBannerButton(banner))
-        gui.addElement(
-            StaticGuiElement(
-                'r',
-                Material.RED_CONCRETE.item,
-                {
-                    val player = it.event.whoClicked as Player
-                    PlayerBanners.remove(player.uniqueId, index)
-                    Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
-                    player.sendMessage("§eBanner removed from personal library!")
-                    it.gui.close()
-                    return@StaticGuiElement true
-                },
-                "§c§lDelete Banner",
-                "§7Remove the banner from",
-                "§7your personal library",
-                "§0 ",
-                "§cThis action cannot be undone!",
-                "§0 ",
-                "§e§lCLICK §7to remove"
+        with (Buttons) {
+            gui.addElements(
+                createGiveCommandButton(banner),
+                createEditBannerButton(banner),
+                createRemoveButton(index),
+                backInHistory
             )
-        )
+        }
 
-        gui.addElement(Buttons.backInHistory)
         gui.setCloseAction { false }
         return gui
+    }
+
+    private fun createRemoveButton(index: Int): StaticGuiElement {
+        return StaticGuiElement(
+            'r',
+            Material.RED_CONCRETE.item,
+            {
+                val player = it.event.whoClicked as Player
+                PlayerBanners.remove(player.uniqueId, index)
+                Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
+                player.sendMessage("§eBanner removed from personal library!")
+                it.gui.close()
+                return@StaticGuiElement true
+            },
+            "§c§lDelete Banner",
+            "§7Remove the banner from",
+            "§7your personal library",
+            "§0 ",
+            "§cThis action cannot be undone!",
+            "§0 ",
+            "§e§lCLICK §7to remove"
+        )
     }
 }

@@ -3,7 +3,6 @@ package com.itsazza.bannerz.menus.publiclibrary
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
-import com.itsazza.bannerz.menus.playerlibrary.libraryMenuTemplate
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.capitalizeFirst
 import com.itsazza.bannerz.util.checkBanner
@@ -26,7 +25,14 @@ object PublicLibraryMenu {
             BannerZPlugin.instance,
             null,
             name.capitalizeFirst(),
-            libraryMenuTemplate
+            arrayOf(
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "1  bcs  2",
+            )
         )
 
         val group = GuiElementGroup('0')

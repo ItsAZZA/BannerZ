@@ -2,12 +2,6 @@ package com.itsazza.bannerz.menus.alphabet
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.menus.Buttons
-import com.itsazza.bannerz.menus.Buttons.backInHistory
-import com.itsazza.bannerz.menus.Buttons.close
-import com.itsazza.bannerz.menus.Buttons.nextPage
-import com.itsazza.bannerz.menus.Buttons.previousPage
-import com.itsazza.bannerz.menus.creator.BannerCreatorMenu.createGiveCommandButton
-import com.itsazza.bannerz.menus.creator.BannerCreatorMenu.createSaveButton
 import com.itsazza.bannerz.util.Sounds
 import com.itsazza.bannerz.util.checkBanner
 import de.themoep.inventorygui.GuiElementGroup
@@ -30,7 +24,14 @@ object AlphabetBannerMenu {
             this.plugin,
             null,
             "Alphabet Banners",
-            alphabetBannerMenuTemplate
+            arrayOf(
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "000000000",
+                "1  bc   2"
+            )
         )
 
         val group = GuiElementGroup('0')
@@ -39,13 +40,15 @@ object AlphabetBannerMenu {
             group.addElement(button)
         }
 
-        gui.addElements(
-            group,
-            nextPage,
-            previousPage,
-            backInHistory,
-            close
-        )
+        with (Buttons) {
+            gui.addElements(
+                group,
+                nextPage,
+                previousPage,
+                backInHistory,
+                close
+            )
+        }
 
         gui.setCloseAction { false }
         return gui
@@ -92,12 +95,14 @@ object AlphabetBannerMenu {
             )
         )
 
-        gui.addElements(
-            createGiveCommandButton(banner),
-            createSaveButton(banner),
-            Buttons.createEditBannerButton(banner),
-            backInHistory
-        )
+        with (Buttons) {
+            gui.addElements(
+                createGiveCommandButton(banner),
+                createSaveButton(banner),
+                createEditBannerButton(banner),
+                backInHistory
+            )
+        }
 
         gui.setCloseAction { false }
         return gui

@@ -26,7 +26,13 @@ object AlphabetMenu  {
             BannerZPlugin.instance,
             null,
             "Alphabet & Numerals",
-            alphabetMenuTemplate
+            arrayOf(
+                " 00000000",
+                "p00000000",
+                "g11111111",
+                " 11111111",
+                "    bc   "
+            )
         )
 
         val group0 = GuiElementGroup('0')

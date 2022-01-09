@@ -27,7 +27,14 @@ object BannerColorMenu {
             BannerZPlugin.instance,
             null,
             "Select a color",
-            colorMenuTemplate
+            arrayOf(
+                "         ",
+                " 0000000 ",
+                " 0000000 ",
+                " 0000000 ",
+                "         ",
+                "   bc    ",
+            )
         )
 
         val group = GuiElementGroup('0')
