@@ -98,3 +98,22 @@ get() {
         DyeColor.BLACK -> Material.BLACK_CONCRETE
     }
 }
+
+fun DyeColor.toInt() =  when(this) {
+    DyeColor.BLACK -> 15
+    DyeColor.RED -> 14
+    DyeColor.GREEN -> 13
+    DyeColor.BROWN -> 12
+    DyeColor.BLUE -> 11
+    DyeColor.PURPLE -> 10
+    DyeColor.CYAN -> 9
+    DyeColor.LIGHT_GRAY -> 8
+    DyeColor.GRAY -> 7
+    DyeColor.PINK -> 6
+    DyeColor.LIME -> 5
+    DyeColor.YELLOW -> 4
+    DyeColor.LIGHT_BLUE -> 3
+    DyeColor.MAGENTA -> 2
+    DyeColor.ORANGE -> 1
+    DyeColor.WHITE -> 0
+}

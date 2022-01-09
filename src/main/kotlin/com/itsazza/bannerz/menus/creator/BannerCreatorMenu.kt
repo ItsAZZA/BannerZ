@@ -2,12 +2,10 @@ package com.itsazza.bannerz.menus.creator
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
-import com.itsazza.bannerz.menus.Buttons.close
-import com.itsazza.bannerz.menus.Buttons.createBackButton
+import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.creator.color.BannerColorMenu
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
 import com.itsazza.bannerz.menus.main.MainMenu
-import com.itsazza.bannerz.menus.playerlibrary.data.PlayerBanners
 import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -34,7 +32,14 @@ object BannerCreatorMenu {
             BannerZPlugin.instance,
             null,
             "Banner Creator",
-            creatorMenuTemplate
+            arrayOf(
+                "    p    ",
+                " 0000000 ",
+                " 0000000 ",
+                " 0000000 ",
+                "    1    ",
+                " blgcSs  "
+            )
         )
 
         val bannerMeta = banner.itemMeta as BannerMeta
@@ -50,18 +55,21 @@ object BannerCreatorMenu {
             group.addElement(createAddPatternButton(banner, creatorMode, block))
         }
 
-        gui.addElements(
-            group,
-            createPreviewButton(banner),
-            createGiveItemButton(banner),
-            createGiveCommandButton(banner),
-            createSaveButton(banner),
-            createBackButton(MainMenu.create()),
-            close
-        )
+        with(Buttons) {
+            gui.addElements(
+                createGiveCommandButton(banner),
+                createSaveButton(banner),
+                createBackButton(MainMenu.create()),
+                createGetShieldButton(banner),
+                group,
+                createPreviewButton(banner),
+                createGiveItemButton(banner),
+                close
+            )
+        }
 
-        if(creatorMode == CreatorMode.CHANGE && block != null) { gui.addElement(createSaveBlockButton(banner, block)) }
-        gui.closeAction = InventoryGui.CloseAction { false }
+        if (creatorMode == CreatorMode.CHANGE && block != null) { gui.addElement(createSaveBlockButton(banner, block)) }
+        gui.setCloseAction { false }
         return gui
     }
 
@@ -83,11 +91,8 @@ object BannerCreatorMenu {
 
     private fun createPatternButton(banner: ItemStack, creatorMode: CreatorMode, block: Block?, bannerPattern: Pattern, index: Int) : StaticGuiElement {
         val item = banner(Material.WHITE_BANNER) { pattern(bannerPattern) }
-        if(bannerPattern.color == DyeColor.WHITE) {
-            item.type = Material.BLACK_BANNER
-        }
-
-        val patternName = bannerPattern.pattern.name.lowercase().split("_").joinToString(" "){ it.capitalizeFirst() }
+        if (bannerPattern.color == DyeColor.WHITE) item.type = Material.BLACK_BANNER
+        val patternName = bannerPattern.pattern.name.beautifyCapitalizeWords()
 
         return StaticGuiElement('@',
             item,
@@ -104,7 +109,7 @@ object BannerCreatorMenu {
                     }
                     it.event.click.isRightClick -> {
                         val bannerMeta = banner.itemMeta as BannerMeta
-                        if(index == 0) {
+                        if (index == 0) {
                             player.sendMessage("§cCannot move this pattern up!")
                             player.playSound(player.location, Sound.ENTITY_VILLAGER_NO, 1.0F, 1.0F)
                             return@StaticGuiElement true
@@ -153,18 +158,17 @@ object BannerCreatorMenu {
         )
     }
 
-    private fun createPreviewButton(banner: ItemStack) : StaticGuiElement {
-        banner.mutateMeta<ItemMeta> {
-            it.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
-        }
-
-        return StaticGuiElement('p',
-            banner,
+    private fun createPreviewButton(banner: ItemStack): StaticGuiElement {
+        return StaticGuiElement(
+            'p',
+            banner.mutateMeta<ItemMeta> {
+                it.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+            },
             {
                 return@StaticGuiElement true
             },
             "§6§lPreview"
-            )
+        )
     }
 
     private fun createGiveItemButton(banner: ItemStack) : StaticGuiElement {
@@ -184,46 +188,6 @@ object BannerCreatorMenu {
             "§0 ",
             "§e§lCLICK §7to select"
         )
-    }
-
-    fun createSaveButton(banner: ItemStack) : StaticGuiElement {
-        return StaticGuiElement('l',
-            Material.BOOKSHELF.item,
-            {
-                val player = it.event.whoClicked as Player
-                PlayerBanners.add(player.uniqueId, banner)
-                player.sendMessage("§eBanner added to personal library!")
-                Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
-                return@StaticGuiElement true
-            },
-            "§6§lSave",
-            "§7Save this banner to",
-            "§7your personal banner library",
-            "§0 ",
-            "§e§lCLICK §7to save"
-            )
-    }
-
-    fun createGiveCommandButton(banner: ItemStack) : StaticGuiElement {
-        return StaticGuiElement('g',
-            Material.COMMAND_BLOCK.item,
-            {
-                val player = it.event.whoClicked as Player
-                if (!Permissions.check(player, "bannerz.commandblock")) return@StaticGuiElement true
-
-                val item = NBT.getBannerCommandBlock(banner)
-                player.inventory.addItem(item)
-                Sounds.play(player, Sound.ENTITY_VILLAGER_YES)
-                return@StaticGuiElement true
-            },
-            "§6§lCommand Block",
-            "§7Generates you a /give",
-            "§7command for this banner",
-            "§7and gives you a command",
-            "§7block for it",
-            "§0 ",
-            "§e§lCLICK §7to get"
-            )
     }
 
     private fun createSaveBlockButton(banner: ItemStack, block: Block) : StaticGuiElement {
