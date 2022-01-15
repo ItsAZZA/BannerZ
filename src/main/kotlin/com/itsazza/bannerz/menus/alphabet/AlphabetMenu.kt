@@ -1,8 +1,7 @@
 package com.itsazza.bannerz.menus.alphabet
 
 import com.itsazza.bannerz.BannerZPlugin
-import com.itsazza.bannerz.menus.Buttons.close
-import com.itsazza.bannerz.menus.Buttons.createBackButton
+import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.creator.color.dyes
 import com.itsazza.bannerz.menus.main.MainMenu
 import com.itsazza.bannerz.util.*
@@ -43,14 +42,16 @@ object AlphabetMenu  {
             group1.addElement(createBackgroundColorSelectButton(dye, backgroundColor, foregroundColor))
         }
 
-        gui.addElements(
-            group0,
-            group1,
-            createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor),
-            StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6§lPreview"),
-            createBackButton(MainMenu.create()),
-            close
-        )
+        with (Buttons) {
+            gui.addElements(
+                group0,
+                group1,
+                createOpenAlphabetBannerMenuButton(foregroundColor, backgroundColor),
+                StaticGuiElement('p', alphabetBanners["A"]!!.build(foregroundColor, backgroundColor), "§6§lPreview"),
+                createBackButton(MainMenu.create()),
+                close
+            )
+        }
 
         gui.setCloseAction { false }
         return gui

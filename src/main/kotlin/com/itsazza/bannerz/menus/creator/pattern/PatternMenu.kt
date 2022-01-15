@@ -2,13 +2,10 @@ package com.itsazza.bannerz.menus.creator.pattern
 
 import com.itsazza.bannerz.BannerZPlugin
 import com.itsazza.bannerz.builder.banner
-import com.itsazza.bannerz.menus.Buttons.close
-import com.itsazza.bannerz.menus.Buttons.createBackButton
-import com.itsazza.bannerz.menus.Buttons.nextPage
-import com.itsazza.bannerz.menus.Buttons.previousPage
-import com.itsazza.bannerz.menus.creator.color.ColorMenu
+import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.creator.BannerCreatorMenu
 import com.itsazza.bannerz.menus.creator.CreatorMode
+import com.itsazza.bannerz.menus.creator.color.ColorMenu
 import com.itsazza.bannerz.util.*
 import de.themoep.inventorygui.GuiElementGroup
 import de.themoep.inventorygui.InventoryGui
@@ -24,8 +21,6 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BannerMeta
 import org.bukkit.inventory.meta.ItemMeta
-import org.bukkit.inventory.meta.PotionMeta
-import kotlin.text.capitalize
 
 object PatternMenu {
     fun open(player: Player, banner: ItemStack, color: DyeColor = DyeColor.RED, index: Int? = null, creatorMode: CreatorMode, block: Block?) {
@@ -52,16 +47,18 @@ object PatternMenu {
             group.addElement(createPatternButton(banner, it, color, index, creatorMode, block))
         }
 
-        gui.addElements(
-            group,
-            nextPage,
-            previousPage,
-            createPreviewButton(banner),
-            createChangeColorButton(banner, index, color, creatorMode, block),
-            createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)),
-            createGoBackAndSaveButton(banner, color, index, creatorMode, block),
-            close
-        )
+        with (Buttons) {
+            gui.addElements(
+                group,
+                nextPage,
+                previousPage,
+                createPreviewButton(banner),
+                createChangeColorButton(banner, index, color, creatorMode, block),
+                createBackButton(BannerCreatorMenu.create(banner, creatorMode, block)),
+                createGoBackAndSaveButton(banner, color, index, creatorMode, block),
+                close
+            )
+        }
 
         gui.setCloseAction { false }
         return gui

@@ -1,8 +1,7 @@
 package com.itsazza.bannerz.menus.creator.color
 
 import com.itsazza.bannerz.BannerZPlugin
-import com.itsazza.bannerz.menus.Buttons.close
-import com.itsazza.bannerz.menus.Buttons.createBackButton
+import com.itsazza.bannerz.menus.Buttons
 import com.itsazza.bannerz.menus.creator.CreatorMode
 import com.itsazza.bannerz.menus.creator.pattern.PatternMenu
 import com.itsazza.bannerz.util.*
@@ -42,11 +41,13 @@ object ColorMenu  {
             group.addElement(createColorSelectButton(player, banner, index, currentColor, dye, creatorMode, block))
         }
 
-        gui.addElements(
-            group,
-            createBackButton(PatternMenu.create(banner, currentColor, index, creatorMode, block)),
-            close
-        )
+        with (Buttons) {
+            gui.addElements(
+                group,
+                createBackButton(PatternMenu.create(banner, currentColor, index, creatorMode, block)),
+                close
+            )
+        }
 
         return gui
     }

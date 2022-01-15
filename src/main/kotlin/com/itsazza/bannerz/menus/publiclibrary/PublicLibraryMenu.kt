@@ -41,13 +41,15 @@ object PublicLibraryMenu {
             group.addElement(createBannerButton(it))
         }
 
-        gui.addElements(
-            group,
-            Buttons.previousPage,
-            Buttons.nextPage,
-            Buttons.close,
-            Buttons.createBackButton(PublicLibraryMainMenu.create()),
-        )
+        with (Buttons) {
+            gui.addElements(
+                group,
+                previousPage,
+                nextPage,
+                close,
+                createBackButton(PublicLibraryMainMenu.create()),
+            )
+        }
 
         gui.setCloseAction { false }
         return gui
